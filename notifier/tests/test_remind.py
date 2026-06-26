@@ -4,6 +4,7 @@ from datetime import date, timedelta
 from unittest.mock import MagicMock, patch
 
 import pytest
+from googleapiclient.errors import HttpError
 
 from remind import build_email, create_calendar_event, send_email, session_type_for
 
@@ -188,6 +189,51 @@ def test_send_email_calls_smtp(monkeypatch):
 # ---------------------------------------------------------------------------
 # create_calendar_event — Google API calls
 # ---------------------------------------------------------------------------
+
+def test_create_calendar_event_uses_deterministic_id(monkeypatch):
+    fake_token = {
+        "token": "tok", "refresh_token": "ref",
+        "token_uri": "https://oauth2.googleapis.com/token",
+        "client_id": "cid", "client_secret": "csec",
+        "scopes": ["https://www.googleapis.com/auth/calendar.events"],
+    }
+    monkeypatch.setenv("GCAL_TOKEN_JSON", json.dumps(fake_token))
+    monkeypatch.setenv("GCAL_CALENDAR_ID", "primary")
+
+    mock_service = MagicMock()
+    mock_service.events().insert().execute.return_value = {"htmlLink": "https://cal.google.com/event"}
+
+    with patch("remind.Credentials.from_authorized_user_info") as mock_creds, \
+         patch("remind.build", return_value=mock_service):
+        mock_creds.return_value.expired = False
+        create_calendar_event(date(2026, 6, 27), "saturday-deep", "next", 180, 0)
+
+    _, kwargs = mock_service.events().insert.call_args
+    assert kwargs["body"]["id"] == "studyreminder20260627"
+
+
+def test_create_calendar_event_updates_on_duplicate(monkeypatch):
+    fake_token = {
+        "token": "tok", "refresh_token": "ref",
+        "token_uri": "https://oauth2.googleapis.com/token",
+        "client_id": "cid", "client_secret": "csec",
+        "scopes": ["https://www.googleapis.com/auth/calendar.events"],
+    }
+    monkeypatch.setenv("GCAL_TOKEN_JSON", json.dumps(fake_token))
+    monkeypatch.setenv("GCAL_CALENDAR_ID", "primary")
+
+    mock_service = MagicMock()
+    conflict = HttpError(resp=MagicMock(status=409), content=b"conflict")
+    mock_service.events().insert().execute.side_effect = conflict
+    mock_service.events().update().execute.return_value = {"htmlLink": "https://cal.google.com/event"}
+
+    with patch("remind.Credentials.from_authorized_user_info") as mock_creds, \
+         patch("remind.build", return_value=mock_service):
+        mock_creds.return_value.expired = False
+        create_calendar_event(date(2026, 6, 27), "saturday-deep", "next", 180, 0)
+
+    mock_service.events().update.assert_called()
+
 
 def test_create_calendar_event_builds_correct_event(monkeypatch):
     fake_token = {

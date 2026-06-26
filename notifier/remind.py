@@ -9,6 +9,7 @@ from email.mime.text import MIMEText
 from google.oauth2.credentials import Credentials
 from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
 
 PROGRESS_URL = "https://raw.githubusercontent.com/Santihs/karpathy-path/main/00-Meta/progress.json"
 TIMEZONE = "America/La_Paz"
@@ -104,7 +105,10 @@ def create_calendar_event(
     start = datetime(day.year, day.month, day.day, 9, 0)
     end = start + timedelta(minutes=duration_min)
 
+    event_id = f"studyreminder{day.strftime('%Y%m%d')}"
+
     event = {
+        "id": event_id,
         "summary": f"Study — {session_type} · Phase {phase}",
         "description": next_up,
         "start": {"dateTime": start.isoformat(), "timeZone": TIMEZONE},
@@ -116,8 +120,15 @@ def create_calendar_event(
         },
     }
 
-    created = service.events().insert(calendarId=calendar_id, body=event).execute()
-    print(f"✓ Calendar event created: {created.get('htmlLink')}")
+    try:
+        result = service.events().insert(calendarId=calendar_id, body=event).execute()
+        print(f"✓ Calendar event created: {result.get('htmlLink')}")
+    except HttpError as e:
+        if e.status_code == 409:  # already exists — update it
+            result = service.events().update(calendarId=calendar_id, eventId=event_id, body=event).execute()
+            print(f"✓ Calendar event updated (already existed): {result.get('htmlLink')}")
+        else:
+            raise
 
 
 def main() -> None:
