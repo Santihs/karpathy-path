@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00-Meta/curriculum-map.md",
+                "file": "02-Topics/Linear-Algebra-Basics.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "curriculum-map"
+              "title": "Linear-Algebra-Basics"
             }
           }
         ]
@@ -185,9 +185,19 @@
   },
   "active": "ab8ce814faa2eca6",
   "lastOpenFiles": [
+    "03-Daily-Logs/2026-06-26.md",
+    "03-Daily-Logs/2026-06-26.md.tmp.24412.b98f5c4ae0f1",
+    "00-Meta/progress.json.tmp.24412.9b1e7d1c2525",
+    "00-Meta/progress.json.tmp.24412.e0253087aae7",
+    "00-Meta/curriculum-map.md",
+    "00-Meta/progress.json.tmp.24412.8618b5a1f48e",
+    "02-Topics/Linear-Algebra-Basics.md.tmp.24412.426c6b4c2a01",
+    "02-Topics/Linear-Algebra-Basics.md.tmp.24412.eda48804feb9",
+    "README.md.tmp.15136.dad92c66e043",
+    "README.md",
+    "README.md.tmp.15136.86cb399efcc7",
     "00-Meta/claude-code-bootstrap-prompt.md",
     "00-Meta/AI_Roadmap_From_Developer_to_Karpathy_Level.md",
-    "00-Meta/daily-log-template.md",
-    "00-Meta/curriculum-map.md"
+    "00-Meta/daily-log-template.md"
   ]
 }
