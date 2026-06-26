@@ -209,7 +209,7 @@ def test_create_calendar_event_uses_deterministic_id(monkeypatch):
         create_calendar_event(date(2026, 6, 27), "saturday-deep", "next", 180, 0)
 
     _, kwargs = mock_service.events().insert.call_args
-    assert kwargs["body"]["id"] == "studyreminder20260627"
+    assert kwargs["body"]["id"] == "srem20260627"
 
 
 def test_create_calendar_event_updates_on_duplicate(monkeypatch):

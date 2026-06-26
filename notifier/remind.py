@@ -105,7 +105,7 @@ def create_calendar_event(
     start = datetime(day.year, day.month, day.day, 9, 0)
     end = start + timedelta(minutes=duration_min)
 
-    event_id = f"studyreminder{day.strftime('%Y%m%d')}"
+    event_id = f"srem{day.strftime('%Y%m%d')}"  # only [a-v0-9] allowed by Google Calendar API
 
     event = {
         "id": event_id,
