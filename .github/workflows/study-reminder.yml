@@ -1,0 +1,26 @@
+name: Study Reminder
+
+on:
+  schedule:
+    - cron: '0 22 * * *'  # 22:00 UTC = 6pm Bolivia (UTC-4)
+  workflow_dispatch:       # manual trigger for testing
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v4
+
+      - name: Install dependencies
+        run: uv sync --frozen --directory notifier
+
+      - name: Send email + create calendar event
+        run: uv run --directory notifier remind.py
+        env:
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          GCAL_TOKEN_JSON: ${{ secrets.GCAL_TOKEN_JSON }}
+          GCAL_CALENDAR_ID: ${{ secrets.GCAL_CALENDAR_ID }}
