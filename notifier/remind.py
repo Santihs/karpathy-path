@@ -102,7 +102,7 @@ def create_calendar_event(
 
     service = build("calendar", "v3", credentials=creds)
 
-    start = datetime(day.year, day.month, day.day, 9, 0)
+    start = datetime(day.year, day.month, day.day, 18, 0)
     end = start + timedelta(minutes=duration_min)
 
     event_id = f"srem{day.strftime('%Y%m%d')}"  # only [a-v0-9] allowed by Google Calendar API

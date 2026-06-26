@@ -270,6 +270,6 @@ def test_create_calendar_event_builds_correct_event(monkeypatch):
     assert event["summary"] == "Study — saturday-deep · Phase 0"
     assert event["description"] == "Watch 3B1B ch. 4"
     assert event["colorId"] == "7"
-    assert "09:00:00" in event["start"]["dateTime"]
-    assert "12:00:00" in event["end"]["dateTime"]
+    assert "18:00:00" in event["start"]["dateTime"]
+    assert "21:00:00" in event["end"]["dateTime"]
     assert event["start"]["timeZone"] == "America/La_Paz"
