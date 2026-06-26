@@ -1,0 +1,145 @@
+{
+  "meta": {
+    "current_phase": 0,
+    "current_week": 1,
+    "last_session_date": null,
+    "last_session_type": null,
+    "study_streak": 0,
+    "total_hours_logged": 0,
+    "session_count": 0,
+    "last_cumulative_review": null,
+    "next_up": "Phase 0 → Watch 3Blue1Brown 'Essence of Linear Algebra' (chapters 1–3) + read Phase-0 note"
+  },
+  "phases": {
+    "phase_0": {
+      "name": "Math & ML Refresher",
+      "status": "in_progress",
+      "target_weeks": "1-3",
+      "topics": {
+        "linear_algebra_vectors_matrices": { "status": "not_started", "confidence": 0 },
+        "linear_algebra_dot_products_embeddings": { "status": "not_started", "confidence": 0 },
+        "calculus_derivatives_gradients": { "status": "not_started", "confidence": 0 },
+        "calculus_chain_rule_backprop_preview": { "status": "not_started", "confidence": 0 },
+        "probability_distributions_expectation": { "status": "not_started", "confidence": 0 },
+        "probability_cross_entropy_softmax": { "status": "not_started", "confidence": 0 },
+        "numpy_fundamentals": { "status": "not_started", "confidence": 0 },
+        "pytorch_tensors_autograd_blitz": { "status": "not_started", "confidence": 0 },
+        "andrew_ng_ml_specialization": { "status": "not_started", "confidence": 0 }
+      }
+    },
+    "phase_1": {
+      "name": "Neural Networks from Scratch",
+      "status": "not_started",
+      "target_weeks": "2-3",
+      "topics": {
+        "micrograd_autograd_engine": { "status": "not_started", "confidence": 0 },
+        "makemore_bigram_model": { "status": "not_started", "confidence": 0 },
+        "makemore_mlp": { "status": "not_started", "confidence": 0 },
+        "makemore_rnn_gru": { "status": "not_started", "confidence": 0 },
+        "backpropagation_derivation": { "status": "not_started", "confidence": 0 },
+        "non_linearities_why_needed": { "status": "not_started", "confidence": 0 },
+        "vanishing_gradients": { "status": "not_started", "confidence": 0 },
+        "optimizers_adam_vs_sgd": { "status": "not_started", "confidence": 0 },
+        "cs231n_backprop_notes": { "status": "not_started", "confidence": 0 }
+      }
+    },
+    "phase_2": {
+      "name": "GPT from Scratch",
+      "status": "not_started",
+      "target_weeks": "2-3",
+      "topics": {
+        "tokenization_bpe": { "status": "not_started", "confidence": 0 },
+        "self_attention_qkv": { "status": "not_started", "confidence": 0 },
+        "multi_head_attention": { "status": "not_started", "confidence": 0 },
+        "causal_masking": { "status": "not_started", "confidence": 0 },
+        "positional_encoding": { "status": "not_started", "confidence": 0 },
+        "transformer_block_architecture": { "status": "not_started", "confidence": 0 },
+        "layer_norm_vs_batch_norm": { "status": "not_started", "confidence": 0 },
+        "attention_is_all_you_need_paper": { "status": "not_started", "confidence": 0 },
+        "nanogpt_full_read": { "status": "not_started", "confidence": 0 },
+        "raschka_book_ch1_4": { "status": "not_started", "confidence": 0 }
+      }
+    },
+    "phase_3": {
+      "name": "Pretraining at Small Scale",
+      "status": "not_started",
+      "target_weeks": "2-3",
+      "topics": {
+        "data_pipeline_fineweb_edu": { "status": "not_started", "confidence": 0 },
+        "nanochat_speedrun": { "status": "not_started", "confidence": 0 },
+        "scaling_laws_intuition": { "status": "not_started", "confidence": 0 },
+        "compute_cost_tradeoffs": { "status": "not_started", "confidence": 0 },
+        "tokenizer_training": { "status": "not_started", "confidence": 0 }
+      }
+    },
+    "phase_4": {
+      "name": "Finetuning, RLHF, DPO, Reasoning",
+      "status": "not_started",
+      "target_weeks": "2-3",
+      "topics": {
+        "instruction_finetuning_sft": { "status": "not_started", "confidence": 0 },
+        "rlhf_ppo_mechanics": { "status": "not_started", "confidence": 0 },
+        "dpo_vs_rlhf": { "status": "not_started", "confidence": 0 },
+        "lora_qlora": { "status": "not_started", "confidence": 0 },
+        "chain_of_thought_inference_scaling": { "status": "not_started", "confidence": 0 },
+        "reasoning_from_scratch_repo": { "status": "not_started", "confidence": 0 },
+        "raschka_book_ch7": { "status": "not_started", "confidence": 0 }
+      }
+    },
+    "phase_5": {
+      "name": "Modern Practitioner Stack",
+      "status": "not_started",
+      "target_weeks": "2-3",
+      "topics": {
+        "huggingface_transformers_api": { "status": "not_started", "confidence": 0 },
+        "huggingface_llm_course": { "status": "not_started", "confidence": 0 },
+        "vllm_inference_serving": { "status": "not_started", "confidence": 0 },
+        "peft_lora_in_practice": { "status": "not_started", "confidence": 0 },
+        "quantization_bitsandbytes": { "status": "not_started", "confidence": 0 },
+        "weights_and_biases_tracking": { "status": "not_started", "confidence": 0 },
+        "lm_evaluation_harness": { "status": "not_started", "confidence": 0 },
+        "pytorch_professional_cert": { "status": "not_started", "confidence": 0 }
+      }
+    },
+    "phase_6": {
+      "name": "Agents & Applied Workflows",
+      "status": "not_started",
+      "target_weeks": "2-3",
+      "topics": {
+        "react_agent_loop": { "status": "not_started", "confidence": 0 },
+        "tool_calling_mechanics": { "status": "not_started", "confidence": 0 },
+        "prompt_chaining_vs_agents_vs_multiagent": { "status": "not_started", "confidence": 0 },
+        "agent_memory_patterns": { "status": "not_started", "confidence": 0 },
+        "mini_coding_agent_from_scratch": { "status": "not_started", "confidence": 0 },
+        "huggingface_agents_course": { "status": "not_started", "confidence": 0 },
+        "anthropic_agent_design_patterns": { "status": "not_started", "confidence": 0 }
+      }
+    },
+    "phase_7": {
+      "name": "Deployment & MLOps",
+      "status": "not_started",
+      "target_weeks": "1-2",
+      "topics": {
+        "vllm_serving_setup": { "status": "not_started", "confidence": 0 },
+        "ollama_local_serving": { "status": "not_started", "confidence": 0 },
+        "huggingface_spaces_gradio": { "status": "not_started", "confidence": 0 },
+        "latency_cost_batching_tradeoffs": { "status": "not_started", "confidence": 0 },
+        "model_monitoring_basics": { "status": "not_started", "confidence": 0 }
+      }
+    },
+    "phase_8": {
+      "name": "Specialization",
+      "status": "not_started",
+      "target_weeks": "indefinite",
+      "chosen_track": null,
+      "tracks": [
+        "research_pretraining",
+        "applied_ml_finetuning",
+        "agents_applied_ai_engineering",
+        "infra_systems",
+        "alignment_safety"
+      ],
+      "topics": {}
+    }
+  }
+}
