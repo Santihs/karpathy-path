@@ -89,7 +89,154 @@ $$|\vec{v}| = \sqrt{v_1^2 + v_2^2} \quad \text{(en 2D)}$$
 
 ---
 
-## Still to cover (3B1B chapters 4–16)
+## Ch 4 — Matrix Multiplication as Composition (2026-06-27)
+
+**Core insight:** Matrix multiplication = composing two transformations into one.
+
+- $M_2 M_1$ means: apply $M_1$ **first**, then $M_2$ (read right to left, like $f(g(x))$)
+- The resulting matrix IS the single transformation that does both in sequence
+- Order matters: "rotate then shear" ≠ "shear then rotate" → $AB \neq BA$ in general
+
+**Mechanical recipe (derived from geometry):**
+
+Each column of the result = $M_2$ applied to each column of $M_1$:
+
+$$\begin{bmatrix}a&b\\c&d\end{bmatrix}\begin{bmatrix}e&f\\g&h\end{bmatrix} = \begin{bmatrix}ae+bg & af+bh\\ce+dg & cf+dh\end{bmatrix}$$
+
+Why: columns of $M_1$ tell you where $\hat{i}$ and $\hat{j}$ land → $M_2$ transforms those landing spots → result encodes the full composition.
+
+**Properties:**
+- Associative: $(AB)C = A(BC)$ ✓
+- NOT commutative: $AB \neq BA$ in general ✗
+
+---
+
+## Ch 5 — 3D Linear Transformations (2026-06-27)
+
+**Core insight:** Everything from ch 4 generalizes to 3D — same logic, one extra basis vector.
+
+- Now tracking where $\hat{i}$, $\hat{j}$, **and** $\hat{k}$ land → 3×3 matrix (3 columns, one per basis vector)
+- Composition still works the same: $A \cdot B$ = apply B first, then A
+- Used in **computer graphics** (rotating 3D objects) and **robotics** (joint transformations)
+
+**Why it matters for ML:** Neural network weight matrices are N×M — same principle, just N-dimensional space. A layer `y = Wx` is literally a linear transformation from M-dim to N-dim space.
+
+---
+
+## Ch 6 — The Determinant (2026-06-27)
+
+**Core insight:** The determinant is the **scale factor** by which a transformation stretches or shrinks area (2D) or volume (3D).
+
+- Matrix $\begin{bmatrix}3&0\\0&2\end{bmatrix}$ → det = 6 → every region in space gets scaled by 6×
+- The determinant applies uniformly to **any** shape, not just the unit square
+
+**Formula (2D):**
+$$\det\begin{bmatrix}a&b\\c&d\end{bmatrix} = ad - bc$$
+
+Geometric derivation: the parallelogram area = $(a+b)(c+d) - ac - bd - 2bc = ad - bc$
+
+- When $b=0, c=0$: det $= ad$ (pure scale — just width × height)
+- When $b \neq 0, c=0$: det still $= ad$ — **shear doesn't change area** (the parallelogram tilts but its base × height stays constant)
+- When $c \neq 0$: the $bc$ term accounts for how much the parallelogram is stretched/compressed
+
+**Special values:**
+- **det = 0** → space collapsed to a lower dimension (line, plane, or point) — transformation is not invertible, information lost permanently
+- **det < 0** → orientation flipped. In 2D: $\hat{i}$ and $\hat{j}$ swap from counterclockwise to clockwise. In 3D: right-hand rule violated ("principle of hand")
+
+**In 3D:** determinant = scale factor for **volume**. Unit cube deforms into a parallelepiped; det = how much that volume changed.
+
+**Key property:**
+$$\det(AB) = \det(A) \times \det(B)$$
+If you apply two transformations, the total area scaling = product of each individual scaling.
+
+**Why it matters for ML:**
+- det = 0 → matrix is singular → not invertible → that layer loses information (squashes multiple inputs to the same output)
+- Understanding when transformations preserve vs. destroy information is core to understanding gradient flow and network expressiveness
+
+---
+
+## Ch 7 — Inverse Matrices, Column Space, Null Space (2026-06-27)
+
+**Core use of linear algebra:** Solving systems of linear equations. Each variable is scaled by a constant and summed — that's exactly $A\vec{x} = \vec{v}$.
+
+**Rewriting a system as a matrix equation:**
+$$2x+5y+3z=-3 \quad \rightarrow \quad \begin{bmatrix}2&5&3\\4&0&8\\1&3&0\end{bmatrix}\begin{bmatrix}x\\y\\z\end{bmatrix}=\begin{bmatrix}-3\\0\\2\end{bmatrix}$$
+
+Goal: find $\vec{x}$ such that $A$ transforms it into $\vec{v}$.
+
+**Solving with the inverse:**
+- If det(A) ≠ 0: unique solution exists → $\vec{x} = A^{-1}\vec{v}$
+- $A^{-1}A = I$ (identity — "the transformation that does nothing")
+- Geometrically: $A^{-1}$ runs the transformation backwards
+
+**How to compute $A^{-1}$ (2×2):**
+
+$$A = \begin{bmatrix}a&b\\c&d\end{bmatrix} \quad \rightarrow \quad A^{-1} = \frac{1}{\det(A)}\begin{bmatrix}d&-b\\-c&a\end{bmatrix}$$
+
+Steps: (1) swap diagonal $a \leftrightarrow d$, (2) negate off-diagonal, (3) divide by det.
+
+For 3×3+: use `numpy.linalg.inv(A)` — concept is identical, formula is messy.
+
+**Concrete example:**
+$$2x + y = 5, \quad x + 3y = 7$$
+$$A = \begin{bmatrix}2&1\\1&3\end{bmatrix}, \quad \det(A) = (2)(3)-(1)(1) = 5 \neq 0$$
+$$A^{-1} = \frac{1}{5}\begin{bmatrix}3&-1\\-1&2\end{bmatrix}$$
+$$\vec{x} = A^{-1}\vec{v} = \frac{1}{5}\begin{bmatrix}3&-1\\-1&2\end{bmatrix}\begin{bmatrix}5\\7\end{bmatrix} = \frac{1}{5}\begin{bmatrix}8\\9\end{bmatrix} = \begin{bmatrix}1.6\\1.8\end{bmatrix} \checkmark$$
+Verify: $A^{-1}A = I$ ✓ — "the transformation that does nothing"
+
+**When det(A) = 0 — no inverse exists:**
+Space got compressed to a lower dimension — you can't "undo" that. Solutions only exist if $\vec{v}$ happens to live in that compressed output space.
+
+**Rank** = number of dimensions in the output (column space):
+- Rank 3 (full rank, 3×3): output fills all of 3D space
+- Rank 2: output is a plane
+- Rank 1: output is a line
+
+**Column space** = set of all possible outputs of $A\vec{x}$ — the "span" of A's columns.
+
+**Null space / Kernel** = all input vectors that get squashed to $\vec{0}$.
+
+Concrete example — $A = \begin{bmatrix}1&2\\2&4\end{bmatrix}$, det = 0:
+- Column space: line spanned by $\begin{bmatrix}1\\2\end{bmatrix}$ (rank 1)
+- Null space: line spanned by $\begin{bmatrix}2\\-1\end{bmatrix}$ — these inputs are destroyed
+
+**Intuition:** rank = what survives. null space = what gets destroyed.
+
+**Why it matters for ML:**
+- Weight matrix with rank < N → information bottleneck (not all dimensions used)
+- Null space of a weight layer = directions in input space the network is completely blind to
+- Solving $A\vec{x} = \vec{v}$ is at the heart of least-squares regression and linear probes
+
+---
+
+## Ch 8 — Nonsquare Matrices (2026-06-27)
+
+**Core insight:** A nonsquare matrix transforms between spaces of different dimensions.
+
+- **3×2 matrix**: takes 2D input → 3D output (embeds a plane into 3D space). Column space = a plane inside 3D.
+- **2×3 matrix**: takes 3D input → 2D output (projects down, loses one dimension)
+- Columns = number of input dimensions (basis vectors going in)
+- Rows = number of coordinates in the output (where those basis vectors land)
+
+**The matrix multiplication dimension rule:**
+$$(m \times n) \cdot (n \times p) = (m \times p)$$
+Inner dimensions must match. Outer dimensions give result shape.
+
+| A | B | Valid? | Result |
+|---|---|--------|--------|
+| 3×2 | 2×4 | ✓ | 3×4 |
+| 2×3 | 3×5 | ✓ | 2×5 |
+| 2×3 | 2×3 | ✗ | — |
+
+**Why this matters for ML (critical):**
+Every neural network layer is a nonsquare matrix multiply: `y = Wx + b`
+- W shape = (output_dim × input_dim)
+- 784 pixels → (256×784) W → 256-dim hidden layer → (10×256) W → 10 class scores
+- Full rank = preserves as much info as possible given the compression
+
+---
+
+## Still to cover (3B1B chapters 9–16)
 
 - Determinantes
 - Producto punto y dualidad

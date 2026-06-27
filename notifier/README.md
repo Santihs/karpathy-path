@@ -47,7 +47,7 @@ Go to your repo → **Settings → Secrets and variables → Actions → New rep
 
 | Secret name | Value |
 |---|---|
-| `GMAIL_ADDRESS` | `sanchezx1601@gmail.com` |
+| `GMAIL_ADDRESS` | `your-gmail@gmail.com` |
 | `GMAIL_APP_PASSWORD` | The 16-char password from step 1 |
 | `GCAL_TOKEN_JSON` | The full JSON block printed by `auth.py` in step 3 |
 | `GCAL_CALENDAR_ID` | `primary` (unless you want a specific calendar) |
@@ -59,7 +59,7 @@ Go to your repo → **Settings → Secrets and variables → Actions → New rep
 **Local test** (requires a `notifier/.env` file — see below):
 ```bash
 # Create notifier/.env with:
-# GMAIL_ADDRESS=sanchezx1601@gmail.com
+# GMAIL_ADDRESS=your-gmail@gmail.com
 # GMAIL_APP_PASSWORD=your-app-password
 # GCAL_TOKEN_JSON={"token": "...", ...}
 # GCAL_CALENDAR_ID=primary
