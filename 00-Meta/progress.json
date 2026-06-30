@@ -2,13 +2,13 @@
   "meta": {
     "current_phase": 0,
     "current_week": 1,
-    "last_session_date": "2026-06-27",
-    "last_session_type": "saturday-deep",
-    "study_streak": 2,
-    "total_hours_logged": 2.8,
-    "session_count": 3,
+    "last_session_date": "2026-06-29",
+    "last_session_type": "sunday-deep-review",
+    "study_streak": 3,
+    "total_hours_logged": 3.55,
+    "session_count": 4,
     "last_cumulative_review": null,
-    "next_up": "Phase 0 → Watch 3Blue1Brown 'Essence of Linear Algebra' ch 9–11: dot product, duality, cross product"
+    "next_up": "Phase 0 → Watch 3Blue1Brown 'Essence of Linear Algebra' ch 10–11: cross products + cross product as duality"
   },
   "phases": {
     "phase_0": {
@@ -17,7 +17,7 @@
       "target_weeks": "1-3",
       "topics": {
         "linear_algebra_vectors_matrices": { "status": "done_needs_review", "confidence": 3 },
-        "linear_algebra_dot_products_embeddings": { "status": "in_progress", "confidence": 0 },
+        "linear_algebra_dot_products_embeddings": { "status": "in_progress", "confidence": 3 },
         "calculus_derivatives_gradients": { "status": "not_started", "confidence": 0 },
         "calculus_chain_rule_backprop_preview": { "status": "not_started", "confidence": 0 },
         "probability_distributions_expectation": { "status": "not_started", "confidence": 0 },

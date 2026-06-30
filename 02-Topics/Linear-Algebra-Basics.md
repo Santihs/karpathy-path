@@ -2,8 +2,8 @@
 tags: [phase-0, math, linear-algebra]
 status: learning
 first_learned: 2026-06-26
-last_reviewed: 2026-06-26
-confidence: 2/5
+last_reviewed: 2026-06-29
+confidence: 3/5
 ---
 
 # Linear Algebra Basics
@@ -236,13 +236,107 @@ Every neural network layer is a nonsquare matrix multiply: `y = Wx + b`
 
 ---
 
-## Still to cover (3B1B chapters 9–16)
+## Ch 9 — Dot Products and Duality (2026-06-29)
 
-- Determinantes
-- Producto punto y dualidad
-- Producto cruz
-- Matrices inversas, espacio columna, espacio nulo
-- Vectores y valores propios (eigenvectors/eigenvalues)
+**El resultado:** un número (escalar). Mide cuánto apuntan dos vectores en la misma dirección.
+
+**Fórmula algebraica:**
+$$\vec{v} \cdot \vec{w} = v_1 w_1 + v_2 w_2 + \ldots + v_n w_n$$
+
+**Fórmula geométrica:**
+$$\vec{v} \cdot \vec{w} = |\vec{v}||\vec{w}|\cos\theta$$
+
+donde θ es el ángulo entre los dos vectores.
+
+**Interpretación del signo:**
+- `v·w > 0` → ángulo < 90° — apuntan "al mismo lado"
+- `v·w = 0` → perpendiculares (ortogonales) — cero dirección compartida
+- `v·w < 0` → ángulo > 90° — apuntan en direcciones opuestas
+
+**Proyección — ¿cuánto de w va en dirección de v?**
+
+Componente escalar (longitud de la "sombra" de w sobre v):
+$$\text{comp}_{\vec{v}}\vec{w} = \frac{\vec{v} \cdot \vec{w}}{|\vec{v}|}$$
+
+Proyección vectorial (el vector sombra completo):
+$$\text{proj}_{\vec{v}}\vec{w} = \frac{\vec{v} \cdot \vec{w}}{|\vec{v}|^2}\vec{v}$$
+
+**Para qué sirve la proyección:** responde "¿cuánto de w va en la dirección de v?" Ejemplo físico: fuerza F empujando en diagonal sobre un riel horizontal — `F · horizontal` da la fuerza efectiva.
+
+**Dualidad (el insight profundo):**
+
+Cualquier transformación lineal nD→1D puede escribirse de dos formas equivalentes:
+1. Como una matriz fila `[u₁, u₂, ..., uₙ]` multiplicando un vector
+2. Como producto punto con el vector û = `[u₁, u₂, ..., uₙ]`
+
+Prueba con û = [0.6, 0.8]:
+- î = [1,0] → [0.6, 0.8]·[1,0] = **0.6** (= coordenada x de û)
+- ĵ = [0,1] → [0.6, 0.8]·[0,1] = **0.8** (= coordenada y de û)
+
+Las coordenadas de û son exactamente donde aterrizan î y ĵ. Esto es la dualidad: proyectar = transformación lineal. Siempre hay un vector dual que hace lo mismo que la transformación.
+
+**Generalización:** funciona para cualquier dimensión. Si la transformación aplana nD→1D, existe un vector en nD que es su dual. Para 3D→1D: vector dual vive en 3D. Para 100D→1D: vector dual vive en 100D.
+
+**Por qué importa en ML/AI:**
+- **Cosine similarity** = producto punto de vectores unitarios = cos(θ) entre embeddings
+- **Attention** en transformers = una matriz de productos punto (Q·Kᵀ) — mide qué tan "similares" son queries y keys
+- Cada neurona en una red hace un producto punto: `w·x` — ¿cuánto del input va en la dirección del peso?
+
+**Ejemplo numérico completo:**
+
+v = [3, 1], w = [2, 4]:
+- Algebraico: `3×2 + 1×4 = 10`
+- Geométrico: `|v| = √10, |w| = √20, cos(θ) = 10/(√10·√20) = 10/√200 ≈ 0.707` → θ ≈ 45°
+- Proyección de w sobre v: `10/√10 ≈ 3.16` (longitud de la sombra)
+
+---
+
+## Ch 10 — Cross Products (2026-06-29)
+
+**El resultado:** un vector (en 3D). Perpendicular a los dos vectores de entrada.
+
+Solo definido en 3D (y matemáticamente en 7D, ignorar eso).
+
+**Fórmula:**
+$$\vec{v} \times \vec{w} = \det\begin{bmatrix}\hat{i} & \hat{j} & \hat{k} \\ v_x & v_y & v_z \\ w_x & w_y & w_z\end{bmatrix} = \begin{bmatrix}v_y w_z - v_z w_y \\ v_z w_x - v_x w_z \\ v_x w_y - v_y w_x\end{bmatrix}$$
+
+**Fórmula geométrica para la magnitud:**
+$$|\vec{v} \times \vec{w}| = |\vec{v}||\vec{w}|\sin\theta$$
+
+= área del paralelogramo formado por v y w.
+
+**Regla de la mano derecha:** dedos de v a w → el pulgar apunta en la dirección de v×w.
+
+**Signo importa:**
+- `v×w` = -(w×v) — anticonmutativo
+
+**Por qué importa en ML/AI:**
+- Menos directo que el producto punto, pero clave en geometría 3D
+- Se usa para calcular normales de superficies (gráficos 3D, visión computacional)
+- Aparece en física (torque, momento angular) que subyace a simulaciones físicas en RL
+
+---
+
+## Ch 11 — Cross Product como Dualidad (2026-06-29)
+
+**El insight:** el producto cruz es la dualidad aplicada a 3D.
+
+Define una función: f(v) = det([v, w₁, w₂]) — toma v en 3D y produce un número (el volumen del paralelepípedo). Esa función es lineal en v.
+
+Por dualidad: existe un vector p tal que f(v) = p·v para todo v.
+
+Ese vector p = w₁ × w₂.
+
+**Conclusión:** el producto cruz es "el vector dual de la función volumen definida por dos vectores". La fórmula del producto cruz no es magia — es la consecuencia directa de aplicar dualidad al determinante 3D.
+
+---
+
+## Still to cover (3B1B chapters 12–16)
+
+- Ch 12: Cramer's rule
+- Ch 13: Change of basis
+- Ch 14–15: Eigenvectors and eigenvalues (crítico para PCA, transformers)
+- Ch 16: Abstract vector spaces
 
 ---
 
