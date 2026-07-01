@@ -1,7 +1,7 @@
 ---
 tags: [phase-0, linear-algebra, dot-product, duality, cross-product]
 date_added: 2026-06-29
-last_tested: null
+last_tested: 2026-06-30
 ---
 
 Q: ¿Qué tipo de resultado produce el producto punto? ¿Y el producto cruz?
@@ -51,3 +51,18 @@ A: Define f(p) = det([p, v, w]) — función lineal 3D→1D. Por dualidad, exist
 
 Q: Una red neuronal tiene embeddings de 512 dimensiones. ¿Cómo uses dot product para medir similitud entre dos embeddings?
 A: Normaliza ambos (hazlos unitarios), luego dot product = cos(θ). Resultado cercano a 1 = similares. Cercano a 0 = independientes. Cercano a -1 = opuestos. Cosine similarity = (v·w) / (|v| × |w|).
+
+---
+
+Q: Explica paso a paso cómo dualidad deriva la fórmula del cross product (no solo "nD→1D").
+A: 1) Defines f(x) = det([x,v,w]) — lineal en x, da un escalar. 2) Dualidad: existe p fijo tal que f(x) = p·x para todo x. 3) Expandes el determinante en componentes y comparas coeficientes con p₁x+p₂y+p₃z. 4) Resuelves p → p = v×w.
+
+---
+
+Q: ¿Por qué el "determinante" con î, ĵ, k̂ en la primera fila NO es un determinante real? ¿Y qué relación tiene con el área del paralelogramo?
+A: Un determinante real solo tiene escalares como entradas — ahí hay vectores, rompe la definición. Es mnemotécnico: incluye 3 cofactores que resultan en un vector, no en un escalar de escala. La relación con área es aparte: |v×w| (norma del vector resultado) = área del paralelogramo — eso no es lo que "calcula" el mnemotécnico directamente, es un hecho geométrico sobre el resultado.
+
+---
+
+Q: ¿Cuál es la diferencia entre "determinante real" (ch6) y el mnemotécnico usado para cross product (ch10)?
+A: Determinante real = número, factor de escala de área/volumen de una transformación. Mnemotécnico de cross product = truco con misma estructura de cofactores pero entradas vectoriales (î,ĵ,k̂) → resultado es un vector (v×w), no una escala. Comparten nombre y estructura de cálculo, pero son operaciones distintas.

@@ -2,13 +2,13 @@
   "meta": {
     "current_phase": 0,
     "current_week": 1,
-    "last_session_date": "2026-06-29",
-    "last_session_type": "sunday-deep-review",
-    "study_streak": 3,
-    "total_hours_logged": 3.55,
-    "session_count": 4,
+    "last_session_date": "2026-06-30",
+    "last_session_type": "weekday-micro",
+    "study_streak": 4,
+    "total_hours_logged": 5.55,
+    "session_count": 5,
     "last_cumulative_review": null,
-    "next_up": "Phase 0 → Watch 3Blue1Brown 'Essence of Linear Algebra' ch 10–11: cross products + cross product as duality"
+    "next_up": "Phase 0 → Watch 3Blue1Brown 'Essence of Linear Algebra' ch 12: Cramer's rule"
   },
   "phases": {
     "phase_0": {

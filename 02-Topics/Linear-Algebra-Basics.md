@@ -2,7 +2,7 @@
 tags: [phase-0, math, linear-algebra]
 status: learning
 first_learned: 2026-06-26
-last_reviewed: 2026-06-29
+last_reviewed: 2026-06-30
 confidence: 3/5
 ---
 
@@ -307,6 +307,22 @@ $$|\vec{v} \times \vec{w}| = |\vec{v}||\vec{w}|\sin\theta$$
 
 **Regla de la mano derecha:** dedos de v a w → el pulgar apunta en la dirección de v×w.
 
+**Nota sobre la fórmula del determinante:** el determinante con î, ĵ, k̂ como fila NO es un determinante real (determinantes toman escalares, no vectores) — es un truco mnemotécnico. Al expandirlo, los vectores base actúan como placeholders para las componentes del resultado, no como entradas reales de matriz. Un determinante 3×3 real siempre tiene solo escalares.
+
+**Determinante 3×3 real (comparación, solo escalares):**
+$$\det\begin{bmatrix}a&b&c\\d&e&f\\g&h&i\end{bmatrix} = a(ei-fh) - b(di-fg) + c(dh-eg)$$
+
+**Expansión del "determinante" mnemotécnico → fórmula de v×w:**
+$$\vec{v}\times\vec{w} = \hat{i}(v_yw_z-v_zw_y) - \hat{j}(v_xw_z-v_zw_x) + \hat{k}(v_xw_y-v_yw_x)$$
+$$= \begin{bmatrix}v_yw_z-v_zw_y\\v_zw_x-v_xw_z\\v_xw_y-v_yw_x\end{bmatrix}$$
+
+Misma estructura de cofactores que el determinante real — por eso el truco funciona — pero aquí cada cofactor multiplica un vector base en vez de sumarse a un escalar único.
+
+**Ojo — no confundir con "determinante = escala de área" (ch6):** son 2 cosas distintas con el mismo nombre.
+- Determinante real (ch6): número, factor de escala de área/volumen de una transformación.
+- Mnemotécnico aquí: no escala nada — calcula las 3 componentes del vector v×w.
+- La relación con área es aparte: $|\vec{v}\times\vec{w}|$ (la norma del vector resultado) = área del paralelogramo. Ver [[determinante-vs-cross-product-mnemonic]].
+
 **Signo importa:**
 - `v×w` = -(w×v) — anticonmutativo
 
@@ -351,4 +367,7 @@ Cada capa de una red neuronal es `y = Wx + b` — una multiplicación de matrice
 
 ## Doubts Resolved
 
-<!-- Link any resolved doubts from /06-Doubts-Resolved/ here -->
+- [[cross-product-real-world-ml-uses]] — para qué sirve cross product en mundo real y ML (2026-06-30)
+- [[duality-in-neural-networks]] — cómo duality explica por qué cada neurona es un dot product (2026-06-30)
+- [[determinante-vs-cross-product-mnemonic]] — determinante real (escala área) vs. mnemotécnico del cross product (vector) — no son lo mismo (2026-06-30)
+- [[dot-product-duality-explained]] — producto punto: geometria vs componentes, por qué coinciden (2026-06-30)
