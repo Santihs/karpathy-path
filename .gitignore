@@ -1,6 +1,9 @@
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
 
+# Book PDFs — large binaries, keep local only
+00-Meta/resources/*.pdf
+
 # Python
 __pycache__/
 *.pyc

@@ -347,6 +347,9 @@ Ese vector p = w₁ × w₂.
 
 ---
 
+> **Nota:** el contenido formal de Axler (subespacios, independencia lineal, bases, dimensión, mapas lineales) se movió a [[Linear-Algebra-Axler-Fundamentals]] — explicado con menos símbolos, más prosa, cita al libro. Esta nota se queda con la intuición geométrica de 3b1b.
+
+
 ## Still to cover (3B1B chapters 12–16)
 
 - Ch 12: Cramer's rule

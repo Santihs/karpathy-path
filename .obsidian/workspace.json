@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "02-Topics/Linear-Algebra-Basics.md",
+                "file": "02-Topics/Linear-Algebra-Axler-Fundamentals.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Linear-Algebra-Basics"
+              "title": "Linear-Algebra-Axler-Fundamentals"
             }
           }
         ]
@@ -185,19 +185,40 @@
   },
   "active": "ab8ce814faa2eca6",
   "lastOpenFiles": [
+    "03-Daily-Logs/2026-07-01.md",
+    "03-Daily-Logs/2026-07-01.md.tmp.31649.b6f4aae19394",
+    "00-Meta/progress.json.tmp.31649.f28dcd1bff8b",
+    "00-Meta/progress.json.tmp.31649.6963644e6bb3",
+    "02-Topics/Linear-Algebra-Axler-Fundamentals.md.tmp.31649.115936fca2e0",
+    "04-Quiz-Bank/phase-0-axler-klein-2026-07-01.md.tmp.31649.33efa6825630",
+    "02-Topics/Coding-the-Matrix-Vectors.md",
+    "04-Quiz-Bank/phase-0-axler-klein-2026-07-01.md",
+    "04-Quiz-Bank/phase-0-axler-klein-2026-07-01.md.tmp.31649.3b9447843e01",
+    "02-Topics/Coding-the-Matrix-Vectors.md.tmp.31649.d76d9c3a2ffa",
+    "02-Topics/Coding-the-Matrix-Vectors.md.tmp.31649.975b7a119cd4",
+    "02-Topics/Coding-the-Matrix-Vectors.md.tmp.31649.a1024749256e",
+    "02-Topics/Coding-the-Matrix-Vectors.md.tmp.31649.191ad40279e1",
+    "02-Topics/Probability-Fundamentals.md",
+    "02-Topics/Coding-the-Matrix-Fundamentals.md",
+    "02-Topics/Linear-Algebra-Basics.md",
+    "00-Meta/book-topic-template.md",
+    "02-Topics/Linear-Algebra-Axler-Fundamentals.md",
+    "CLAUDE.md",
+    "06-Doubts-Resolved/README.md",
+    "02-Topics/Calculus-Gradients.md",
+    "01-Phases/Phase-0-Math-Refresh.md",
+    "03-Daily-Logs/2026-06-27.md",
     "03-Daily-Logs/2026-06-26.md",
-    "03-Daily-Logs/2026-06-26.md.tmp.24412.b98f5c4ae0f1",
-    "00-Meta/progress.json.tmp.24412.9b1e7d1c2525",
-    "00-Meta/progress.json.tmp.24412.e0253087aae7",
-    "00-Meta/curriculum-map.md",
-    "00-Meta/progress.json.tmp.24412.8618b5a1f48e",
-    "02-Topics/Linear-Algebra-Basics.md.tmp.24412.426c6b4c2a01",
-    "02-Topics/Linear-Algebra-Basics.md.tmp.24412.eda48804feb9",
-    "README.md.tmp.15136.dad92c66e043",
-    "README.md",
-    "README.md.tmp.15136.86cb399efcc7",
-    "00-Meta/claude-code-bootstrap-prompt.md",
+    "04-Quiz-Bank/phase-0-linear-algebra-ch4-8.md",
+    "02-Topics/Self-Attention-QKV.md",
+    "notifier/README.md",
+    "05-Projects/README.md",
+    "05-Projects/notifier/SPEC.md",
     "00-Meta/AI_Roadmap_From_Developer_to_Karpathy_Level.md",
-    "00-Meta/daily-log-template.md"
+    "00-Meta/claude-code-bootstrap-prompt.md",
+    "00-Meta/curriculum-map.md",
+    "00-Meta/daily-log-template.md",
+    "04-Quiz-Bank/README.md",
+    "README.md"
   ]
 }

@@ -2,7 +2,7 @@ name: Study Reminder
 
 on:
   schedule:
-    - cron: '0 22 * * *'  # 22:00 UTC = 6pm Bolivia (UTC-4)
+    - cron: '0 12 * * *'  # 12:00 UTC = 8am Bolivia (UTC-4)
   workflow_dispatch:       # manual trigger for testing
 
 jobs:
