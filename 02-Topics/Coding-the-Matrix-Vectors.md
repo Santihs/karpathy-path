@@ -2,8 +2,8 @@
 tags: [phase-0, math, linear-algebra, coding-the-matrix, vectors]
 status: learning
 first_learned: 2026-07-01
-last_reviewed: 2026-07-01
-confidence: 2/5
+last_reviewed: 2026-07-02
+confidence: 3/5
 source_pdf: "00-Meta/resources/Philip N. Klein-Coding the Matrix_ Linear Algebra through Computer Science Applications-Newtonian Press (2013).pdf"
 ---
 
@@ -210,6 +210,38 @@ $$\frac{1}{2}\mathbf{u} + \frac{1}{2}\mathbf{v} = \text{promedio pixel-a-pixel d
 Resultado: una tercera "cara" que es literal el promedio visual de las dos — mezcla de rasgos de ambas, a mitad de camino. Si generalizás variando $\alpha$ de 0 a 1 (con $\beta=1-\alpha$), obtenés una secuencia de imágenes que hace una transición suave (*morph*) de una cara a la otra — eso ES el "segmento de línea" entre las dos imágenes, ahora bien tangible: no es geometría abstracta, es directamente algo que podés ver.
 
 **Por qué esto conecta todo:** confirma que "vector" y "combinación convexa" no son solo conceptos de flechas en el plano — aplican igual a CUALQUIER cosa representable como vector (imágenes, embeddings, datasets) — exacto lo que vimos en la sección 4 ("Qué podemos representar con vectores").
+
+---
+
+## 10. Dot-product (2.9, p.~110-115)
+
+**Definición (2.9, imagen del libro):** pa dos $D$-vectores $\mathbf{u}$ y $\mathbf{v}$ (mismo dominio de índices), el dot-product suma el producto de entradas correspondientes:
+
+$$\mathbf{u}\cdot\mathbf{v} = \sum_{k\in D} \mathbf{u}[k]\,\mathbf{v}[k]$$
+
+Para vectores tradicionales: $\mathbf{u}\cdot\mathbf{v} = u_1v_1+u_2v_2+\cdots+u_nv_n$. **Output es escalar, no vector** — por eso también se llama "scalar product".
+
+**Código (Quiz 2.9.4):**
+```python
+def list_dot(u, v): return sum([u[i]*v[i] for i in range(len(u))])
+# o equivalente:
+def list_dot(u, v): return sum([a*b for (a,b) in zip(u,v)])
+```
+
+**Aplicación 1 — costo/beneficio total (2.9.1, Example 2.9.5):** si `cost` es vector de precio-por-unidad y `quantity` es vector de cantidades, `cost·quantity` = costo total (suma de precio×cantidad por cada ítem). Misma fórmula sirve pa "valor total" cambiando `cost` por `value` (ej. calorías). Patrón general: dot-product = "suma ponderada", reaparece en ML como `weights·features` (regresión lineal, capa densa de una red).
+
+**Aplicación 2 — pattern matching / needle-in-haystack (Quiz 2.9.13):** dot-product mide similitud entre vectores ±1. Deslizás el needle sobre el haystack, calculás dot-product en cada posición de inicio, score más alto = mejor match.
+
+Ejemplo resuelto: haystack=$[1,-1,1,1,1,-1,1,1,1]$ (len 9), needle=$[1,-1,1,1,-1,1]$ (len 6) → $9-6+1=4$ posiciones posibles.
+
+- Pos 0: $[1,-1,1,1,1,-1]\cdot$needle $=1+1+1+1-1-1=2$
+- Pos 1: $[-1,1,1,1,-1,1]\cdot$needle $=-1-1+1+1+1+1=2$
+- Pos 2: $[1,1,1,-1,1,1]\cdot$needle $=1-1+1-1-1+1=0$
+- Pos 3: $[1,1,-1,1,1,1]\cdot$needle $=1-1-1+1-1+1=0$
+
+Resultado $[2,2,0,0]$ — máximo empatado en pos 0 y 1.
+
+**Por qué funciona con entradas ±1:** signo coincide en un slot → +1 al dot-product; signo distinto → -1. Máximo posible = len(needle) (match perfecto, todo coincide). Score de 2 sobre máximo de 6 = 4 coincidencias netas más que fallos — mejor ventana disponible, aunque no perfecta. Esta es la base conceptual de convolution/cross-correlation en CNNs: "deslizar un patrón fijo sobre una señal y medir similitud con dot-product en cada posición".
 
 ---
 
