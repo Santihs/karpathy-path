@@ -1,9 +1,9 @@
 ---
 tags: [phase-0, math, linear-algebra, coding-the-matrix, vectors]
-status: learning
+status: solid
 first_learned: 2026-07-01
-last_reviewed: 2026-07-02
-confidence: 3/5
+last_reviewed: 2026-07-03
+confidence: 5/5
 source_pdf: "00-Meta/resources/Philip N. Klein-Coding the Matrix_ Linear Algebra through Computer Science Applications-Newtonian Press (2013).pdf"
 ---
 
@@ -244,6 +244,52 @@ Resultado $[2,2,0,0]$ — máximo empatado en pos 0 y 1.
 **Por qué funciona con entradas ±1:** signo coincide en un slot → +1 al dot-product; signo distinto → -1. Máximo posible = len(needle) (match perfecto, todo coincide). Score de 2 sobre máximo de 6 = 4 coincidencias netas más que fallos — mejor ventana disponible, aunque no perfecta. Esta es la base conceptual de convolution/cross-correlation en CNNs: "deslizar un patrón fijo sobre una señal y medir similitud con dot-product en cada posición".
 
 ---
+
+## 10.5 Propiedades algebraicas del dot-product (2.9.8, p.123-124)
+
+Valen para cualquier field (R, GF(2), etc.) — no dependen de qué campo estés usando.
+
+**Commutativity (Prop. 2.9.21, p.123):**
+$$\mathbf{u}\cdot\mathbf{v} = \mathbf{v}\cdot\mathbf{u}$$
+
+Prueba: se hereda de que la multiplicación escalar-escalar es conmutativa —
+$$[u_1,...,u_n]\cdot[v_1,...,v_n] = u_1v_1+\cdots+u_nv_n = v_1u_1+\cdots+v_nu_n = [v_1,...,v_n]\cdot[u_1,...,u_n]$$
+
+**Homogeneity (Prop. 2.9.22, p.124):** escalar uno de los dos vectores del dot-product equivale a escalar el resultado.
+$$(\alpha\mathbf{u})\cdot\mathbf{v} = \alpha(\mathbf{u}\cdot\mathbf{v})$$
+
+Ojo — NO generaliza a escalar ambos lados a la vez (Problem 2.9.24, contraejemplo en el libro): $(\alpha\mathbf{u})\cdot(\alpha\mathbf{v}) \ne \alpha(\mathbf{u}\cdot\mathbf{v})$ en general — el $\alpha$ se duplica: $(\alpha\mathbf{u})\cdot(\alpha\mathbf{v}) = \alpha^2(\mathbf{u}\cdot\mathbf{v})$.
+
+**Distributivity (Prop. 2.9.25, p.124):** dot-product distribuye sobre suma de vectores.
+$$(\mathbf{u}+\mathbf{v})\cdot\mathbf{w} = \mathbf{u}\cdot\mathbf{w}+\mathbf{v}\cdot\mathbf{w}$$
+
+Prueba (escribiendo $\mathbf{u}=[u_1,...,u_n]$, etc.):
+$$(\mathbf{u}+\mathbf{v})\cdot\mathbf{w} = [u_1+v_1,...,u_n+v_n]\cdot[w_1,...,w_n]$$
+$$= (u_1+v_1)w_1+\cdots+(u_n+v_n)w_n$$
+$$= (u_1w_1+\cdots+u_nw_n) + (v_1w_1+\cdots+v_nw_n)$$
+$$= \mathbf{u}\cdot\mathbf{w} + \mathbf{v}\cdot\mathbf{w}$$
+
+**Por qué importa pa developer:** estas 3 propiedades son exactamente lo que garantiza que `weights · features` (regresión lineal, capa densa) se comporte bien bajo operaciones comunes de ML — sumar gradientes, escalar por learning rate, batchear ejemplos — sin sorpresas de orden ni de agrupamiento. Homogeneity en particular es la base de por qué `(lr * grad) · x == lr * (grad · x)` en optimización.
+
+---
+
+## 11. Dot-product sobre GF(2) — parity bit (2.9.5)
+
+**Idea simple:** en GF(2) solo hay 0 y 1, y la suma es XOR (mod 2). Dot-product $\mathbf{u}\cdot\mathbf{v}$ con $\mathbf{u}=$ all-ones $[1,1,...,1]$ suma TODAS las entradas de $\mathbf{v}$ sin pesar nada — y esa suma mod 2 ES la paridad de $\mathbf{v}$.
+
+$$\mathbf{1}\cdot\mathbf{v} = \sum_k v[k] \pmod 2 = \begin{cases}1 & \text{cantidad impar de 1s en } v\\0 & \text{cantidad par}\end{cases}$$
+
+**Por qué es la base de parity bit/checksum:** si transmitís $\mathbf{v}$ y guardás su paridad calculada, y en destino un bit se corrompe (0↔1 por ruido), la cantidad de 1s cambia de paridad — la paridad recalculada en destino ya NO coincide con la enviada, señal de error detectado. Detecta 1 bit corrupto (no localiza cuál, no corrige) — base conceptual de ECC memory, RAID, checksums de red (versiones más fuertes usan más bits de paridad para localizar y corregir).
+
+**Gap propio (quiz 2026-07-03):** confundí "resultado es 0 o 1" (trivial, es GF(2)) con "qué SIGNIFICA ese 0/1" — el significado es paridad, y paridad es la señal de detección de error.
+
+---
+
+## Doubts Resolved
+
+- [[vec-vs-gf2-field-separation]] — por qué `Vec` y `GF2` son clases separadas en la implementación (field vs vector space)
+- [[backward-substitution-pytorch]] — para qué sirve backward substitution (Sec. 2.11) y confirmación de que `torch.linalg.solve` la usa por debajo (LAPACK getrf+getrs)
+- [[triangular-solve-zero-pivot]] — visual paso a paso del algoritmo, dónde entra el dot-product, y qué hacer con pivote cero
 
 ## Ver también
 

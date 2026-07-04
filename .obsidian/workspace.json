@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "02-Topics/Linear-Algebra-Axler-Fundamentals.md",
+                "file": "06-Doubts-Resolved/triangular-solve-zero-pivot.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Linear-Algebra-Axler-Fundamentals"
+              "title": "triangular-solve-zero-pivot"
             }
           }
         ]
@@ -185,24 +185,27 @@
   },
   "active": "ab8ce814faa2eca6",
   "lastOpenFiles": [
-    "03-Daily-Logs/2026-07-01.md",
-    "03-Daily-Logs/2026-07-01.md.tmp.31649.b6f4aae19394",
-    "00-Meta/progress.json.tmp.31649.f28dcd1bff8b",
-    "00-Meta/progress.json.tmp.31649.6963644e6bb3",
-    "02-Topics/Linear-Algebra-Axler-Fundamentals.md.tmp.31649.115936fca2e0",
-    "04-Quiz-Bank/phase-0-axler-klein-2026-07-01.md.tmp.31649.33efa6825630",
+    "02-Topics/Linear-Algebra-Basics.md.tmp.58311.a7678413abe2",
+    "02-Topics/Linear-Algebra-Basics.md.tmp.58311.b408c9d37147",
+    "02-Topics/Linear-Algebra-Basics.md.tmp.58311.f45c84cf4c08",
+    "00-Meta/progress.json.tmp.58311.2361452f36b6",
+    "04-Quiz-Bank/phase-0-axler-klein-2026-07-01.md.tmp.58311.67e72db8b270",
+    "04-Quiz-Bank/phase-0-linear-algebra-ch9-11.md.tmp.58311.42623eaaa08c",
+    "04-Quiz-Bank/phase-0-linear-algebra-ch4-8.md.tmp.58311.dcb2fb4c2e8f",
+    "03-Daily-Logs/2026-07-03.md.tmp.58311.d98eb82632a7",
+    "00-Meta/progress.json.tmp.58311.55d8f5242d94",
+    "02-Topics/Coding-the-Matrix-Vectors.md.tmp.58311.1addfd36ea7a",
+    "00-Meta/progress.json.tmp.58311.4829a13fa776",
     "02-Topics/Coding-the-Matrix-Vectors.md",
-    "04-Quiz-Bank/phase-0-axler-klein-2026-07-01.md",
-    "04-Quiz-Bank/phase-0-axler-klein-2026-07-01.md.tmp.31649.3b9447843e01",
-    "02-Topics/Coding-the-Matrix-Vectors.md.tmp.31649.d76d9c3a2ffa",
-    "02-Topics/Coding-the-Matrix-Vectors.md.tmp.31649.975b7a119cd4",
-    "02-Topics/Coding-the-Matrix-Vectors.md.tmp.31649.a1024749256e",
-    "02-Topics/Coding-the-Matrix-Vectors.md.tmp.31649.191ad40279e1",
-    "02-Topics/Probability-Fundamentals.md",
+    "06-Doubts-Resolved/triangular-solve-zero-pivot.md",
+    "06-Doubts-Resolved/backward-substitution-pytorch.md",
     "02-Topics/Coding-the-Matrix-Fundamentals.md",
+    "02-Topics/Linear-Algebra-Axler-Fundamentals.md",
+    "03-Daily-Logs/2026-07-01.md",
+    "04-Quiz-Bank/phase-0-axler-klein-2026-07-01.md",
+    "02-Topics/Probability-Fundamentals.md",
     "02-Topics/Linear-Algebra-Basics.md",
     "00-Meta/book-topic-template.md",
-    "02-Topics/Linear-Algebra-Axler-Fundamentals.md",
     "CLAUDE.md",
     "06-Doubts-Resolved/README.md",
     "02-Topics/Calculus-Gradients.md",
@@ -217,8 +220,6 @@
     "00-Meta/AI_Roadmap_From_Developer_to_Karpathy_Level.md",
     "00-Meta/claude-code-bootstrap-prompt.md",
     "00-Meta/curriculum-map.md",
-    "00-Meta/daily-log-template.md",
-    "04-Quiz-Bank/README.md",
-    "README.md"
+    "00-Meta/daily-log-template.md"
   ]
 }

@@ -2,8 +2,8 @@
 tags: [phase-0, math, linear-algebra]
 status: learning
 first_learned: 2026-06-26
-last_reviewed: 2026-06-30
-confidence: 3/5
+last_reviewed: 2026-07-03
+confidence: 2/5
 ---
 
 # Linear Algebra Basics
@@ -108,6 +108,8 @@ Why: columns of $M_1$ tell you where $\hat{i}$ and $\hat{j}$ land → $M_2$ tran
 **Properties:**
 - Associative: $(AB)C = A(BC)$ ✓
 - NOT commutative: $AB \neq BA$ in general ✗
+
+**Gap propio (quiz 2026-07-03):** contesté "el orden de los factores no altera el producto" — dije lo OPUESTO de lo correcto. Confundí con la propiedad conmutativa de números reales. En matrices el orden SÍ importa porque cada matriz es una transformación geométrica — $AB$ aplica $B$ primero, y la segunda transformación actúa sobre el espacio ya deformado por la primera. Repasar con un ejemplo concreto (rotar 90° luego cortar en x, vs cortar en x luego rotar 90°) para fijar la intuición geométrica, no solo la regla.
 
 ---
 
@@ -276,6 +278,8 @@ Prueba con û = [0.6, 0.8]:
 Las coordenadas de û son exactamente donde aterrizan î y ĵ. Esto es la dualidad: proyectar = transformación lineal. Siempre hay un vector dual que hace lo mismo que la transformación.
 
 **Generalización:** funciona para cualquier dimensión. Si la transformación aplana nD→1D, existe un vector en nD que es su dual. Para 3D→1D: vector dual vive en 3D. Para 100D→1D: vector dual vive en 100D.
+
+**Gap propio (quiz 2026-07-03):** pedido "explicá dualidad en una oración" → no recordé nada. Segunda vez que este concepto no sobrevive el gap entre sesiones (ya había fallado el cross-product-vía-dualidad en el quiz de 2026-06-30). Necesita repaso desde cero, no solo repregunta — probablemente ayude reforzar con el ejemplo concreto de arriba (û=[0.6,0.8]) antes de pedir la definición abstracta.
 
 **Por qué importa en ML/AI:**
 - **Cosine similarity** = producto punto de vectores unitarios = cos(θ) entre embeddings

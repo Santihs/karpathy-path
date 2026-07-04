@@ -1,7 +1,7 @@
 ---
 tags: [phase-0, linear-algebra, subspaces, bases, dimension, linear-maps, functions, probability, vectors, axler, coding-the-matrix]
 date_added: 2026-07-01
-last_tested: 2026-07-01
+last_tested: 2026-07-03
 ---
 
 Q: ¿Cuáles son las 3 condiciones pa que un subconjunto U de V sea subespacio? (Axler 1.34)

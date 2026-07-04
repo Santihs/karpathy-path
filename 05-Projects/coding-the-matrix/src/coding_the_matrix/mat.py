@@ -1,0 +1,180 @@
+# Exercise stencil. Klein, "Coding the Matrix", Ch. 4-6 (Matrices).
+# Fill each function body, then remove its "# doctest: +SKIP" markers so the
+# doctest actually verifies the implementation. Verify with: uv run pytest
+# A Mat is a linear map: D = (row_labels, col_labels), f: (row,col) -> value.
+from coding_the_matrix.vec import Vec
+
+
+def getitem(M, k):
+    """
+    Returns the value of entry k in M, where k is a 2-tuple.
+
+    TODO: remove the "# doctest: +SKIP" markers below once implemented.
+
+    >>> M = Mat(({1,3,5}, {'a'}), {(1,'a'):4, (5,'a'): 2})
+    >>> M[1,'a']  # doctest: +SKIP
+    4
+    >>> M[3,'a']  # doctest: +SKIP
+    0
+    """
+    raise NotImplementedError
+
+
+def setitem(M, k, val):
+    """
+    Set entry k of Mat M to val, where k is a 2-tuple.
+
+    TODO: remove the "# doctest: +SKIP" markers below once implemented.
+
+    >>> M = Mat(({'a','b','c'}, {5}), {('a', 5):3, ('b', 5):7})
+    >>> M['b', 5] = 9  # doctest: +SKIP
+    >>> M['c', 5] = 13  # doctest: +SKIP
+    >>> M == Mat(({'a','b','c'}, {5}), {('a', 5):3, ('b', 5):9, ('c',5):13})  # doctest: +SKIP
+    True
+    """
+    raise NotImplementedError
+
+
+def equal(A, B):
+    """
+    Returns true iff A is equal to B.
+
+    TODO: remove the "# doctest: +SKIP" marker below once implemented.
+
+    >>> A = Mat(({'a','b'}, {0,1}), {('a',1):2, ('b',0):1})
+    >>> B = Mat(({'a','b'}, {0,1}), {('a',1):2, ('b',0):1, ('b',1):0})
+    >>> A == B  # doctest: +SKIP
+    True
+    """
+    raise NotImplementedError
+
+
+def add(A, B):
+    """
+    Return the sum of Mats A and B. Domains must match.
+
+    TODO: remove the "# doctest: +SKIP" marker below once implemented.
+
+    >>> A1 = Mat(({3, 6}, {'x','y'}), {(3,'x'):-2, (6,'y'):3})
+    >>> A2 = Mat(({3, 6}, {'x','y'}), {(3,'y'):4})
+    >>> B = Mat(({3, 6}, {'x','y'}), {(3,'x'):-2, (3,'y'):4, (6,'y'):3})
+    >>> A1 + A2 == B  # doctest: +SKIP
+    True
+    """
+    raise NotImplementedError
+
+
+def scalar_mul(M, x):
+    """
+    Returns the result of scaling M by x.
+
+    TODO: remove the "# doctest: +SKIP" markers below once implemented.
+
+    >>> M = Mat(({1,3,5}, {2,4}), {(1,2):4, (5,4):2, (3,4):3})
+    >>> 1*M == M  # doctest: +SKIP
+    True
+    >>> 0.25*M == Mat(({1,3,5}, {2,4}), {(1,2):1.0, (5,4):0.5, (3,4):0.75})  # doctest: +SKIP
+    True
+    """
+    raise NotImplementedError
+
+
+def transpose(M):
+    """
+    Returns the matrix that is the transpose of M.
+
+    TODO: remove the "# doctest: +SKIP" marker below once implemented.
+
+    >>> M = Mat(({0,1}, {0,1}), {(0,1):3, (1,0):2, (1,1):4})
+    >>> M.transpose() == Mat(({0,1}, {0,1}), {(0,1):2, (1,0):3, (1,1):4})  # doctest: +SKIP
+    True
+    """
+    raise NotImplementedError
+
+
+def vector_matrix_mul(v, M):
+    """
+    Returns the product of vector v and matrix M (v as a row vector).
+
+    TODO: remove the "# doctest: +SKIP" marker below once implemented.
+
+    >>> v1 = Vec({1, 2, 3}, {1: 1, 2: 8})
+    >>> M1 = Mat(({1, 2, 3}, {'a', 'b', 'c'}), {(1, 'b'): 2, (2, 'a'):-1, (3, 'a'): 1, (3, 'c'): 7})
+    >>> v1*M1 == Vec({'a', 'b', 'c'},{'a': -8, 'b': 2, 'c': 0})  # doctest: +SKIP
+    True
+    """
+    raise NotImplementedError
+
+
+def matrix_vector_mul(M, v):
+    """
+    Returns the product of matrix M and vector v (v as a column vector).
+
+    TODO: remove the "# doctest: +SKIP" marker below once implemented.
+
+    >>> N1 = Mat(({1, 3, 5, 7}, {'a', 'b'}), {(1, 'a'): -1, (1, 'b'): 2, (3, 'a'): 1, (3, 'b'):4, (7, 'a'): 3, (5, 'b'):-1})
+    >>> u1 = Vec({'a', 'b'}, {'a': 1, 'b': 2})
+    >>> N1*u1 == Vec({1, 3, 5, 7},{1: 3, 3: 9, 5: -2, 7: 3})  # doctest: +SKIP
+    True
+    """
+    raise NotImplementedError
+
+
+def matrix_matrix_mul(A, B):
+    """
+    Returns the result of the matrix-matrix multiplication, A*B.
+
+    TODO: remove the "# doctest: +SKIP" marker below once implemented.
+
+    >>> A = Mat(({0,1,2}, {0,1,2}), {(1,1):4, (0,0):0, (1,2):1, (1,0):5, (0,1):3, (0,2):2})
+    >>> B = Mat(({0,1,2}, {0,1,2}), {(1,0):5, (2,1):3, (1,1):2, (2,0):0, (0,0):1, (0,1):4})
+    >>> A*B == Mat(({0,1,2}, {0,1,2}), {(0,0):15, (0,1):12, (1,0):25, (1,1):31})  # doctest: +SKIP
+    True
+    """
+    raise NotImplementedError
+
+
+###############################################################################
+
+
+class Mat:
+    def __init__(self, labels, function):
+        self.D = labels
+        self.f = function
+
+    __getitem__ = getitem
+    __setitem__ = setitem
+    transpose = transpose
+
+    def __neg__(self):
+        return (-1) * self
+
+    def __mul__(self, other):
+        if isinstance(other, Mat):
+            return matrix_matrix_mul(self, other)
+        elif isinstance(other, Vec):
+            return matrix_vector_mul(self, other)
+        else:
+            return scalar_mul(self, other)
+
+    def __rmul__(self, other):
+        if isinstance(other, Vec):
+            return vector_matrix_mul(other, self)
+        return scalar_mul(self, other)
+
+    __add__ = add
+
+    def __radd__(self, other):
+        if other == 0:
+            return self
+
+    def __sub__(a, b):
+        return a + (-b)
+
+    __eq__ = equal
+
+    def copy(self):
+        return Mat(self.D, self.f.copy())
+
+    def __repr__(self):
+        return "Mat(" + str(self.D) + ", " + str(self.f) + ")"

@@ -1,7 +1,7 @@
 ---
 tags: [phase-0, linear-algebra, matrix-multiplication, determinant, inverse, null-space, rank]
 date_added: 2026-06-27
-last_tested: 2026-06-30
+last_tested: 2026-07-03
 ---
 
 Q: What does multiplying two matrices $A \cdot B$ represent geometrically?
