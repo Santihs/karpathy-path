@@ -21,3 +21,14 @@ def zero_vec(D):
     True
     """
     return Vec(D, {})
+
+
+def lin_comb(vlist, clist):
+    """
+    Returns the linear combination of the vectors in vlist with the
+    corresponding coefficients in clist.
+
+    >>> lin_comb([list2vec([2, 3.5]), list2vec([4, 10])], [-5, 2]) == list2vec([-2, 2.5])
+    True
+    """
+    return sum([coeff * v for (coeff, v) in zip(clist, vlist)])

@@ -81,28 +81,24 @@ def scalar_mul(v, alpha):
     """
     Returns the scalar-vector product alpha times v.
 
-    TODO: remove the "# doctest: +SKIP" markers below once implemented.
-
     >>> zero = Vec({'x','y','z','w'}, {})
     >>> u = Vec({'x','y','z','w'},{'x':1,'y':2,'z':3,'w':4})
-    >>> 0*u == zero  # doctest: +SKIP
+    >>> 0*u == zero
     True
-    >>> 0.5*u == Vec({'x','y','z','w'},{'x':0.5,'y':1,'z':1.5,'w':2})  # doctest: +SKIP
+    >>> 0.5*u == Vec({'x','y','z','w'},{'x':0.5,'y':1,'z':1.5,'w':2})
     True
     """
-    raise NotImplementedError
+    return Vec(v.D, {k: alpha * getitem(v, k) for k in v.D})
 
 
 def neg(v):
     """
     Returns the negation of a vector.
 
-    TODO: remove the "# doctest: +SKIP" marker below once implemented.
-
-    >>> -Vec({'a','b','c'}, {'a':1}) == Vec({'a','b','c'}, {'a':-1})  # doctest: +SKIP
+    >>> -Vec({'a','b','c'}, {'a':1}) == Vec({'a','b','c'}, {'a':-1})
     True
     """
-    raise NotImplementedError
+    return scalar_mul(v, -1)
 
 
 ###############################################################################
