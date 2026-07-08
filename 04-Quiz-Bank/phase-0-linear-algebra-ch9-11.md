@@ -1,7 +1,7 @@
 ---
 tags: [phase-0, linear-algebra, dot-product, duality, cross-product]
 date_added: 2026-06-29
-last_tested: 2026-07-03
+last_tested: 2026-07-07
 ---
 
 Q: ¿Qué tipo de resultado produce el producto punto? ¿Y el producto cruz?
@@ -35,7 +35,7 @@ A: Cada producto punto Q·Kᵀ mide cuánto "apunta" una query en la dirección 
 Q: Explica dualidad en una oración.
 A: Cualquier transformación lineal nD→1D puede escribirse como producto punto con un vector en nD — proyectar y transformar son la misma operación.
 
-<!-- srs: ease=2.5 interval=1 due=2026-07-06 lapses=0 last_seen=none -->
+<!-- srs: ease=2.5 interval=1 due=2026-07-08 lapses=0 last_seen=2026-07-07 -->
 
 ---
 

@@ -2,7 +2,7 @@
 tags: [phase-0, math, linear-algebra]
 status: learning
 first_learned: 2026-06-26
-last_reviewed: 2026-07-03
+last_reviewed: 2026-07-07
 confidence: 2/5
 ---
 
@@ -209,6 +209,8 @@ Concrete example — $A = \begin{bmatrix}1&2\\2&4\end{bmatrix}$, det = 0:
 - Null space of a weight layer = directions in input space the network is completely blind to
 - Solving $A\vec{x} = \vec{v}$ is at the heart of least-squares regression and linear probes
 
+**Gap propio (quiz 2026-07-07, biweekly-cumulative):** null space → dije "se aplasta a un punto", falta el detalle clave: se aplasta al **vector cero** específicamente (no cualquier punto), y no siempre es un punto — puede ser línea/plano según el rank. Y en det(A)=0 → di la geometría bien pero omití la consecuencia práctica: no hay solución única para $A\vec{x}=\vec{v}$.
+
 ---
 
 ## Ch 8 — Nonsquare Matrices (2026-06-27)
@@ -280,6 +282,8 @@ Las coordenadas de û son exactamente donde aterrizan î y ĵ. Esto es la dualid
 **Generalización:** funciona para cualquier dimensión. Si la transformación aplana nD→1D, existe un vector en nD que es su dual. Para 3D→1D: vector dual vive en 3D. Para 100D→1D: vector dual vive en 100D.
 
 **Gap propio (quiz 2026-07-03):** pedido "explicá dualidad en una oración" → no recordé nada. Segunda vez que este concepto no sobrevive el gap entre sesiones (ya había fallado el cross-product-vía-dualidad en el quiz de 2026-06-30). Necesita repaso desde cero, no solo repregunta — probablemente ayude reforzar con el ejemplo concreto de arriba (û=[0.6,0.8]) antes de pedir la definición abstracta.
+
+**Gap propio (quiz 2026-07-07, biweekly-cumulative):** TERCERA vez que dualidad falla — esta vez parcial ("podemos resolver a espacio 1D usando ambos transformaciones o producto punto"), rondando la idea pero sin decir la equivalencia exacta. El concepto no está afianzado — necesita re-explicación estructurada (no solo repetir la definición), quizás con un diagrama o comparación lado-a-lado matriz-fila vs producto-punto antes de la próxima ronda.
 
 **Por qué importa en ML/AI:**
 - **Cosine similarity** = producto punto de vectores unitarios = cos(θ) entre embeddings

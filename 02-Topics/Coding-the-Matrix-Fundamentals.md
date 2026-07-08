@@ -93,6 +93,116 @@ $$g \circ f = \text{id}_{\text{dominio de } f}$$
 
 ---
 
+## 5. Cap 4.1 — What is a matrix? (p.185-189)
+
+### 4.1.1 Traditional matrices
+
+Matriz sobre $\mathbb{F}$ = array 2D cuyas entradas son elementos de $\mathbb{F}$. Matriz $m \times n$ = $m$ filas, $n$ columnas. Elemento $i,j$ = fila $i$, columna $j$, notación $A_{i,j}$ o Pythonesa $A[i,j]$.
+
+$$\text{Row } i = [A[i,0], A[i,1], \ldots, A[i,n-1]] \qquad \text{Column } j = [A[0,j], A[1,j], \ldots, A[m-1,j]]$$
+
+**Representación lista-de-filas:** lista $L$ tal que $A[i,j] = L[i][j]$. Matriz $\begin{bmatrix}1&2&3\\10&20&30\end{bmatrix}$ → `[[1,2,3],[10,20,30]]`.
+
+Quiz 4.1.1 (zero matrix 3×4, lista-de-filas):
+```python
+[[0 for j in range(4)] for i in range(3)]
+```
+
+**Representación lista-de-columnas:** lista $L$ tal que $A[i,j] = L[j][i]$ (dualidad fila/columna — todo lo que hacés con columnas lo podés hacer con filas). Misma matriz → `[[1,10],[2,20],[3,30]]`.
+
+Quiz 4.1.2 (matriz 3×4, elemento $i,j = i-j$, lista-de-columnas):
+```python
+[[i-j for i in range(3)] for j in range(4)]
+```
+Ojo con el orden: la comprehension externa itera sobre $j$ (columnas), la interna sobre $i$ (filas dentro de cada columna) — al revés de lo intuitivo si pensás "fila primero".
+
+### 4.1.2 The matrix revealed
+
+Igual que un $D$-vector es una función $D \to \mathbb{F}$, una **matriz sobre $\mathbb{F}$** se define como función del producto cartesiano $R \times C \to \mathbb{F}$, donde $R$ = row labels, $C$ = column labels (conjuntos arbitrarios, no solo enteros 0..n-1).
+
+Ejemplo con $R=\{a,b\}$, $C=\{\#,@,?\}$: la matriz es literal un dict `{('a','@'):1, ('a','#'):2, ('a','?'):3, ('b','@'):10, ...}`.
+
+### 4.1.3 Rows, columns, and entries
+
+Fila/columna de una matriz se interpreta como **`Vec`** (mismo tipo que ya usás en `vec.py`):
+
+- Fila `'a'` = `Vec({'@','#','?'}, {'@':1, '#':2, '?':3})`
+- Columna `'#'` = `Vec({'a','b'}, {'a':2, 'b':20})`
+
+Notación: $M[r,:]$ o $M_{r,:}$ = fila $r$. $M[:,c]$ o $M_{:,c}$ = columna $c$.
+
+Quiz 4.1.4 (columna `'?'` como `Vec`):
+```python
+Vec({'a','b'}, {'a':3, 'b':30})
+```
+
+### 4.1.4 Representaciones en Python (rowdict / coldict)
+
+**Rowdict:** dict que mapea cada row-label a un `Vec` (la fila entera).
+```python
+{'a': Vec({'#','@','?'}, {'@':1,'#':2,'?':3}),
+ 'b': Vec({'#','@','?'}, {'@':10,'#':20,'?':30})}
+```
+
+**Coldict:** dict que mapea cada column-label a un `Vec` (la columna entera) — misma dualidad de siempre.
+
+Quiz 4.1.5 (coldict del ejemplo):
+```python
+{'#': Vec({'a','b'}, {'a':2,'b':20}),
+ '@': Vec({'a','b'}, {'a':1,'b':10}),
+ '?': Vec({'a','b'}, {'a':3,'b':30})}
+```
+
+**Insight clave:** rowdict y coldict son representaciones equivalentes de la misma matriz — no hace falta guardar las dos.
+
+### 4.1.4 Our Python implementation of matrices (p.189-190) — confirmado en libro
+
+Clase `Mat`, análoga a `Vec`, con 2 campos:
+- `D` → par `(R, C)` de sets (a diferencia de `Vec` donde `D` es UN solo set)
+- `f` → dict que mapea pares `(r,c) ∈ R×C` a valores del campo
+
+Sparsity: entradas con valor 0 no necesitan estar en el dict (igual que `Vec`). Más importante acá porque matrices son $|R|\times|C|$, mucho más grandes que vectores.
+
+**Por qué D es un par y no todo $R\times C$:** guardar el producto cartesiano completo gastaría demasiado espacio en matrices sparse grandes — `D` guarda solo los sets `R` y `C`, `f` guarda solo las entradas no-cero.
+
+```python
+class Mat:
+    def __init__(self, labels, function):
+        self.D = labels
+        self.f = function
+
+M = Mat(({'a','b'}, {'@','#','?'}), {('a','@'):1, ('a','#'):2, ('a','?'):3,
+                                       ('b','@'):10, ('b','#'):20, ('b','?'):30})
+```
+
+**Verificado en `05-Projects/coding-the-matrix`:** crear la instancia funciona igual que el ejemplo. Pero `print(M)` da el `repr` crudo (`Mat({...}, {...})`), NO la tabla bonita `# @ ?` / `a | 1 2 3` que muestra el libro — el libro mismo dice que el pretty-printing con `__str__` viene "eventually", más adelante en el capítulo. Todavía no implementado en este proyecto.
+
+### 4.1.5 Identity matrix (p.190)
+
+$D\times D$ identity matrix: row-labels y col-labels son ambos $D$, entrada $(d,d)=1$ para todo $d\in D$, resto 0. Notación $\mathbb{1}_D$.
+
+```python
+def identity(D): return Mat((D, D), {(d, d): 1 for d in D})
+```
+
+### 4.1.6 Converting between matrix representations (p.190-191)
+
+```python
+def mat2rowdict(A):
+    return {r: Vec(A.D[1], {c: A[r, c] for c in A.D[1]}) for r in A.D[0]}
+
+def mat2coldict(A):
+    return {c: Vec(A.D[0], {r: A[r, c] for r in A.D[0]}) for c in A.D[1]}
+```
+
+Patrón: fila `r` = `Vec` sobre el domain de columnas, evaluando `A[r,c]` para cada `c`. Columna `c` = simétrico.
+
+### 4.1.7 matutil.py (p.191-192)
+
+Provee `identity`, `mat2rowdict`/`mat2coldict` y sus inversas `rowdict2mat`/`coldict2mat`, más `listlist2mat(L)` (conveniente para crear matrices chicas de ejemplo desde lista de listas).
+
+---
+
 ## Ver también
 
 - [[Linear-Algebra-Axler-Fundamentals]] — versión formal/rigurosa (Axler)

@@ -1,7 +1,7 @@
 ---
 tags: [phase-0, linear-algebra, dot-product, coding-the-matrix, klein]
 date_added: 2026-07-02
-last_tested: null
+last_tested: 2026-07-07
 ---
 
 Q: ¿Qué es el dot-product de dos D-vectores u, v, y qué tipo de valor devuelve?
@@ -42,7 +42,7 @@ A: 9-6+1=4 posiciones (0,1,2,3). Resultados: [2,2,0,0] — mejor match empatado 
 Q: Dot-product sobre GF(2): ¿qué representa u·v cuando u es el vector all-ones [1,1,1,...,1]?
 A: La PARIDAD de v — 1 si v tiene cantidad impar de 1s, 0 si tiene cantidad par. Dot-product con all-ones = sumar todas las entradas de v sin pesar nada, y en GF(2) esa suma total ES la paridad.
 
-<!-- srs: ease=2.5 interval=1 due=2026-07-06 lapses=0 last_seen=none -->
+<!-- srs: ease=2.5 interval=3 due=2026-07-10 lapses=0 last_seen=2026-07-07 -->
 
 ---
 

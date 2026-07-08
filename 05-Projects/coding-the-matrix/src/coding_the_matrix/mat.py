@@ -12,12 +12,12 @@ def getitem(M, k):
     TODO: remove the "# doctest: +SKIP" markers below once implemented.
 
     >>> M = Mat(({1,3,5}, {'a'}), {(1,'a'):4, (5,'a'): 2})
-    >>> M[1,'a']  # doctest: +SKIP
+    >>> M[1,'a']
     4
-    >>> M[3,'a']  # doctest: +SKIP
+    >>> M[3,'a']
     0
     """
-    raise NotImplementedError
+    return M.f.get(k, 0)
 
 
 def setitem(M, k, val):
@@ -27,12 +27,12 @@ def setitem(M, k, val):
     TODO: remove the "# doctest: +SKIP" markers below once implemented.
 
     >>> M = Mat(({'a','b','c'}, {5}), {('a', 5):3, ('b', 5):7})
-    >>> M['b', 5] = 9  # doctest: +SKIP
-    >>> M['c', 5] = 13  # doctest: +SKIP
-    >>> M == Mat(({'a','b','c'}, {5}), {('a', 5):3, ('b', 5):9, ('c',5):13})  # doctest: +SKIP
+    >>> M['b', 5] = 9
+    >>> M['c', 5] = 13
+    >>> M == Mat(({'a','b','c'}, {5}), {('a', 5):3, ('b', 5):9, ('c',5):13})
     True
     """
-    raise NotImplementedError
+    M.f[k] = val
 
 
 def equal(A, B):
@@ -43,10 +43,11 @@ def equal(A, B):
 
     >>> A = Mat(({'a','b'}, {0,1}), {('a',1):2, ('b',0):1})
     >>> B = Mat(({'a','b'}, {0,1}), {('a',1):2, ('b',0):1, ('b',1):0})
-    >>> A == B  # doctest: +SKIP
+    >>> A == B
     True
     """
-    raise NotImplementedError
+    assert A.D == B.D
+    return all(getitem(A, (r, c)) == getitem(B, (r, c)) for r in A.D[0] for c in A.D[1])
 
 
 def add(A, B):
@@ -58,10 +59,12 @@ def add(A, B):
     >>> A1 = Mat(({3, 6}, {'x','y'}), {(3,'x'):-2, (6,'y'):3})
     >>> A2 = Mat(({3, 6}, {'x','y'}), {(3,'y'):4})
     >>> B = Mat(({3, 6}, {'x','y'}), {(3,'x'):-2, (3,'y'):4, (6,'y'):3})
-    >>> A1 + A2 == B  # doctest: +SKIP
+    >>> A1 + A2 == B
     True
     """
-    raise NotImplementedError
+    assert A.D == B.D
+    return Mat(A.D, {(r, c): getitem(A, (r, c)) + getitem(B, (r, c))
+                      for r in A.D[0] for c in A.D[1]})
 
 
 def scalar_mul(M, x):
@@ -71,12 +74,12 @@ def scalar_mul(M, x):
     TODO: remove the "# doctest: +SKIP" markers below once implemented.
 
     >>> M = Mat(({1,3,5}, {2,4}), {(1,2):4, (5,4):2, (3,4):3})
-    >>> 1*M == M  # doctest: +SKIP
+    >>> 1*M == M
     True
-    >>> 0.25*M == Mat(({1,3,5}, {2,4}), {(1,2):1.0, (5,4):0.5, (3,4):0.75})  # doctest: +SKIP
+    >>> 0.25*M == Mat(({1,3,5}, {2,4}), {(1,2):1.0, (5,4):0.5, (3,4):0.75})
     True
     """
-    raise NotImplementedError
+    return Mat(M.D, {(r, c): x * getitem(M, (r, c)) for r in M.D[0] for c in M.D[1]})
 
 
 def transpose(M):
@@ -86,10 +89,10 @@ def transpose(M):
     TODO: remove the "# doctest: +SKIP" marker below once implemented.
 
     >>> M = Mat(({0,1}, {0,1}), {(0,1):3, (1,0):2, (1,1):4})
-    >>> M.transpose() == Mat(({0,1}, {0,1}), {(0,1):2, (1,0):3, (1,1):4})  # doctest: +SKIP
+    >>> M.transpose() == Mat(({0,1}, {0,1}), {(0,1):2, (1,0):3, (1,1):4})
     True
     """
-    raise NotImplementedError
+    return Mat((M.D[1], M.D[0]), {(c, r): val for (r, c), val in M.f.items()})
 
 
 def vector_matrix_mul(v, M):
@@ -100,10 +103,11 @@ def vector_matrix_mul(v, M):
 
     >>> v1 = Vec({1, 2, 3}, {1: 1, 2: 8})
     >>> M1 = Mat(({1, 2, 3}, {'a', 'b', 'c'}), {(1, 'b'): 2, (2, 'a'):-1, (3, 'a'): 1, (3, 'c'): 7})
-    >>> v1*M1 == Vec({'a', 'b', 'c'},{'a': -8, 'b': 2, 'c': 0})  # doctest: +SKIP
+    >>> v1*M1 == Vec({'a', 'b', 'c'},{'a': -8, 'b': 2, 'c': 0})
     True
     """
-    raise NotImplementedError
+    assert v.D == M.D[0]
+    return Vec(M.D[1], {c: sum(v[r] * M[r, c] for r in M.D[0]) for c in M.D[1]})
 
 
 def matrix_vector_mul(M, v):
@@ -114,10 +118,11 @@ def matrix_vector_mul(M, v):
 
     >>> N1 = Mat(({1, 3, 5, 7}, {'a', 'b'}), {(1, 'a'): -1, (1, 'b'): 2, (3, 'a'): 1, (3, 'b'):4, (7, 'a'): 3, (5, 'b'):-1})
     >>> u1 = Vec({'a', 'b'}, {'a': 1, 'b': 2})
-    >>> N1*u1 == Vec({1, 3, 5, 7},{1: 3, 3: 9, 5: -2, 7: 3})  # doctest: +SKIP
+    >>> N1*u1 == Vec({1, 3, 5, 7},{1: 3, 3: 9, 5: -2, 7: 3})
     True
     """
-    raise NotImplementedError
+    assert v.D == M.D[1]
+    return Vec(M.D[0], {r: sum(M[r, c] * v[c] for c in M.D[1]) for r in M.D[0]})
 
 
 def matrix_matrix_mul(A, B):
@@ -128,10 +133,12 @@ def matrix_matrix_mul(A, B):
 
     >>> A = Mat(({0,1,2}, {0,1,2}), {(1,1):4, (0,0):0, (1,2):1, (1,0):5, (0,1):3, (0,2):2})
     >>> B = Mat(({0,1,2}, {0,1,2}), {(1,0):5, (2,1):3, (1,1):2, (2,0):0, (0,0):1, (0,1):4})
-    >>> A*B == Mat(({0,1,2}, {0,1,2}), {(0,0):15, (0,1):12, (1,0):25, (1,1):31})  # doctest: +SKIP
+    >>> A*B == Mat(({0,1,2}, {0,1,2}), {(0,0):15, (0,1):12, (1,0):25, (1,1):31})
     True
     """
-    raise NotImplementedError
+    assert A.D[1] == B.D[0]
+    return Mat((A.D[0], B.D[1]),
+               {(r, c): sum(A[r, k] * B[k, c] for k in A.D[1]) for r in A.D[0] for c in B.D[1]})
 
 
 ###############################################################################

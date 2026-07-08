@@ -1,7 +1,7 @@
 ---
 tags: [phase-0, linear-algebra, matrix-multiplication, determinant, inverse, null-space, rank]
 date_added: 2026-06-27
-last_tested: 2026-07-03
+last_tested: 2026-07-07
 ---
 
 Q: What does multiplying two matrices $A \cdot B$ represent geometrically?
@@ -28,14 +28,14 @@ A: The scale factor by which the transformation stretches or shrinks area (2D) o
 Q: What does det(A) = 0 mean geometrically? And for solving equations?
 A: Space was compressed to a lower dimension (line, plane, or point). The transformation is not invertible — information is permanently lost. For $A\vec{x} = \vec{v}$, no unique solution exists.
 
-<!-- srs: ease=2.5 interval=1 due=2026-07-06 lapses=0 last_seen=none -->
+<!-- srs: ease=2.5 interval=1 due=2026-07-08 lapses=0 last_seen=2026-07-07 -->
 
 ---
 
 Q: What is the null space (kernel) of a matrix?
 A: The set of all input vectors that get mapped to the zero vector (origin) after the transformation. When det ≠ 0, only $\vec{0}$ itself is in the null space. When det = 0, a whole line/plane of vectors get destroyed.
 
-<!-- srs: ease=2.5 interval=1 due=2026-07-06 lapses=0 last_seen=none -->
+<!-- srs: ease=2.5 interval=1 due=2026-07-08 lapses=0 last_seen=2026-07-07 -->
 
 ---
 
