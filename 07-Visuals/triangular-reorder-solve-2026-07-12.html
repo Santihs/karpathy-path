@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Triangular: reordenar y resolver — paso a paso</title>
+<style>
+  :root {
+    --paper: #edf1f5;
+    --paper-raised: #ffffff;
+    --ink: #20293d;
+    --ink-soft: #4b5568;
+    --rule: #c7d0dc;
+    --accent: #b8752e;
+    --accent-soft: #f2e0c9;
+    --accent-ink: #6b4110;
+    --zero: #9aa5b3;
+    --ok-soft: #d9ecdd;
+    --ok-ink: #1f5c33;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #161b22;
+      --paper-raised: #1d232c;
+      --ink: #e7e9ec;
+      --ink-soft: #a8b0bd;
+      --rule: #333c48;
+      --accent: #dda25c;
+      --accent-soft: #3a2c17;
+      --accent-ink: #f4d9ad;
+      --zero: #5b6472;
+      --ok-soft: #17301f;
+      --ok-ink: #8fd3a1;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #161b22; --paper-raised: #1d232c; --ink: #e7e9ec; --ink-soft: #a8b0bd;
+    --rule: #333c48; --accent: #dda25c; --accent-soft: #3a2c17; --accent-ink: #f4d9ad;
+    --zero: #5b6472; --ok-soft: #17301f; --ok-ink: #8fd3a1;
+  }
+  :root[data-theme="light"] {
+    --paper: #edf1f5; --paper-raised: #ffffff; --ink: #20293d; --ink-soft: #4b5568;
+    --rule: #c7d0dc; --accent: #b8752e; --accent-soft: #f2e0c9; --accent-ink: #6b4110;
+    --zero: #9aa5b3; --ok-soft: #d9ecdd; --ok-ink: #1f5c33;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+    line-height: 1.55;
+  }
+
+  .sans { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .mono { font-family: "SF Mono", ui-monospace, "Cascadia Code", Menlo, monospace; }
+
+  .eyebrow {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-soft); margin: 0 0 0.6rem;
+  }
+  h1 { font-size: 1.85rem; font-weight: 600; margin: 0 0 0.3rem; text-wrap: balance; }
+  .subhead {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--ink-soft); font-size: 1rem; margin: 0 0 2.4rem;
+  }
+
+  h2 {
+    font-size: 1.05rem; font-weight: 600; margin: 2.6rem 0 0.4rem;
+    display: flex; align-items: baseline; gap: 0.6rem;
+  }
+  h2 .step-num {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em;
+    color: var(--accent-ink); background: var(--accent-soft);
+    padding: 0.15rem 0.5rem; border-radius: 999px;
+  }
+  .stage-note {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.92rem; color: var(--ink-soft); margin: 0 0 1rem;
+  }
+
+  .panel {
+    background: var(--paper-raised); border: 1px solid var(--rule); border-radius: 8px;
+    padding: 1.3rem 1.4rem; margin: 0 0 1.6rem;
+  }
+
+  .overflow-guard { overflow-x: auto; }
+
+  table.mat {
+    border-collapse: collapse; font-family: "SF Mono", ui-monospace, "Cascadia Code", Menlo, monospace;
+    font-size: 0.95rem;
+  }
+  table.mat th, table.mat td {
+    text-align: right; padding: 0.4rem 0.8rem; font-variant-numeric: tabular-nums;
+    border-bottom: 1px solid var(--rule); min-width: 2.4rem;
+  }
+  table.mat th {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.75rem; color: var(--ink-soft); font-weight: 500; text-transform: none;
+  }
+  table.mat th:first-child, table.mat td:first-child { text-align: left; }
+  table.mat tr:last-child td { border-bottom: none; }
+  table.mat td.zero { color: var(--zero); }
+  table.mat td.pivot { color: var(--accent-ink); background: var(--accent-soft); font-weight: 700; border-radius: 4px; }
+  table.mat tr.active-row td { background: var(--accent-soft); }
+  table.mat tr.active-row td.pivot { background: var(--accent); color: var(--paper-raised); }
+
+  .order-flow {
+    display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+    font-family: "SF Mono", ui-monospace, "Cascadia Code", Menlo, monospace; font-size: 1.05rem;
+  }
+  .order-flow .tag {
+    background: var(--accent-soft); color: var(--accent-ink); padding: 0.3rem 0.7rem;
+    border-radius: 6px; font-weight: 600;
+  }
+  .order-flow .arrow { color: var(--ink-soft); font-size: 1.2rem; }
+
+  .solve-step {
+    display: grid; grid-template-columns: 1fr; gap: 0.9rem;
+  }
+  .row-being-solved {
+    font-family: "SF Mono", ui-monospace, "Cascadia Code", Menlo, monospace; font-size: 0.98rem;
+  }
+  .row-being-solved .rlabel { color: var(--ink-soft); }
+
+  .partial-x {
+    display: flex; gap: 0.6rem; flex-wrap: wrap;
+    font-family: "SF Mono", ui-monospace, "Cascadia Code", Menlo, monospace; font-size: 0.92rem;
+  }
+  .partial-x .slot {
+    padding: 0.25rem 0.6rem; border-radius: 6px; border: 1px solid var(--rule);
+  }
+  .partial-x .slot.solved { background: var(--ok-soft); color: var(--ok-ink); border-color: transparent; font-weight: 600; }
+  .partial-x .slot.pending { color: var(--zero); }
+
+  .arith {
+    font-family: "SF Mono", ui-monospace, "Cascadia Code", Menlo, monospace; font-size: 0.98rem;
+  }
+  .arith .highlight { color: var(--accent-ink); font-weight: 700; }
+
+  .result {
+    margin-top: 2.6rem; padding: 1.4rem 1.5rem; background: var(--ok-soft); color: var(--ok-ink);
+    border-radius: 8px; font-family: "SF Mono", ui-monospace, "Cascadia Code", Menlo, monospace;
+    font-size: 1.1rem; font-weight: 600; text-align: center;
+  }
+
+  .footer-note {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.85rem; color: var(--ink-soft); margin-top: 2rem; text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<p class="eyebrow">Coding the Matrix · Cap 4.6.4/4.6.12 + Cap 2.11 (backward substitution)</p>
+<h1>Reordenar para triangularizar, después resolver</h1>
+<p class="subhead">find_triangular_order() descubre el orden; triangular_solve() resuelve el sistema usando ese orden — mismos datos, misma matriz, dos algoritmos que ya tenés implementados trabajando juntos.</p>
+
+<h2><span class="step-num">PASO 1</span> Matriz original (orden alfabético)</h2>
+<p class="stage-note">No se ve triangular acá — los ceros están dispersos, no forman escalera.</p>
+<div class="panel overflow-guard">
+  <table class="mat">
+    <tr><th></th><th>#</th><th>@</th><th>?</th></tr>
+    <tr><td>a</td><td>2</td><td class="zero">0</td><td>3</td></tr>
+    <tr><td>b</td><td>20</td><td>10</td><td>30</td></tr>
+    <tr><td>c</td><td>35</td><td class="zero">0</td><td class="zero">0</td></tr>
+  </table>
+</div>
+
+<h2><span class="step-num">PASO 2</span> find_triangular_order() encuentra el orden</h2>
+<p class="stage-note">Prueba permutaciones hasta que TODO lo que quedaría bajo la diagonal es cero. Mismos datos — solo cambia el orden en que se miran filas/columnas.</p>
+<div class="panel">
+  <div class="order-flow">
+    <span class="sans" style="color:var(--ink-soft); font-size:0.85rem;">L_R =</span>
+    <span class="tag">b</span><span class="arrow">→</span><span class="tag">a</span><span class="arrow">→</span><span class="tag">c</span>
+    <span class="sans" style="color:var(--ink-soft); font-size:0.85rem; margin-left:1rem;">L_C =</span>
+    <span class="tag">@</span><span class="arrow">→</span><span class="tag">?</span><span class="arrow">→</span><span class="tag">#</span>
+  </div>
+</div>
+
+<h2><span class="step-num">PASO 3</span> Matriz reordenada — ahora sí triangular</h2>
+<p class="stage-note">Misma matriz, mismos valores — solo reordenada. Los ceros ahora forman un triángulo perfecto bajo la diagonal (marcada).</p>
+<div class="panel overflow-guard">
+  <table class="mat">
+    <tr><th></th><th>@</th><th>?</th><th>#</th></tr>
+    <tr><td>b</td><td class="pivot">10</td><td>30</td><td>20</td></tr>
+    <tr><td>a</td><td class="zero">0</td><td class="pivot">3</td><td>2</td></tr>
+    <tr><td>c</td><td class="zero">0</td><td class="zero">0</td><td class="pivot">35</td></tr>
+  </table>
+</div>
+
+<h2><span class="step-num">PASO 4</span> Backward substitution — de abajo hacia arriba</h2>
+<p class="stage-note">triangular_solve() resuelve empezando por la ÚLTIMA fila (menos incógnitas), y cada paso usa lo ya resuelto — las posiciones sin resolver valen 0 automático en el dot-product.</p>
+
+<div class="panel solve-step">
+  <div class="row-being-solved"><span class="rlabel">fila c &nbsp;→&nbsp;</span> @:0 &nbsp; ?:0 &nbsp; <b>#:35</b></div>
+  <div class="partial-x">
+    <span class="sans" style="color:var(--ink-soft); font-size:0.85rem;">x parcial:</span>
+    <span class="slot pending">@ = ?</span><span class="slot pending">? = ?</span><span class="slot pending"># = ?</span>
+  </div>
+  <div class="arith">dot(fila_c, x_parcial) = 0×0 + 0×0 + 35×0 = 0 &nbsp;→&nbsp; x[#] = (35 − 0) / 35 = <span class="highlight">1</span></div>
+</div>
+
+<div class="panel solve-step">
+  <div class="row-being-solved"><span class="rlabel">fila a &nbsp;→&nbsp;</span> @:0 &nbsp; <b>?:3</b> &nbsp; #:2</div>
+  <div class="partial-x">
+    <span class="sans" style="color:var(--ink-soft); font-size:0.85rem;">x parcial:</span>
+    <span class="slot pending">@ = ?</span><span class="slot pending">? = ?</span><span class="slot solved"># = 1</span>
+  </div>
+  <div class="arith">dot(fila_a, x_parcial) = 0×0 + 3×0 + 2×1 = 2 &nbsp;→&nbsp; x[?] = (5 − 2) / 3 = <span class="highlight">1</span></div>
+</div>
+
+<div class="panel solve-step">
+  <div class="row-being-solved"><span class="rlabel">fila b &nbsp;→&nbsp;</span> <b>@:10</b> &nbsp; ?:30 &nbsp; #:20</div>
+  <div class="partial-x">
+    <span class="sans" style="color:var(--ink-soft); font-size:0.85rem;">x parcial:</span>
+    <span class="slot pending">@ = ?</span><span class="slot solved">? = 1</span><span class="slot solved"># = 1</span>
+  </div>
+  <div class="arith">dot(fila_b, x_parcial) = 10×0 + 30×1 + 20×1 = 50 &nbsp;→&nbsp; x[@] = (60 − 50) / 10 = <span class="highlight">1</span></div>
+</div>
+
+<div class="result">x = {@: 1, ?: 1, #: 1} &nbsp;·&nbsp; verificado: A_reordenada · x = [60, 5, 35] ✓</div>
+
+<p class="footer-note">Generado para karpathy-path — find_triangular_order() + triangular_solve() (05-Projects/coding-the-matrix), Klein Cap 4.6.4/4.6.12 + Cap 2.11.</p>
+
+</body>
+</html>
