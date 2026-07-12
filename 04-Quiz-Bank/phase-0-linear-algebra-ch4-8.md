@@ -1,7 +1,7 @@
 ---
 tags: [phase-0, linear-algebra, matrix-multiplication, determinant, inverse, null-space, rank]
 date_added: 2026-06-27
-last_tested: 2026-07-07
+last_tested: 2026-07-12
 ---
 
 Q: What does multiplying two matrices $A \cdot B$ represent geometrically?
@@ -14,7 +14,7 @@ A: Composing two transformations — apply B first, then A. The result is a sing
 Q: Why does $AB \neq BA$ in general?
 A: Because the order of transformations matters geometrically. "Rotate then shear" deforms space differently than "shear then rotate" — the second transformation acts on an already-transformed space.
 
-<!-- srs: ease=2.5 interval=1 due=2026-07-06 lapses=0 last_seen=none -->
+<!-- srs: ease=2.5 interval=1 due=2026-07-13 lapses=0 last_seen=2026-07-12 -->
 
 ---
 

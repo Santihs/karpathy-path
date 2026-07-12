@@ -1,7 +1,7 @@
 ---
 tags: [phase-0, linear-algebra, subspaces, bases, dimension, linear-maps, functions, probability, vectors, axler, coding-the-matrix]
 date_added: 2026-07-01
-last_tested: 2026-07-07
+last_tested: 2026-07-12
 ---
 
 Q: ¿Cuáles son las 3 condiciones pa que un subconjunto U de V sea subespacio? (Axler 1.34)
@@ -14,7 +14,7 @@ A: (1) 0 ∈ U, (2) cerrado bajo suma (u,w∈U ⟹ u+w∈U), (3) cerrado bajo es
 Q: ¿Es {(x,y,z)∈R³ : x+y+z=5} subespacio? ¿Por qué?
 A: No. El vector cero no cumple la ecuación (0+0+0=0≠5) — falla la condición de identidad aditiva. Ecuación no-homogénea rompe subespacialidad.
 
-<!-- srs: ease=2.5 interval=1 due=2026-07-06 lapses=0 last_seen=none -->
+<!-- srs: ease=2.3 interval=1 due=2026-07-13 lapses=1 last_seen=2026-07-12 -->
 
 ---
 
@@ -35,7 +35,7 @@ A: Con solo 2 vectores, el span máximo es un plano (2D) — no alcanza a cubrir
 Q: ¿Qué 2 condiciones tiene que cumplir una lista pa ser "base" de un espacio vectorial? (Axler 2.26)
 A: (1) Ser linealmente independiente Y (2) hacer span del espacio completo. Las dos son obligatorias.
 
-<!-- srs: ease=2.5 interval=1 due=2026-07-06 lapses=0 last_seen=none -->
+<!-- srs: ease=2.6 interval=3 due=2026-07-15 lapses=0 last_seen=2026-07-12 -->
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 tags: [phase-0, linear-algebra, dot-product, coding-the-matrix, klein]
 date_added: 2026-07-02
-last_tested: 2026-07-07
+last_tested: 2026-07-12
 ---
 
 Q: ¿Qué es el dot-product de dos D-vectores u, v, y qué tipo de valor devuelve?
@@ -14,7 +14,7 @@ A: $\mathbf{u}\cdot\mathbf{v} = \sum_{k\in D} u[k]\,v[k]$ — suma de productos 
 Q: ¿Cómo se implementa list_dot(u,v) en Python con sum() + list comprehension?
 A: `def list_dot(u, v): return sum([u[i]*v[i] for i in range(len(u))])` — o equivalente con zip: `sum([a*b for (a,b) in zip(u,v)])`.
 
-<!-- srs: ease=2.5 interval=1 due=2026-07-06 lapses=0 last_seen=none -->
+<!-- srs: ease=2.5 interval=1 due=2026-07-13 lapses=0 last_seen=2026-07-12 -->
 
 ---
 

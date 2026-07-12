@@ -1,7 +1,7 @@
 ---
 tags: [phase-0, linear-algebra, dot-product, duality, cross-product]
 date_added: 2026-06-29
-last_tested: 2026-07-07
+last_tested: 2026-07-12
 ---
 
 Q: ¿Qué tipo de resultado produce el producto punto? ¿Y el producto cruz?
@@ -56,7 +56,7 @@ A: Solo en 3D (y matemáticamente en 7D, pero ignorar). El producto punto funcio
 Q: ¿Qué representa geométricamente |v × w|?
 A: El área del paralelogramo formado por v y w. Igual que |v||w|sin(θ).
 
-<!-- srs: ease=2.5 interval=1 due=2026-07-06 lapses=0 last_seen=none -->
+<!-- srs: ease=2.5 interval=1 due=2026-07-13 lapses=0 last_seen=2026-07-12 -->
 
 ---
 
