@@ -5,10 +5,10 @@
     "last_session_date": "2026-07-12",
     "last_session_type": "sunday-deep-review",
     "study_streak": 1,
-    "total_hours_logged": 18.2,
-    "session_count": 12,
+    "total_hours_logged": 19.7,
+    "session_count": 13,
     "last_cumulative_review": "2026-07-07",
-    "next_up": "Axler Cap 3B (Null Spaces and Ranges) — teoría formal de subespacios asociados a transformaciones lineales. Coding-the-Matrix Klein Cap 4 (4.1-4.6, Mat/matutil/triangular/find_triangular_order) queda cerrado y testeado (66 tests); pendiente de antes: docstrings senior-style en vec.py/triangular.py/vecutil.py."
+    "next_up": "Axler Cap 3B (Null Spaces and Ranges) — teoría formal de subespacios asociados a transformaciones lineales. Coding-the-Matrix Klein Cap 4 (4.1-4.6, Mat/matutil/triangular/find_triangular_order) queda cerrado y testeado (74 tests, incluye viz_html.py). Tooling nuevo: 07-Visuals/ (Jinja2 template + viz_html.py/viz_examples.py) para explicaciones con subíndices/fórmulas que el chat no renderiza — usar este patrón de acá en más. Pendiente de antes: docstrings senior-style en vec.py/triangular.py/vecutil.py."
   },
   "phases": {
     "phase_0": {
