@@ -89,7 +89,15 @@ A: ...
 
 ---
 
-## 5. Hard Rules
+## 5. Explanation Style
+
+
+- **No LaTeX in chat.** Ever. Write math plain/code-style (`AB != BA`, `v*w`, `x^2`) — LaTeX renders as unreadable raw markup in this chat surface. LaTeX is fine in written notes (`02-Topics/`, `06-Doubts-Resolved/`) where Obsidian renders it, never in conversational replies.
+- **Matrix/vector examples: show the table, not just formulas.** When explaining any matrix-vector op (mult, transpose, triangular systems, reordering) in `05-Projects/coding-the-matrix` or any Klein/linear-algebra example, print the actual `Mat.__str__`/`pp()` table output (or a hand-drawn equivalent) first, then walk through it **row-by-row or column-by-column visually** — arrows/annotations over the table, not code-only or formula-only. Keep code minimal in these explanations; the point is the visual trace of the process.
+- **Formulas with subscripts/notation the chat can't render (e.g. `v_y`, `w_z`): generate a local HTML file in `07-Visuals/`**, not a Claude Artifact (Artifacts are hosted on claude.ai's servers, external to this repo — even private ones don't live in git with everything else). Write a self-contained standalone `.html` (own `<style>`, no CDN fonts/scripts, real `<sub>`/`<sup>` tags for subscripts, light+dark theme via `prefers-color-scheme`), name it `07-Visuals/<topic>-<YYYY-MM-DD>.html`, and it gets committed with the rest of the session's changes. Open locally in a browser (`xdg-open`/`open`) — never publish it externally.
+- **Bash tool output never shows ANSI/color in this chat** — confirmed permanent Claude Code limitation, no setting fixes it. Don't design explanations around color/`rich` output for anything shown here; `rich` is fine only for scripts I run in my own separate terminal.
+
+## 6. Hard Rules
 
 - **SaaS project is out of scope.** If I mention it, acknowledge and redirect.
 - **Calibrate to my level**: I'm a working developer who already uses AI agents daily. No beginner scaffolding.

@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Producto cruz — v × w paso a paso</title>
+<style>
+  :root {
+    --paper: #edf1f5;
+    --paper-raised: #ffffff;
+    --ink: #20293d;
+    --ink-soft: #4b5568;
+    --rule: #c7d0dc;
+    --accent: #b8752e;
+    --accent-soft: #f2e0c9;
+    --accent-ink: #6b4110;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #161b22;
+      --paper-raised: #1d232c;
+      --ink: #e7e9ec;
+      --ink-soft: #a8b0bd;
+      --rule: #333c48;
+      --accent: #dda25c;
+      --accent-soft: #3a2c17;
+      --accent-ink: #f4d9ad;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #161b22;
+    --paper-raised: #1d232c;
+    --ink: #e7e9ec;
+    --ink-soft: #a8b0bd;
+    --rule: #333c48;
+    --accent: #dda25c;
+    --accent-soft: #3a2c17;
+    --accent-ink: #f4d9ad;
+  }
+  :root[data-theme="light"] {
+    --paper: #edf1f5;
+    --paper-raised: #ffffff;
+    --ink: #20293d;
+    --ink-soft: #4b5568;
+    --rule: #c7d0dc;
+    --accent: #b8752e;
+    --accent-soft: #f2e0c9;
+    --accent-ink: #6b4110;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+    line-height: 1.55;
+  }
+
+  .eyebrow {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 0.6rem;
+  }
+
+  h1 {
+    font-size: 1.9rem;
+    font-weight: 600;
+    margin: 0 0 0.3rem;
+    text-wrap: balance;
+  }
+
+  .subhead {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--ink-soft);
+    font-size: 1rem;
+    margin: 0 0 2.2rem;
+  }
+
+  .vectors {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    display: flex;
+    gap: 2rem;
+    margin: 0 0 2.6rem;
+    padding: 1rem 1.25rem;
+    background: var(--paper-raised);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+  }
+  .vectors .item { font-variant-numeric: tabular-nums; }
+  .vectors .label { color: var(--ink-soft); font-size: 0.8rem; margin-right: 0.4rem; }
+  .vectors .val { font-family: "SF Mono", ui-monospace, "Cascadia Code", Menlo, monospace; font-weight: 600; }
+
+  .pattern-note {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    margin: 0 0 2.6rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--rule);
+  }
+  .pattern-note strong { color: var(--ink); font-weight: 600; }
+
+  section.step {
+    margin: 0 0 2.2rem;
+    padding: 1.4rem 1.5rem;
+    background: var(--paper-raised);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+  }
+
+  .step-title {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 0.9rem;
+  }
+
+  table.trace {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: "SF Mono", ui-monospace, "Cascadia Code", Menlo, monospace;
+    font-size: 0.95rem;
+  }
+  table.trace th, table.trace td {
+    text-align: left;
+    padding: 0.5rem 0.7rem;
+    font-variant-numeric: tabular-nums;
+    border-bottom: 1px solid var(--rule);
+  }
+  table.trace th {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+  table.trace tr:last-child td { border-bottom: none; }
+  table.trace tr.active td {
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    font-weight: 600;
+  }
+  table.trace tr.active td:first-child {
+    border-radius: 4px 0 0 4px;
+  }
+  table.trace tr.active td:last-child {
+    border-radius: 0 4px 4px 0;
+  }
+
+  .overflow-guard { overflow-x: auto; }
+
+  .result {
+    margin-top: 2.4rem;
+    padding: 1.4rem 1.5rem;
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    border-radius: 8px;
+    font-family: "SF Mono", ui-monospace, "Cascadia Code", Menlo, monospace;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .footer-note {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    margin-top: 2rem;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<p class="eyebrow">Coding the Matrix · Cap 4 / doubt-resolved: cross-product-real-world-ml-uses</p>
+<h1>Producto cruz v × w, paso a paso</h1>
+<p class="subhead">Subíndices reales (HTML &lt;sub&gt;) — sin las limitaciones de Unicode ni el problema de LaTeX sin renderizar en el chat.</p>
+
+<div class="vectors">
+  <div class="item"><span class="label">v =</span><span class="val">[2, 3, 4]</span></div>
+  <div class="item"><span class="label">w =</span><span class="val">[5, 6, 7]</span></div>
+</div>
+
+<p class="pattern-note">
+  <strong>Patrón cíclico:</strong> cada componente del resultado "salta" su propio eje y usa los otros dos, siempre en el mismo orden circular — x usa (y,z), y usa (z,x), z usa (x,y).
+</p>
+
+<section class="step">
+  <p class="step-title">Paso 1 de 3 — componente x</p>
+  <div class="overflow-guard">
+    <table class="trace">
+      <tr><th>componente</th><th>fórmula</th><th>cálculo</th><th>resultado</th></tr>
+      <tr class="active">
+        <td>x</td>
+        <td>v<sub>y</sub>·w<sub>z</sub> − v<sub>z</sub>·w<sub>y</sub></td>
+        <td>3×7 − 4×6 = 21 − 24</td>
+        <td>−3</td>
+      </tr>
+      <tr><td>y</td><td>v<sub>z</sub>·w<sub>x</sub> − v<sub>x</sub>·w<sub>z</sub></td><td>4×5 − 2×7</td><td>6</td></tr>
+      <tr><td>z</td><td>v<sub>x</sub>·w<sub>y</sub> − v<sub>y</sub>·w<sub>x</sub></td><td>2×6 − 3×5</td><td>−3</td></tr>
+    </table>
+  </div>
+</section>
+
+<section class="step">
+  <p class="step-title">Paso 2 de 3 — componente y</p>
+  <div class="overflow-guard">
+    <table class="trace">
+      <tr><th>componente</th><th>fórmula</th><th>cálculo</th><th>resultado</th></tr>
+      <tr><td>x</td><td>v<sub>y</sub>·w<sub>z</sub> − v<sub>z</sub>·w<sub>y</sub></td><td>3×7 − 4×6</td><td>−3</td></tr>
+      <tr class="active">
+        <td>y</td>
+        <td>v<sub>z</sub>·w<sub>x</sub> − v<sub>x</sub>·w<sub>z</sub></td>
+        <td>4×5 − 2×7 = 20 − 14</td>
+        <td>6</td>
+      </tr>
+      <tr><td>z</td><td>v<sub>x</sub>·w<sub>y</sub> − v<sub>y</sub>·w<sub>x</sub></td><td>2×6 − 3×5</td><td>−3</td></tr>
+    </table>
+  </div>
+</section>
+
+<section class="step">
+  <p class="step-title">Paso 3 de 3 — componente z</p>
+  <div class="overflow-guard">
+    <table class="trace">
+      <tr><th>componente</th><th>fórmula</th><th>cálculo</th><th>resultado</th></tr>
+      <tr><td>x</td><td>v<sub>y</sub>·w<sub>z</sub> − v<sub>z</sub>·w<sub>y</sub></td><td>3×7 − 4×6</td><td>−3</td></tr>
+      <tr><td>y</td><td>v<sub>z</sub>·w<sub>x</sub> − v<sub>x</sub>·w<sub>z</sub></td><td>4×5 − 2×7</td><td>6</td></tr>
+      <tr class="active">
+        <td>z</td>
+        <td>v<sub>x</sub>·w<sub>y</sub> − v<sub>y</sub>·w<sub>x</sub></td>
+        <td>2×6 − 3×5 = 12 − 15</td>
+        <td>−3</td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<div class="result">v × w = [−3, 6, −3]</div>
+
+<p class="footer-note">Generado para karpathy-path — patrón a usar de acá en más para fórmulas con subíndices/notación matemática que no rendericen bien en el chat.</p>
+
+</body>
+</html>
