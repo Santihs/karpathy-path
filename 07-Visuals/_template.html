@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Reordenar para triangularizar, después resolver</title>
+<title>{{ title }}</title>
 <style>
   :root {
     --paper: #edf1f5; --paper-raised: #ffffff; --ink: #20293d; --ink-soft: #4b5568;
@@ -151,46 +151,13 @@
 </head>
 <body>
 
-<p class="eyebrow">Coding the Matrix · Cap 4.6.4/4.6.12 + Cap 2.11 (backward substitution)</p>
-<h1>Reordenar para triangularizar, después resolver</h1>
-<p class="subhead">find_triangular_order() descubre el orden; triangular_solve() resuelve usando ese orden — generado con viz_html.py, no tipeado a mano.</p>
+<p class="eyebrow">{{ eyebrow }}</p>
+<h1>{{ title }}</h1>
+<p class="subhead">{{ subhead }}</p>
 
+{{ content }}
 
-<h2><span class="step-num">PASO 1</span> Matriz original (orden alfabético)</h2>
-<p class="stage-note">No se ve triangular acá — ceros dispersos, no forman escalera.</p>
-<div class="panel overflow-guard"><table class="mat"><tr><th></th><th>#</th><th>?</th><th>@</th></tr><tr><td>a</td><td>2</td><td>3</td><td class="zero">0</td></tr><tr><td>b</td><td>20</td><td>30</td><td>10</td></tr><tr><td>c</td><td>35</td><td class="zero">0</td><td class="zero">0</td></tr></table></div>
-
-<h2><span class="step-num">PASO 2</span> find_triangular_order() encuentra el orden</h2>
-<p class="stage-note">Prueba permutaciones hasta que todo bajo la diagonal da cero. Mismos datos, solo reordenados.</p>
-<div class="panel"><div class="order-flow"><span class="label">L<sub>R</sub> =</span> <span class="tag">b</span><span class="arrow">→</span><span class="tag">a</span><span class="arrow">→</span><span class="tag">c</span><span class="label" style="margin-left:1rem">L<sub>C</sub> =</span> <span class="tag">@</span><span class="arrow">→</span><span class="tag">?</span><span class="arrow">→</span><span class="tag">#</span></div></div>
-
-<h2><span class="step-num">PASO 3</span> Matriz reordenada — ahora sí triangular</h2>
-<p class="stage-note">Misma matriz exacta, solo vista con el orden encontrado — pivotes marcados en la diagonal.</p>
-<div class="panel overflow-guard"><table class="mat"><tr><th></th><th>@</th><th>?</th><th>#</th></tr><tr><td>b</td><td class="pivot">10</td><td>30</td><td>20</td></tr><tr><td>a</td><td class="zero">0</td><td class="pivot">3</td><td>2</td></tr><tr><td>c</td><td class="zero">0</td><td class="zero">0</td><td class="pivot">35</td></tr></table></div>
-
-<h2><span class="step-num">PASO 4</span> Backward substitution — de abajo hacia arriba</h2>
-<p class="stage-note">triangular_solve() resuelve empezando por la última fila; cada paso usa lo ya resuelto.</p>
-
-    <div class="panel solve-step">
-      <div class="row-being-solved"><span class="rlabel">fila c &nbsp;→&nbsp;</span> @:0 &nbsp; ?:0 &nbsp; <b>#:35</b></div>
-      <div class="partial-x"><span class="label">x parcial:</span><span class="slot pending">@ = ?</span><span class="slot pending">? = ?</span><span class="slot pending"># = ?</span></div>
-      <div class="arith">dot(fila<sub>c</sub>, x parcial) = 0 &nbsp;→&nbsp; x[#] = (35 − 0) / 35 = <span class="highlight">1</span></div>
-    </div>
-    <div class="panel solve-step">
-      <div class="row-being-solved"><span class="rlabel">fila a &nbsp;→&nbsp;</span> @:0 &nbsp; <b>?:3</b> &nbsp; #:2</div>
-      <div class="partial-x"><span class="label">x parcial:</span><span class="slot pending">@ = ?</span><span class="slot pending">? = ?</span><span class="slot solved"># = 1</span></div>
-      <div class="arith">dot(fila<sub>a</sub>, x parcial) = 2 &nbsp;→&nbsp; x[?] = (5 − 2) / 3 = <span class="highlight">1</span></div>
-    </div>
-    <div class="panel solve-step">
-      <div class="row-being-solved"><span class="rlabel">fila b &nbsp;→&nbsp;</span> <b>@:10</b> &nbsp; ?:30 &nbsp; #:20</div>
-      <div class="partial-x"><span class="label">x parcial:</span><span class="slot pending">@ = ?</span><span class="slot solved">? = 1</span><span class="slot solved"># = 1</span></div>
-      <div class="arith">dot(fila<sub>b</sub>, x parcial) = 50 &nbsp;→&nbsp; x[@] = (60 − 50) / 10 = <span class="highlight">1</span></div>
-    </div>
-
-<div class="result">x = { @: 1, ?: 1, #: 1 } &nbsp;·&nbsp; verificado contra b = [60, 5, 35]</div>
-
-
-<p class="footer-note">Generado para karpathy-path con coding_the_matrix.viz_html (05-Projects/coding-the-matrix).</p>
+<p class="footer-note">{{ footer }}</p>
 
 </body>
 </html>
