@@ -2,13 +2,13 @@
   "meta": {
     "current_phase": 0,
     "current_week": 1,
-    "last_session_date": "2026-07-17",
-    "last_session_type": "weekday-micro",
-    "study_streak": 1,
-    "total_hours_logged": 21.2,
-    "session_count": 14,
+    "last_session_date": "2026-07-18",
+    "last_session_type": "saturday-deep",
+    "study_streak": 2,
+    "total_hours_logged": 22.7,
+    "session_count": 15,
     "last_cumulative_review": "2026-07-07",
-    "next_up": "Coding-the-Matrix (Klein) Cap 5, sección 5.3+ — Fundamental Questions 5.2.4/5.2.5 (cómo saber si span{a1..an}=V, mínimo de vectores generadores) → lleva a basis y dimensión. Cap 5.1 (coordinate systems, Au=v) y 5.2 (lossy compression: k-sparse, coordenadas, estrategia híbrida) cerrados y documentados en 02-Topics/Coding-the-Matrix-Basis.md. Axler sigue pausado (ver decisión de sesión). Cap 4 cerrado y testeado (74 tests). Tooling: 07-Visuals/ (Jinja2 template + viz_html.py/viz_examples.py) para fórmulas con subíndices — no se usó hoy, contenido fue con notación simple. Pendiente de antes: docstrings senior-style en vec.py/triangular.py/vecutil.py."
+    "next_up": "Coding-the-Matrix (Klein) Cap 5.5 — Exchange Lemma: por qué Grow/Shrink en espacios vectoriales SIEMPRE terminan con el mismo tamaño (mínimo) sin importar el orden/elección de vectores — cierra la pregunta de por qué greedy funciona en vectores y en MSF pero falla en dominating-set (visto en Cap 5.3.3). Cap 5.3 (Grow/Shrink, span test, Fundamental Questions 5.2.4/5.2.5 — unicidad + minimalidad) y Cap 5.4 (Minimum Spanning Forest formulado en GF(2): edge→vector, span=conectividad, Examples 5.4.1-5.4.5) cerrados y documentados en 02-Topics/Coding-the-Matrix-Basis.md. Implementado y testeado: 05-Projects/coding-the-matrix/src/coding_the_matrix/basis.py (is_in_span/grow/shrink, elimination genérica) + msf.py (edge_to_vec/msf_grow/msf_shrink) — 19 tests nuevos, 93 total pasan. Visual: 07-Visuals/msf-span-example-5-4-5-2026-07-18.html (grafo interactivo + trace de reduce()). Pendiente de antes: docstrings senior-style en vec.py/triangular.py/vecutil.py; Axler sigue pausado."
   },
   "phases": {
     "phase_0": {

@@ -2,7 +2,9 @@
 # "Explanation Style"). Run directly: uv run python -m coding_the_matrix.viz_examples
 from coding_the_matrix.mat import Mat, find_triangular_order
 from coding_the_matrix.triangular import triangular_solve
-from coding_the_matrix.viz_html import render_page, matrix_table_html
+from coding_the_matrix.viz_html import render_page, matrix_table_html, trace_table_html
+from coding_the_matrix.basis import _EliminationBasis
+from coding_the_matrix.msf import edge_to_vec
 
 
 def generate_triangular_reorder_solve():
@@ -82,6 +84,94 @@ def generate_triangular_reorder_solve():
     )
 
 
+_MSF_NODE_POS = {
+    'Pembroke': (90, 90), 'Athletic': (300, 90), 'Bio-Med': (90, 240),
+    'Main': (480, 50), 'Keeney': (430, 210), 'Wriston': (570, 210), 'Gregorian': (660, 300),
+}
+_MSF_SHORT = {
+    'Pembroke': 'Pembroke', 'Athletic': 'Athletic', 'Bio-Med': 'Bio-Med',
+    'Main': 'Main', 'Keeney': 'Keeney', 'Wriston': 'Wriston', 'Gregorian': 'Gregorian',
+}
+
+
+def _msf_svg(kept_edges, query_edges, isolated_nodes):
+    """Self-contained inline SVG — no external assets, per CLAUDE.md 07-Visuals rule."""
+    lines = []
+    for x, y in kept_edges:
+        x1, y1 = _MSF_NODE_POS[x]
+        x2, y2 = _MSF_NODE_POS[y]
+        lines.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" '
+                     f'stroke="var(--ok-ink)" stroke-width="3"/>')
+    for x, y in query_edges:
+        x1, y1 = _MSF_NODE_POS[x]
+        x2, y2 = _MSF_NODE_POS[y]
+        lines.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" '
+                     f'stroke="#c0392b" stroke-width="2.5" stroke-dasharray="7,5"/>')
+    nodes = []
+    for n, (x, y) in _MSF_NODE_POS.items():
+        fill = '#c0392b' if n in isolated_nodes else 'var(--ok-ink)'
+        nodes.append(f'<circle cx="{x}" cy="{y}" r="7" fill="{fill}"/>'
+                     f'<text x="{x+12}" y="{y+5}" class="sans" font-size="14" '
+                     f'fill="var(--ink)">{_MSF_SHORT[n]}</text>')
+    return (f'<svg viewBox="0 0 720 340" style="width:100%;height:auto" '
+            f'xmlns="http://www.w3.org/2000/svg">{"".join(lines)}{"".join(nodes)}</svg>')
+
+
+def generate_msf_span_example():
+    """Klein Example 5.4.5 — span of 4 edges excludes edges touching untouched nodes."""
+    nodes = set(_MSF_NODE_POS)
+    kept_pairs = [('Athletic', 'Bio-Med'), ('Main', 'Keeney'), ('Keeney', 'Wriston'), ('Main', 'Wriston')]
+    query_pairs = [('Pembroke', 'Keeney'), ('Main', 'Gregorian'), ('Pembroke', 'Gregorian')]
+
+    tracker = _EliminationBasis()
+    for e in kept_pairs:
+        tracker.add(edge_to_vec(nodes, e))
+
+    graph_svg = _msf_svg(kept_pairs, query_pairs, isolated_nodes={'Pembroke', 'Gregorian'})
+
+    query = ('Pembroke', 'Keeney')
+    v = edge_to_vec(nodes, query)
+    trace_rows = []
+    running = v
+    for pivot, row in zip(tracker.pivots, tracker.pivot_rows):
+        coeff = running[pivot]
+        before = {n: (str(running[n]) if running[n] != 0 else '0') for n in _MSF_NODE_POS}
+        if coeff != 0:
+            running = running - coeff * row
+        trace_rows.append([pivot, str(coeff), ', '.join(f'{n}:{before[n]}' for n in _MSF_NODE_POS if before[n] != '0')])
+    final_nonzero = ', '.join(f'{n}:{running[n]}' for n in _MSF_NODE_POS if running[n] != 0)
+    trace_table = trace_table_html(
+        ['pivot probado', 'coef en esa posición', 'valores no-cero antes de reducir'],
+        trace_rows,
+    )
+
+    content = f'''
+<h2><span class="step-num">GRAFO</span> kept = 4 aristas guardadas (verde), query = 3 aristas a probar (rojo punteado)</h2>
+<p class="stage-note">Pembroke y Gregorian (rojo) nunca aparecen en ninguna arista guardada — quedan aislados del subgrafo verde.</p>
+<div class="panel overflow-guard">{graph_svg}</div>
+
+<h2><span class="step-num">PASO 1</span> is_in_span({{"Pembroke","Keeney"}}) — reduce() recorre los pivotes guardados</h2>
+<p class="stage-note">Cada fila del tracker tiene un pivote (un nodo) que ninguna fila anterior tocaba. "Pembroke" nunca fue pivote de nada.</p>
+<div class="panel overflow-guard">{trace_table}</div>
+
+<h2><span class="step-num">PASO 2</span> qué queda después de reducir</h2>
+<p class="stage-note">Coordenadas no-cero que sobreviven: <b>{final_nonzero}</b> — Pembroke sigue en "one" porque ninguna fila del tracker tenía ese pivote para cancelarlo.</p>
+
+<div class="result">contains() = False &nbsp;·&nbsp; {{"Pembroke","Keeney"}} NO está en Span(kept) &nbsp;·&nbsp; mismo resultado da para {{"Main","Gregorian"}} y {{"Pembroke","Gregorian"}}</div>
+'''
+
+    return render_page(
+        'msf-span-example-5-4-5-2026-07-18.html',
+        title='Por qué {Pembroke,Keeney} no está en el Span — Klein Example 5.4.5',
+        eyebrow='Coding the Matrix · Cap 5.4.3 (MSF en GF(2)) + Cap 5.3 (Grow/Shrink)',
+        subhead='Traza real de _EliminationBasis.reduce() sobre los vectores de arista — el mismo código de basis.py, sin BFS ni union-find.',
+        content=content,
+        footer='Generado para karpathy-path con coding_the_matrix.viz_html (05-Projects/coding-the-matrix).',
+    )
+
+
 if __name__ == '__main__':
     path = generate_triangular_reorder_solve()
     print(f'wrote {path}')
+    path2 = generate_msf_span_example()
+    print(f'wrote {path2}')
