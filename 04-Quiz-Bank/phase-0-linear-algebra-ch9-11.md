@@ -1,7 +1,7 @@
 ---
 tags: [phase-0, linear-algebra, dot-product, duality, cross-product]
 date_added: 2026-06-29
-last_tested: 2026-07-12
+last_tested: 2026-07-17
 ---
 
 Q: ¿Qué tipo de resultado produce el producto punto? ¿Y el producto cruz?
@@ -14,14 +14,14 @@ A: Producto punto → escalar (un número). Producto cruz → vector (perpendicu
 Q: ¿Qué significa geométricamente que v·w = 0?
 A: Los vectores son perpendiculares (ortogonales) — no comparten ninguna dirección. Ángulo entre ellos = 90°.
 
-<!-- srs: ease=2.5 interval=1 due=2026-07-06 lapses=0 last_seen=none -->
+<!-- srs: ease=2.6 interval=3 due=2026-07-20 lapses=0 last_seen=2026-07-17 -->
 
 ---
 
 Q: Dado v = [2, 0] y w = [1, 1], ¿cuánto de w va en la dirección de v?
 A: comp = (v·w) / |v| = (2×1 + 0×1) / 2 = 1. La "sombra" de w sobre v tiene longitud 1.
 
-<!-- srs: ease=2.5 interval=1 due=2026-07-06 lapses=0 last_seen=none -->
+<!-- srs: ease=2.35 interval=1 due=2026-07-18 lapses=1 last_seen=2026-07-17 -->
 
 ---
 
@@ -35,7 +35,7 @@ A: Cada producto punto Q·Kᵀ mide cuánto "apunta" una query en la dirección 
 Q: Explica dualidad en una oración.
 A: Cualquier transformación lineal nD→1D puede escribirse como producto punto con un vector en nD — proyectar y transformar son la misma operación.
 
-<!-- srs: ease=2.5 interval=1 due=2026-07-08 lapses=0 last_seen=2026-07-07 -->
+<!-- srs: ease=2.35 interval=1 due=2026-07-18 lapses=1 last_seen=2026-07-17 -->
 
 ---
 
@@ -49,14 +49,14 @@ A: î aterriza en 0.8 (coordenada x de û), ĵ aterriza en 0.6 (coordenada y de 
 Q: ¿Para qué dimensiones está definido el producto cruz?
 A: Solo en 3D (y matemáticamente en 7D, pero ignorar). El producto punto funciona en cualquier dimensión.
 
-<!-- srs: ease=2.5 interval=1 due=2026-07-06 lapses=0 last_seen=none -->
+<!-- srs: ease=2.6 interval=3 due=2026-07-20 lapses=0 last_seen=2026-07-17 -->
 
 ---
 
 Q: ¿Qué representa geométricamente |v × w|?
 A: El área del paralelogramo formado por v y w. Igual que |v||w|sin(θ).
 
-<!-- srs: ease=2.5 interval=1 due=2026-07-13 lapses=0 last_seen=2026-07-12 -->
+<!-- srs: ease=2.6 interval=8 due=2026-07-25 lapses=0 last_seen=2026-07-17 -->
 
 ---
 
