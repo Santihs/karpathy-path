@@ -28,7 +28,7 @@ A: Ninguno de los dos es múltiplo escalar del otro — no apuntan en la misma d
 Q: (1,2,-4) y (7,-5,6) son independientes en R³ pero NO son base de R³. ¿Por qué no?
 A: Con solo 2 vectores, el span máximo es un plano (2D) — no alcanza a cubrir las 3 dimensiones de R³, sin importar cuán independientes sean.
 
-<!-- srs: ease=2.5 interval=1 due=2026-07-06 lapses=0 last_seen=none -->
+<!-- srs: ease=2.35 interval=1 due=2026-07-22 lapses=1 last_seen=2026-07-21 -->
 
 ---
 
@@ -42,7 +42,7 @@ A: (1) Ser linealmente independiente Y (2) hacer span del espacio completo. Las 
 Q: ¿Por qué "dimensión" es un concepto válido y no ambiguo? (Axler 2.34)
 A: Porque se prueba primero que CUALQUIER base del mismo espacio tiene el mismo largo — recién con eso garantizado se define dim V = largo de cualquier base.
 
-<!-- srs: ease=2.5 interval=1 due=2026-07-06 lapses=0 last_seen=none -->
+<!-- srs: ease=2.5 interval=2 due=2026-07-24 lapses=0 last_seen=2026-07-21 -->
 
 ---
 
@@ -91,7 +91,7 @@ A: También uniforme. Cada output tiene exactamente un input que lo produce (inv
 Q: Un vector de n entradas — ¿cómo se interpreta como función? (Klein 2.2)
 A: Es una función con dominio {0,1,...,n-1} (los índices) y codominio F (los valores) — cada índice mapea a su entrada correspondiente.
 
-<!-- srs: ease=2.5 interval=1 due=2026-07-06 lapses=0 last_seen=none -->
+<!-- srs: ease=2.35 interval=1 due=2026-07-22 lapses=1 last_seen=2026-07-21 -->
 
 ---
 
@@ -112,14 +112,14 @@ A: Porque se define entrada-por-entrada, y la suma en el campo subyacente (R, C,
 Q: 2[1,2,3] + [10,20,30] — ¿cuál es la precedencia de operadores acá, y cuál es el resultado?
 A: Escalar-vector multiplicación tiene precedencia sobre suma (igual que multiplicación sobre suma en aritmética normal). Resultado: [2,4,6]+[10,20,30] = [12,24,36].
 
-<!-- srs: ease=2.5 interval=1 due=2026-07-06 lapses=0 last_seen=none -->
+<!-- srs: ease=2.55 interval=2 due=2026-07-23 lapses=0 last_seen=2026-07-21 -->
 
 ---
 
 Q: ¿Qué es una "combinación convexa" de dos vectores u, v? (Klein 2.6.3)
 A: Una expresión αu+βv donde α,β≥0 y α+β=1 — parametriza cualquier punto del segmento entre u y v, ponderando cuánto pesa cada extremo.
 
-<!-- srs: ease=2.5 interval=1 due=2026-07-06 lapses=0 last_seen=none -->
+<!-- srs: ease=2.35 interval=1 due=2026-07-22 lapses=1 last_seen=2026-07-21 -->
 
 ---
 
@@ -133,4 +133,4 @@ A: El promedio pixel-a-pixel de las dos imágenes — una tercera "cara" a mitad
 Q: Nombra 2 lugares en ML/dev donde reaparece la combinación convexa.
 A: Cualquiera de: mixup (data augmentation, λx1+(1-λ)x2), lerp (interpolación lineal en gráficos), softmax/attention weights (pesos no-negativos que suman 1).
 
-<!-- srs: ease=2.5 interval=1 due=2026-07-06 lapses=0 last_seen=none -->
+<!-- srs: ease=2.35 interval=1 due=2026-07-22 lapses=1 last_seen=2026-07-21 -->

@@ -2,7 +2,7 @@
 tags: [phase-0, math, linear-algebra, coding-the-matrix, basis, span, compression, grow-shrink, minimum-spanning-forest, gf2]
 status: learning
 first_learned: 2026-07-17
-last_reviewed: 2026-07-18
+last_reviewed: 2026-07-21
 confidence: 4/5
 source_pdf: "00-Meta/resources/Philip N. Klein-Coding the Matrix_ Linear Algebra through Computer Science Applications-Newtonian Press (2013).pdf"
 ---
@@ -230,5 +230,89 @@ Esto conecta literal (no análogo) MSF con Cap 5.3: cada arista `{x,y}` → vect
 - `05-Projects/coding-the-matrix/src/coding_the_matrix/msf.py` — `edge_to_vec`/`msf_grow`/`msf_shrink`, reusa `basis.is_in_span` sin cambios.
 - Tests: `tests/test_basis.py`, `tests/test_msf.py` (19 tests nuevos, 93 total pasan).
 
+## 6. Linear Dependence — el álgebra detrás de Grow/Shrink (5.5.1–5.5.11)
+
+### 5.5.1 — Superfluous-Vector Lemma
+
+**Enunciado**: para cualquier set `S` y vector `v∈S`, si `v` puede escribirse como combinación lineal de los OTROS vectores de `S`, entonces `Span(S-{v}) = Span(S)` — sacar un vector redundante no cambia el span.
+
+**Analogía dev — columna calculada en DB**: tabla `orders` con `subtotal, tax, shipping` y una 4ta columna `total = subtotal+tax+shipping`. Cualquier query que use `total` se puede reescribir sustituyendo la fórmula (find-and-replace + reagrupar coeficientes) sin usarla — por eso se puede borrar la columna sin perder ningún reporte posible.
+
+**Prueba** (`S={v1,...,vn}`, `vn = α1v1+...+α(n-1)v(n-1)` — Eq 5.1): tomás `v` arbitrario en `Span(S)`, `v=β1v1+...+βnvn`. Sustituís `vn` por la Eq 5.1 y reagrupás por vector:
+
+```
+v = (β1+βn·α1)v1 + (β2+βn·α2)v2 + ... + (β(n-1)+βn·α(n-1))v(n-1)
+```
+
+`v` quedó escrito sin `vn` → está en `Span(S-{vn})`. Como `v` era arbitrario, vale para todo `Span(S)` → QED.
+
+### 5.5.2 — Definición formal de dependencia lineal
+
+`v1,...,vn` son **linealmente dependientes** si `0 = α1v1+...+αnvn` con algún `αi≠0` (combinación NO trivial). Si la ÚNICA combinación que da cero es la trivial (todos los α=0) → **independientes**.
+
+- Example 5.5.3: `[1,0,0],[0,2,0],[2,4,0]` dependientes — `2[1,0,0]+2[0,2,0]-1[2,4,0]=[0,0,0]`.
+- Example 5.5.4: `[1,0,0],[0,2,0],[0,0,4]` independientes — cada uno tiene una posición exclusiva no-cero (namespace separado), ninguna combinación no-trivial puede cancelar las 3 a la vez.
+
+Restatement: Computational Problem 5.5.5 (testear dependencia) es la MISMA pregunta que Question 4.7.7 (¿null space de `A=[v1|...|vn]` tiene solo el vector cero?) = Question 3.6.5 (¿sistema homogéneo tiene solo solución trivial?) — mismo problema, tercer disfraz.
+
+### 5.5.3 — Dependencia lineal en MSF = ciclo en el grafo
+
+Suma GF(2) de aristas que forman un **ciclo** da el vector cero (cada nodo del ciclo aparece exactamente 2 veces → se cancela). Verificado con triángulo `Main-Keeney-Wriston` en el grafo de Brown:
+
+```
+                Main  Keeney  Wriston
+{Main,Keeney}     1      1       0
+{Keeney,Wriston}  0      1       1
+{Main,Wriston}    1      0       1
+suma (GF2)        0      0       0
+```
+
+Coeficientes `(1,1,1)` — no-trivial → dependientes. **Ciclo en grafo = dependencia lineal**, literal (Example 5.5.7). Converso: forest (sin ciclo) → vectores independientes.
+
+Esto es la justificación formal de por qué Grow (5.4.2) rechaza una arista cuando sus extremos ya están conectados: agregarla cerraría ciclo = la haría dependiente = ya está en `Span(B)`.
+
+### 5.5.4 — Propiedades: Lemma 5.5.8 (subset) y Lemma 5.5.9 (Span Lemma)
+
+**Lemma 5.5.8**: subset de un set independiente es independiente. Prueba por contrapositivo: si `S` (subset) es dependiente, extendés la misma combinación no-trivial a `T⊇S` agregando coeficiente 0 a los vectores extra — sigue siendo no-trivial → `T` también dependiente.
+
+*Analogía dev*: si 3 servicios de un `docker-compose.yml` tienen dependencia circular, agregar 5 servicios más sin tocar los primeros 3 no arregla el ciclo — agregar cosas nunca cura una dependencia existente.
+
+**Lemma 5.5.9 (Span Lemma)** — el más importante, motor de `is_in_span()`: `vi` está en el span de los otros vectores **si y solo si** existe combinación `0=α1v1+...+αnvn` con `αi≠0` específicamente.
+
+- Dirección 1 (span→dependencia): si `vi=α1v1+...+αnvn` (sin `vi`), pasás `vi` al otro lado → `0=α1v1+...+(-1)vi+...+αnvn` — coef de `vi` es `-1≠0`.
+- Dirección 2 (dependencia→span): si `0=...+αivi+...` con `αi≠0`, despejás `vi` dividiendo por `-αi` → `vi` queda en términos de los demás.
+
+En grafos: arista `e` está en el span de otras aristas ⟺ hay un ciclo formado por `e` + subset de esas otras.
+
+**Por qué importa**: convierte "¿puedo escribir `vi` en términos de los otros?" (prueba y error) en "¿existe una dependencia que toque a `vi` con coef≠0?" — resoluble con eliminación gaussiana / sistema homogéneo. Es literalmente lo que `basis.is_in_span()` hace.
+
+### 5.5.5 — Corollary 5.5.10: Grow siempre produce independencia
+
+**Prueba por inducción** (loop invariant, igual que probar que un `set()` nunca tiene duplicados en cada iteración):
+- Caso base `n=0`: vacío, trivialmente independiente.
+- Paso inductivo: `vk` fue agregado porque `vk ∉ Span(v1,...,vk-1)` (regla de Grow). Por el Span Lemma (contrapositiva), eso fuerza `αk=0` en cualquier combinación-cero. Queda `0=α1v1+...+αk-1vk-1`, y por hipótesis inductiva (`v1..vk-1` ya independientes) todos esos α también son 0 → única combinación-cero es la trivial → `v1..vk` independientes.
+
+Aplicación directa en `msf_grow`: el chequeo "¿hay camino x-a-y con aristas ya elegidas?" ES el chequeo de `Span(B)` — por este corolario, el resultado siempre queda independiente sin necesidad de detectar ciclos por separado.
+
+### 5.5.6 — Corollary 5.5.11: Shrink siempre produce independencia
+
+**Prueba por contradicción** (más natural que inducción porque Shrink termina en un punto fijo, no cuenta pasos): asumís que el resultado final `B` es dependiente → existe `0=α1v1+...+αnvn` con algún `αi≠0` → por Span Lemma (5.5.9), `vi` está en el span de los demás → por Superfluous-Vector Lemma (5.5.1), `Span(B-{vi})=Span(B)` → **Shrink debería haber sacado a `vi`**, contradice que `B` ya es el resultado final (Shrink paró = no queda nada para sacar). Contradicción → `B` es independiente.
+
+*Analogía dev*: como probar que un dead-code-eliminator que corre hasta punto fijo no puede terminar dejando código muerto — si quedara, el linter habría tenido algo más para borrar, contradiciendo que ya paró.
+
+**Pipeline completo del capítulo**: 5.5.1 (redundancia→se puede sacar) → 5.5.2 (define dependencia) → 5.5.3 (ciclos=dependencia en grafos) → 5.5.8 (subset hereda independencia) → 5.5.9 (test operacional span↔dependencia) → 5.5.10/5.5.11 (Grow y Shrink SIEMPRE terminan independientes). Es el fundamento matemático completo detrás de `basis.py`/`msf.py` y sus 19 tests.
+
+## 7. Exchange Lemma (5.5)
+
+**Setup**: `B` = base de `V` (independiente + genera V), `T` = otro conjunto de vectores independientes en `V`. La Exchange Lemma dice: podés reemplazar vectores de `B` por vectores de `T`, uno a uno, y `B` sigue generando `V` en cada paso — nunca falta candidato para reemplazar, **mientras `T` no se agote antes que `B`**.
+
+**El argumento (por contradicción)**: si `|T| > |B|`, en algún punto se agotan los vectores de `B` (todos ya reemplazados por vectores de `T`) pero a `T` le sobra al menos un vector sin usar. Ese conjunto ya reemplazado sigue generando `V` (invariante del lema) → el vector sobrante de `T` está en el Span de los demás → es linealmente dependiente. Contradice que `T` es independiente. Por lo tanto: **`|T| ≤ |B|`** siempre que `T` sea independiente y `B` genere `V`.
+
+**Punchline — por qué Grow/Shrink siempre dan el mismo tamaño**: tomá dos bases cualesquiera `B1`, `B2` de `V`. Cada una es independiente Y genera `V` simultáneamente. Aplicando el resultado de arriba en las dos direcciones:
+- `B1` genera, `B2` independiente → `|B2| ≤ |B1|`
+- `B2` genera, `B1` independiente → `|B1| ≤ |B2|`
+
+Las dos desigualdades juntas → `|B1| = |B2|`. Cualquier corrida de Grow o Shrink, sin importar orden ni elección de vectores, termina con el mismo tamaño — no es coincidencia empírica, es esta prueba. Cierra la pregunta de 5.3.3: funciona para vectores (y MSF, por la formulación GF(2) de 5.4.3) porque independencia lineal tiene esta propiedad de intercambio rígida; dominating-set no tiene análogo algebraico, por eso greedy puede fallar ahí.
+
 ## Próximo
-Klein Cap 5.5 — Exchange Lemma: por qué Grow/Shrink en espacios vectoriales siempre terminan con el mismo tamaño (mínimo), sin importar el orden/elección de vectores — cierra por qué greedy funciona acá y en MSF pero falla en dominating-set (5.3.3).
+Continuar Klein Cap 6 (próxima sesión) — dimensión y consecuencias del Exchange Lemma (Corollary: toda base tiene mismo tamaño = dim V bien definida).
