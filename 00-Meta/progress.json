@@ -2,13 +2,13 @@
   "meta": {
     "current_phase": 0,
     "current_week": 1,
-    "last_session_date": "2026-07-21",
-    "last_session_type": "weekday-micro",
-    "study_streak": 3,
-    "total_hours_logged": 23.45,
-    "session_count": 16,
-    "last_cumulative_review": "2026-07-07",
-    "next_up": "Coding-the-Matrix (Klein) Cap 6 — dimensión y consecuencias del Exchange Lemma (Corollary: toda base tiene mismo tamaño). Cap 5.5 (Exchange Lemma: prueba por contradicción de por qué toda base de un espacio vectorial tiene el mismo tamaño, cierra por qué Grow/Shrink dan siempre igual resultado y por qué greedy funciona en vectores/MSF pero no en dominating-set) documentado en 02-Topics/Coding-the-Matrix-Basis.md sección 6. Pendiente de antes: docstrings senior-style en vec.py/triangular.py/vecutil.py; Axler sigue pausado. Quiz bank: lapses en 'combinación convexa' (Klein 2.6.3) y 'vector como función' (Klein 2.2) — revisar pronto."
+    "last_session_date": "2026-07-22",
+    "last_session_type": "biweekly-cumulative",
+    "study_streak": 4,
+    "total_hours_logged": 25.2,
+    "session_count": 17,
+    "last_cumulative_review": "2026-07-22",
+    "next_up": "3Blue1Brown Essence of Linear Algebra Ch 12 — Cramer's rule (nunca visto). Después ch13 (change of basis), ch14 (eigenvectors/eigenvalues — prioridad, cero cobertura hasta ahora, crítico para PCA/attention más adelante), ch15 (abstract vector spaces). Ch9 (dualidad) y ch11 (cross product vía dualidad) repasados y cerrados hoy 2026-07-22 tras varios intentos fallidos — ver 02-Topics/Linear-Algebra-Basics.md. Pendiente de antes (sin tocar hoy): Coding-the-Matrix (Klein) Cap 6 — dimensión y consecuencias del Exchange Lemma, docstrings senior-style en vec.py/triangular.py/vecutil.py, Axler pausado."
   },
   "phases": {
     "phase_0": {

@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cross Product v&times;w vía Dualidad (Ch 11)</title>
+<style>
+  :root {
+    --paper: #edf1f5; --paper-raised: #ffffff; --ink: #20293d; --ink-soft: #4b5568;
+    --rule: #c7d0dc; --accent: #b8752e; --accent-soft: #f2e0c9; --accent-ink: #6b4110;
+    --zero: #9aa5b3; --ok-soft: #d9ecdd; --ok-ink: #1f5c33;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #161b22; --paper-raised: #1d232c; --ink: #e7e9ec; --ink-soft: #a8b0bd;
+      --rule: #333c48; --accent: #dda25c; --accent-soft: #3a2c17; --accent-ink: #f4d9ad;
+      --zero: #5b6472; --ok-soft: #17301f; --ok-ink: #8fd3a1;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #161b22; --paper-raised: #1d232c; --ink: #e7e9ec; --ink-soft: #a8b0bd;
+    --rule: #333c48; --accent: #dda25c; --accent-soft: #3a2c17; --accent-ink: #f4d9ad;
+    --zero: #5b6472; --ok-soft: #17301f; --ok-ink: #8fd3a1;
+  }
+  :root[data-theme="light"] {
+    --paper: #edf1f5; --paper-raised: #ffffff; --ink: #20293d; --ink-soft: #4b5568;
+    --rule: #c7d0dc; --accent: #b8752e; --accent-soft: #f2e0c9; --accent-ink: #6b4110;
+    --zero: #9aa5b3; --ok-soft: #d9ecdd; --ok-ink: #1f5c33;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--paper); color: var(--ink);
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    max-width: 760px; margin: 0 auto; padding: 3rem 1.5rem 5rem; line-height: 1.55;
+  }
+  .sans { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .mono { font-family: "SF Mono", ui-monospace, "Cascadia Code", Menlo, monospace; }
+
+  .eyebrow {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-soft); margin: 0 0 0.6rem;
+  }
+  h1 { font-size: 1.85rem; font-weight: 600; margin: 0 0 0.3rem; text-wrap: balance; }
+  .subhead {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--ink-soft); font-size: 1rem; margin: 0 0 2.4rem;
+  }
+  h2 {
+    font-size: 1.05rem; font-weight: 600; margin: 2.6rem 0 0.4rem;
+    display: flex; align-items: baseline; gap: 0.6rem;
+  }
+  h2 .step-num {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em;
+    color: var(--accent-ink); background: var(--accent-soft);
+    padding: 0.15rem 0.5rem; border-radius: 999px;
+  }
+  .stage-note {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.92rem; color: var(--ink-soft); margin: 0 0 1rem;
+  }
+  .panel {
+    background: var(--paper-raised); border: 1px solid var(--rule); border-radius: 8px;
+    padding: 1.3rem 1.4rem; margin: 0 0 1.6rem;
+  }
+  .overflow-guard { overflow-x: auto; }
+
+  table.mat {
+    border-collapse: collapse; font-family: "SF Mono", ui-monospace, "Cascadia Code", Menlo, monospace;
+    font-size: 0.95rem;
+  }
+  table.mat th, table.mat td {
+    text-align: right; padding: 0.4rem 0.8rem; font-variant-numeric: tabular-nums;
+    border-bottom: 1px solid var(--rule); min-width: 2.4rem;
+  }
+  table.mat th {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.75rem; color: var(--ink-soft); font-weight: 500;
+  }
+  table.mat th:first-child, table.mat td:first-child { text-align: left; }
+  table.mat tr:last-child td { border-bottom: none; }
+  table.mat td.zero { color: var(--zero); }
+  table.mat td.pivot { color: var(--accent-ink); background: var(--accent-soft); font-weight: 700; border-radius: 4px; }
+  table.mat tr.active-row td { background: var(--accent-soft); }
+  table.mat tr.active td.highlight-cell { background: var(--accent-soft); color: var(--accent-ink); font-weight: 700; border-radius: 4px; }
+
+  table.trace {
+    width: 100%; border-collapse: collapse;
+    font-family: "SF Mono", ui-monospace, "Cascadia Code", Menlo, monospace; font-size: 0.95rem;
+  }
+  table.trace th, table.trace td {
+    text-align: left; padding: 0.5rem 0.7rem; font-variant-numeric: tabular-nums;
+    border-bottom: 1px solid var(--rule);
+  }
+  table.trace th {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--ink-soft); font-weight: 500;
+  }
+  table.trace tr:last-child td { border-bottom: none; }
+  table.trace tr.active td { background: var(--accent-soft); color: var(--accent-ink); font-weight: 600; }
+  table.trace tr.active td:first-child { border-radius: 4px 0 0 4px; }
+  table.trace tr.active td:last-child { border-radius: 0 4px 4px 0; }
+
+  .vectors {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    display: flex; gap: 2rem; margin: 0 0 2.6rem; padding: 1rem 1.25rem;
+    background: var(--paper-raised); border: 1px solid var(--rule); border-radius: 6px;
+  }
+  .vectors .item { font-variant-numeric: tabular-nums; }
+  .vectors .label { color: var(--ink-soft); font-size: 0.8rem; margin-right: 0.4rem; }
+  .vectors .val { font-family: "SF Mono", ui-monospace, "Cascadia Code", Menlo, monospace; font-weight: 600; }
+
+  .order-flow {
+    display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+    font-family: "SF Mono", ui-monospace, "Cascadia Code", Menlo, monospace; font-size: 1.05rem;
+  }
+  .order-flow .tag { background: var(--accent-soft); color: var(--accent-ink); padding: 0.3rem 0.7rem; border-radius: 6px; font-weight: 600; }
+  .order-flow .arrow { color: var(--ink-soft); font-size: 1.2rem; }
+  .order-flow .label { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; color: var(--ink-soft); font-size: 0.85rem; }
+
+  .solve-step { display: grid; grid-template-columns: 1fr; gap: 0.9rem; }
+  .row-being-solved { font-family: "SF Mono", ui-monospace, "Cascadia Code", Menlo, monospace; font-size: 0.98rem; }
+  .row-being-solved .rlabel { color: var(--ink-soft); }
+
+  .partial-x {
+    display: flex; gap: 0.6rem; flex-wrap: wrap;
+    font-family: "SF Mono", ui-monospace, "Cascadia Code", Menlo, monospace; font-size: 0.92rem;
+  }
+  .partial-x .slot { padding: 0.25rem 0.6rem; border-radius: 6px; border: 1px solid var(--rule); }
+  .partial-x .slot.solved { background: var(--ok-soft); color: var(--ok-ink); border-color: transparent; font-weight: 600; }
+  .partial-x .slot.pending { color: var(--zero); }
+  .partial-x .label { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; color: var(--ink-soft); font-size: 0.85rem; }
+
+  .arith { font-family: "SF Mono", ui-monospace, "Cascadia Code", Menlo, monospace; font-size: 0.98rem; }
+  .arith .highlight { color: var(--accent-ink); font-weight: 700; }
+
+  .result {
+    margin-top: 2.6rem; padding: 1.4rem 1.5rem; background: var(--ok-soft); color: var(--ok-ink);
+    border-radius: 8px; font-family: "SF Mono", ui-monospace, "Cascadia Code", Menlo, monospace;
+    font-size: 1.1rem; font-weight: 600; text-align: center;
+  }
+  .footer-note {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.85rem; color: var(--ink-soft); margin-top: 2rem; text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<p class="eyebrow">Coding the Matrix / 3Blue1Brown &middot; Repaso 2026-07-22</p>
+<h1>Cross Product v&times;w vía Dualidad (Ch 11)</h1>
+<p class="subhead">Derivación completa: de la función de volumen al vector p = v&times;w, paso a paso.</p>
+
+
+<h2><span class="step-num">PASO 1</span> Definir una función 3D&rarr;1D, no un vector todavía</h2>
+<p class="stage-note">v, w quedan fijos. La entrada variable es [x,y,z].</p>
+<div class="panel overflow-guard">
+<p class="arith">f([x,y,z]) = det(&nbsp;[[x,&nbsp;v<sub>1</sub>,&nbsp;w<sub>1</sub>],&nbsp;[y,&nbsp;v<sub>2</sub>,&nbsp;w<sub>2</sub>],&nbsp;[z,&nbsp;v<sub>3</sub>,&nbsp;w<sub>3</sub>]]&nbsp;)</p>
+<p class="stage-note">Esto es el volumen con signo del paralelepípedo formado por [x,y,z], v y w.</p>
+</div>
+
+<h2><span class="step-num">PASO 2</span> Es lineal &rarr; por dualidad (ch9) existe un vector dual p</h2>
+<div class="panel">
+<p class="arith">f([x,y,z]) = p&middot;[x,y,z] = p<sub>1</sub>x + p<sub>2</sub>y + p<sub>3</sub>z &nbsp; &mdash; para TODO [x,y,z]</p>
+<p class="stage-note">Garantía general de dualidad, no truco específico de este caso.</p>
+</div>
+
+<h2><span class="step-num">PASO 3</span> Resolver p igualando coeficientes</h2>
+<div class="panel overflow-guard">
+<p class="arith">Expandiendo el determinante:</p>
+<p class="arith">det(...) &nbsp;=&nbsp; x(v<sub>2</sub>w<sub>3</sub> &minus; v<sub>3</sub>w<sub>2</sub>) &nbsp;+&nbsp; y(v<sub>3</sub>w<sub>1</sub> &minus; v<sub>1</sub>w<sub>3</sub>) &nbsp;+&nbsp; z(v<sub>1</sub>w<sub>2</sub> &minus; v<sub>2</sub>w<sub>1</sub>)</p>
+<table class="trace"><tr><th>Coeficiente de</th><th>En p&middot;[x,y,z]</th><th>En det(...)</th><th>&rArr; p_i =</th></tr><tr><td>x</td><td>p<sub>1</sub></td><td>v<sub>2</sub>w<sub>3</sub> &minus; v<sub>3</sub>w<sub>2</sub></td><td>v<sub>2</sub>w<sub>3</sub> &minus; v<sub>3</sub>w<sub>2</sub></td></tr><tr><td>y</td><td>p<sub>2</sub></td><td>v<sub>3</sub>w<sub>1</sub> &minus; v<sub>1</sub>w<sub>3</sub></td><td>v<sub>3</sub>w<sub>1</sub> &minus; v<sub>1</sub>w<sub>3</sub></td></tr><tr><td>z</td><td>p<sub>3</sub></td><td>v<sub>1</sub>w<sub>2</sub> &minus; v<sub>2</sub>w<sub>1</sub></td><td>v<sub>1</sub>w<sub>2</sub> &minus; v<sub>2</sub>w<sub>1</sub></td></tr></table>
+</div>
+
+<div class="result">p = v &times; w &mdash; el vector dual resultó ser exactamente el cross product</div>
+
+<h2><span class="step-num">PASO 4</span> Por qué el resultado ES "área &times; perpendicular" (lectura geométrica, no un ingrediente del cálculo)</h2>
+<div class="panel">
+<p class="stage-note">Una vez que sabés p&middot;[x,y,z] = volumen del paralelepípedo formado por [x,y,z], v, w &mdash; y que volumen = (área de la base v,w) &times; (altura, o sea la componente de [x,y,z] perpendicular al plano de v,w) &mdash; la ÚNICA forma de que un dot product p&middot;[x,y,z] devuelva exactamente ese volumen, para cualquier [x,y,z], es que:</p>
+<div class="vectors">
+  <span class="item"><span class="label">longitud de p</span><span class="val">= área del paralelogramo (v,w)</span></span>
+  <span class="item"><span class="label">dirección de p</span><span class="val">perpendicular al plano de v,w</span></span>
+</div>
+<p class="stage-note">No se construyó p multiplicando área por un vector perpendicular por separado &mdash; se derivó resolviendo la ecuación de dualidad, y esas dos propiedades geométricas son la consecuencia necesaria de esa solución.</p>
+</div>
+
+
+<p class="footer-note">Vinculado desde 02-Topics/Linear-Algebra-Basics.md &middot; ch11.</p>
+
+</body>
+</html>

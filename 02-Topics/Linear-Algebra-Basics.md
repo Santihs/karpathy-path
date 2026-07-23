@@ -285,6 +285,8 @@ Las coordenadas de û son exactamente donde aterrizan î y ĵ. Esto es la dualid
 
 **Gap propio (quiz 2026-07-07, biweekly-cumulative):** TERCERA vez que dualidad falla — esta vez parcial ("podemos resolver a espacio 1D usando ambos transformaciones o producto punto"), rondando la idea pero sin decir la equivalencia exacta. El concepto no está afianzado — necesita re-explicación estructurada (no solo repetir la definición), quizás con un diagrama o comparación lado-a-lado matriz-fila vs producto-punto antes de la próxima ronda.
 
+**Repaso 2026-07-22 (rewatch completo, no solo repregunta):** lo que hizo clic fue la secuencia "¿dónde aterrizan î y ĵ al proyectarlos sobre la recta de û?" → esas 2 proyecciones SON las 2 entradas de la matriz 1×2 → `[ux uy][x,y] = ux·x+uy·y = [ux,uy]·[x,y]`, matriz-fila y dot-product son la misma cuenta. Confirmación propia: "es una transformation entonces igual el producto punto? sí." Requiere û **unitario** específicamente — ver [[vector-unitario-normalizacion]] (repasado en la misma sesión, gap aparte). Detalle completo: [[dot-product-duality-explained]].
+
 **Por qué importa en ML/AI:**
 - **Cosine similarity** = producto punto de vectores unitarios = cos(θ) entre embeddings
 - **Attention** en transformers = una matriz de productos punto (Q·Kᵀ) — mide qué tan "similares" son queries y keys
@@ -339,6 +341,18 @@ Misma estructura de cofactores que el determinante real — por eso el truco fun
 - Se usa para calcular normales de superficies (gráficos 3D, visión computacional)
 - Aparece en física (torque, momento angular) que subyace a simulaciones físicas en RL
 
+**Repaso 2026-07-22 (rewatch completo):**
+
+*Caso 2D primero (antes de saltar a 3D):* `v×w = det([v w])` — mismo determinante 2×2 de ch6, pero acá el resultado ES el área con signo del paralelogramo, no un factor de escala de otra transformación.
+
+*Regla de orientación (signo):* girás de v hacia w por el camino más corto — antihorario → positivo, horario → negativo. Propio: necesité 2 correcciones acá — primer intento mezclaba la regla con î/ĵ específicamente en vez de v,w genéricos; luego el fraseo "w antes q v" seguía ambiguo. La forma que finalmente quedó clara: "giro de v a w, ¿horario o antihorario?" — no pensar en posiciones relativas, pensar en la dirección del giro.
+
+*Por qué perpendiculares dan cross product más grande:* al acercarse a paralelos, el paralelogramo se "aplasta" — la altura efectiva tiende a 0 aunque los lados midan igual. Perpendiculares = altura máxima = área máxima, para largos de vector fijos.
+
+*Escalado:* `(3v)×w = 3(v×w)` — escalar un vector de entrada escala el área linealmente, igual que en dot product (homogeneidad).
+
+*En 3D — vector, no escalar:* dirección perpendicular al paralelogramo (regla mano derecha), longitud = área del paralelogramo (la misma cantidad que en el caso 2D con signo, ahora como magnitud del vector resultado).
+
 ---
 
 ## Ch 11 — Cross Product como Dualidad (2026-06-29)
@@ -353,17 +367,29 @@ Ese vector p = w₁ × w₂.
 
 **Conclusión:** el producto cruz es "el vector dual de la función volumen definida por dos vectores". La fórmula del producto cruz no es magia — es la consecuencia directa de aplicar dualidad al determinante 3D.
 
+**Repaso 2026-07-22 (gap cerrado — era el pendiente desde 06-30, falló en quiz de esa fecha):**
+
+Derivación completa, paso a paso:
+1. f([x,y,z]) = det([x,v1,w1 / y,v2,w2 / z,v3,w3]) — función de volumen, v,w fijos.
+2. Lineal → por dualidad existe p único tal que f([x,y,z]) = p·[x,y,z] para todo [x,y,z].
+3. Se resuelve p igualando coeficientes (x, y, z) entre p1x+p2y+p3z y la expansión del determinante → p1=v2w3-v3w2, p2=v3w1-v1w3, p3=v1w2-v2w1. Método: matching de coeficientes, no adivinar la fórmula.
+4. p = v×w. Geométricamente: longitud = área del paralelogramo(v,w), dirección **perpendicular al plano de v,w** (no al paralelepípedo, que es un sólido 3D sin una única perpendicular).
+
+**Confusión propia corregida:** área×perpendicular NO es cómo se construye p — es la lectura geométrica del resultado ya derivado por dualidad. Ver [[cross-product-derivacion-vs-interpretacion]] y el visual paso a paso [cross-product-duality-derivation-2026-07-22.html](../07-Visuals/cross-product-duality-derivation-2026-07-22.html).
+
+Quiz cerrado en la misma sesión: 3/3 sin nudges — mejor resultado que ch9 (que necesitó 3 fallos previos + hoy). Este concepto quedó afianzado en un solo repaso.
+
 ---
 
 > **Nota:** el contenido formal de Axler (subespacios, independencia lineal, bases, dimensión, mapas lineales) se movió a [[Linear-Algebra-Axler-Fundamentals]] — explicado con menos símbolos, más prosa, cita al libro. Esta nota se queda con la intuición geométrica de 3b1b.
 
 
-## Still to cover (3B1B chapters 12–16)
+## Still to cover (3B1B chapters 12–15)
 
 - Ch 12: Cramer's rule
 - Ch 13: Change of basis
-- Ch 14–15: Eigenvectors and eigenvalues (crítico para PCA, transformers)
-- Ch 16: Abstract vector spaces
+- Ch 14: Eigenvectors and eigenvalues (crítico para PCA, transformers)
+- Ch 15: Abstract vector spaces
 
 ---
 
@@ -381,4 +407,6 @@ Cada capa de una red neuronal es `y = Wx + b` — una multiplicación de matrice
 - [[cross-product-real-world-ml-uses]] — para qué sirve cross product en mundo real y ML (2026-06-30)
 - [[duality-in-neural-networks]] — cómo duality explica por qué cada neurona es un dot product (2026-06-30)
 - [[determinante-vs-cross-product-mnemonic]] — determinante real (escala área) vs. mnemotécnico del cross product (vector) — no son lo mismo (2026-06-30)
-- [[dot-product-duality-explained]] — producto punto: geometria vs componentes, por qué coinciden (2026-06-30)
+- [[dot-product-duality-explained]] — producto punto: geometria vs componentes, por qué coinciden (2026-06-30); repaso 4to intento 2026-07-22, finalmente afianzado
+- [[vector-unitario-normalizacion]] — qué es vector unitario y por qué û unitario es clave en la equivalencia matriz-fila⇔dot-product (2026-07-22)
+- [[cross-product-derivacion-vs-interpretacion]] — v×w se deriva por dualidad, área×perpendicular es lectura geométrica del resultado, no ingrediente del cálculo (2026-07-22)

@@ -1,7 +1,7 @@
 ---
 tags: [phase-0, linear-algebra, dot-product, duality, cross-product]
 date_added: 2026-06-29
-last_tested: 2026-07-17
+last_tested: 2026-07-22
 ---
 
 Q: ¿Qué tipo de resultado produce el producto punto? ¿Y el producto cruz?
@@ -35,7 +35,7 @@ A: Cada producto punto Q·Kᵀ mide cuánto "apunta" una query en la dirección 
 Q: Explica dualidad en una oración.
 A: Cualquier transformación lineal nD→1D puede escribirse como producto punto con un vector en nD — proyectar y transformar son la misma operación.
 
-<!-- srs: ease=2.35 interval=1 due=2026-07-18 lapses=1 last_seen=2026-07-17 -->
+<!-- srs: ease=2.3 interval=2 due=2026-07-24 lapses=1 last_seen=2026-07-22 -->
 
 ---
 
@@ -92,3 +92,24 @@ Q: ¿Cuál es la diferencia entre "determinante real" (ch6) y el mnemotécnico u
 A: Determinante real = número, factor de escala de área/volumen de una transformación. Mnemotécnico de cross product = truco con misma estructura de cofactores pero entradas vectoriales (î,ĵ,k̂) → resultado es un vector (v×w), no una escala. Comparten nombre y estructura de cálculo, pero son operaciones distintas.
 
 <!-- srs: ease=2.5 interval=1 due=2026-07-06 lapses=0 last_seen=none -->
+
+---
+
+Q: (2026-07-22) Derivación de v×w por dualidad (ch11): ¿cuáles son los 4 pasos, en orden?
+A: 1) Definir f([x,y,z])=det([x,v,w]) — función de volumen 3D→1D, v,w fijos. 2) Es lineal → por dualidad existe vector dual p único tal que f([x,y,z])=p·[x,y,z] para todo [x,y,z]. 3) Resolver p igualando coeficientes (x,y,z) entre p1x+p2y+p3z y la expansión del determinante → da la fórmula del cross product. 4) Interpretar geométricamente: p tiene longitud=área del paralelogramo(v,w) y dirección perpendicular a ese plano — consecuencia del resultado, no ingrediente del cálculo.
+
+<!-- srs: ease=2.5 interval=2 due=2026-07-24 lapses=0 last_seen=2026-07-22 -->
+
+---
+
+Q: (2026-07-22) v×w = p. Geométricamente, ¿p es perpendicular a qué exactamente — al paralelepípedo o al plano formado por v,w?
+A: Al plano formado por v,w (2D, el paralelogramo base) — no al paralelepípedo (sólido 3D, no tiene una única dirección perpendicular). El paralelepípedo es la figura que se forma entre el vector variable de entrada y v,w; su volumen es lo que p·[x,y,z] calcula.
+
+<!-- srs: ease=2.5 interval=2 due=2026-07-24 lapses=0 last_seen=2026-07-22 -->
+
+---
+
+Q: (2026-07-22) ¿Qué es un vector unitario, y por qué tiene que ser unitario específicamente el û usado en el ejemplo de dualidad (î/ĵ aterrizando sobre la recta de û)?
+A: Vector unitario = longitud (norma) exactamente 1, notado û. Si no fuera unitario, la proyección de î/ĵ se escalaría por la longitud de u, y habría que dividir por ‖u‖ para recuperar la equivalencia limpia matriz-fila⇔dot-product. Con unitario (longitud 1) no hay factor extra que arrastrar.
+
+<!-- srs: ease=2.5 interval=2 due=2026-07-24 lapses=0 last_seen=2026-07-22 -->

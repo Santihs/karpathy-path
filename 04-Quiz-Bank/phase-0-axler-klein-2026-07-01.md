@@ -28,14 +28,14 @@ A: Ninguno de los dos es múltiplo escalar del otro — no apuntan en la misma d
 Q: (1,2,-4) y (7,-5,6) son independientes en R³ pero NO son base de R³. ¿Por qué no?
 A: Con solo 2 vectores, el span máximo es un plano (2D) — no alcanza a cubrir las 3 dimensiones de R³, sin importar cuán independientes sean.
 
-<!-- srs: ease=2.35 interval=1 due=2026-07-22 lapses=1 last_seen=2026-07-21 -->
+<!-- srs: ease=2.35 interval=2 due=2026-07-24 lapses=1 last_seen=2026-07-22 -->
 
 ---
 
 Q: ¿Qué 2 condiciones tiene que cumplir una lista pa ser "base" de un espacio vectorial? (Axler 2.26)
 A: (1) Ser linealmente independiente Y (2) hacer span del espacio completo. Las dos son obligatorias.
 
-<!-- srs: ease=2.6 interval=3 due=2026-07-15 lapses=0 last_seen=2026-07-12 -->
+<!-- srs: ease=2.7 interval=8 due=2026-07-30 lapses=0 last_seen=2026-07-22 -->
 
 ---
 
@@ -91,7 +91,7 @@ A: También uniforme. Cada output tiene exactamente un input que lo produce (inv
 Q: Un vector de n entradas — ¿cómo se interpreta como función? (Klein 2.2)
 A: Es una función con dominio {0,1,...,n-1} (los índices) y codominio F (los valores) — cada índice mapea a su entrada correspondiente.
 
-<!-- srs: ease=2.35 interval=1 due=2026-07-22 lapses=1 last_seen=2026-07-21 -->
+<!-- srs: ease=2.4 interval=3 due=2026-07-25 lapses=1 last_seen=2026-07-22 -->
 
 ---
 
@@ -119,7 +119,7 @@ A: Escalar-vector multiplicación tiene precedencia sobre suma (igual que multip
 Q: ¿Qué es una "combinación convexa" de dos vectores u, v? (Klein 2.6.3)
 A: Una expresión αu+βv donde α,β≥0 y α+β=1 — parametriza cualquier punto del segmento entre u y v, ponderando cuánto pesa cada extremo.
 
-<!-- srs: ease=2.35 interval=1 due=2026-07-22 lapses=1 last_seen=2026-07-21 -->
+<!-- srs: ease=2.5 interval=4 due=2026-07-26 lapses=1 last_seen=2026-07-22 -->
 
 ---
 

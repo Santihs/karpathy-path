@@ -7,7 +7,7 @@ last_tested: 2026-07-12
 Q: ¿Qué es el dot-product de dos D-vectores u, v, y qué tipo de valor devuelve?
 A: $\mathbf{u}\cdot\mathbf{v} = \sum_{k\in D} u[k]\,v[k]$ — suma de productos de entradas correspondientes. Devuelve un ESCALAR, no un vector (por eso también se llama "scalar product").
 
-<!-- srs: ease=2.5 interval=1 due=2026-07-06 lapses=0 last_seen=none -->
+<!-- srs: ease=2.6 interval=3 due=2026-07-25 lapses=0 last_seen=2026-07-22 -->
 
 ---
 
