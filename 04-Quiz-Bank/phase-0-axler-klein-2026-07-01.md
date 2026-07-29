@@ -1,7 +1,7 @@
 ---
 tags: [phase-0, linear-algebra, subspaces, bases, dimension, linear-maps, functions, probability, vectors, axler, coding-the-matrix]
 date_added: 2026-07-01
-last_tested: 2026-07-12
+last_tested: 2026-07-28
 ---
 
 Q: ¿Cuáles son las 3 condiciones pa que un subconjunto U de V sea subespacio? (Axler 1.34)
@@ -98,7 +98,7 @@ A: Es una función con dominio {0,1,...,n-1} (los índices) y codominio F (los v
 Q: Da 3 ejemplos de cosas que se pueden representar como vectores, además de "flechas geométricas".
 A: Cualquiera de: binary string (key criptográfica), attributes (fila de dataset/features), imagen (píxel→intensidad), distribución de probabilidad, estado de un sistema evolucionando.
 
-<!-- srs: ease=2.5 interval=1 due=2026-07-06 lapses=0 last_seen=none -->
+<!-- srs: ease=2.5 interval=1 due=2026-07-29 lapses=0 last_seen=2026-07-28 -->
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 tags: [phase-0, linear-algebra, dot-product, coding-the-matrix, klein]
 date_added: 2026-07-02
-last_tested: 2026-07-12
+last_tested: 2026-07-28
 ---
 
 Q: ¿Qué es el dot-product de dos D-vectores u, v, y qué tipo de valor devuelve?
@@ -77,7 +77,7 @@ A: No es solo "0 o 1" trivial de GF(2) — significa la PARIDAD de v (par/impar 
 Q: (2026-07-03) Enunciá las 3 propiedades algebraicas del dot-product (Prop. 2.9.21/2.9.22/2.9.25) y de dónde sale cada una.
 A: Commutativity `u·v = v·u` (se hereda de que la multiplicación escalar-escalar es conmutativa). Homogeneity `(αu)·v = α(u·v)` (escalar un lado del dot-product equivale a escalar el resultado). Distributivity `(u+v)·w = u·w + v·w` (se prueba expandiendo entrada por entrada).
 
-<!-- srs: ease=2.5 interval=1 due=2026-07-06 lapses=0 last_seen=none -->
+<!-- srs: ease=2.4 interval=1 due=2026-07-29 lapses=1 last_seen=2026-07-28 -->
 
 ---
 

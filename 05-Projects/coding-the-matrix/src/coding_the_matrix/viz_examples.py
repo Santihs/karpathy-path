@@ -170,8 +170,110 @@ def generate_msf_span_example():
     )
 
 
+def _grid_svg(extra, x_max=8, y_max=8, scale=40, pad=40):
+    """Faint unit grid + axes, then extra SVG markup drawn on top."""
+    w = pad * 2 + x_max * scale
+    h = pad * 2 + y_max * scale
+
+    def px(x, y):
+        return pad + x * scale, h - pad - y * scale
+
+    lines = []
+    for i in range(x_max + 1):
+        x, _ = px(i, 0)
+        lines.append(f'<line x1="{x}" y1="{pad}" x2="{x}" y2="{h - pad}" stroke="var(--rule)" stroke-width="1"/>')
+    for j in range(y_max + 1):
+        _, y = px(0, j)
+        lines.append(f'<line x1="{pad}" y1="{y}" x2="{w - pad}" y2="{y}" stroke="var(--rule)" stroke-width="1"/>')
+    ox, oy = px(0, 0)
+    lines.append(f'<line x1="{pad}" y1="{oy}" x2="{w - pad}" y2="{oy}" stroke="var(--ink-soft)" stroke-width="1.5"/>')
+    lines.append(f'<line x1="{ox}" y1="{pad}" x2="{ox}" y2="{h - pad}" stroke="var(--ink-soft)" stroke-width="1.5"/>')
+    return (f'<svg viewBox="0 0 {w} {h}" style="width:100%;height:auto" '
+            f'xmlns="http://www.w3.org/2000/svg">{"".join(lines)}{extra}</svg>'), px
+
+
+def _vector_arrow(px, origin, tip, color, label, label_dx=6, label_dy=-6):
+    x1, y1 = px(*origin)
+    x2, y2 = px(*tip)
+    return (
+        f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="{color}" stroke-width="2.5" '
+        f'marker-end="url(#arrow-{color.lstrip("#")})"/>'
+        f'<text x="{x2 + label_dx}" y="{y2 + label_dy}" class="sans" font-size="13" fill="{color}">{label}</text>'
+    )
+
+
+def _parallelogram(px, o, side_a, side_b, fill, stroke, opacity=0.35):
+    ax, ay = side_a
+    bx, by = side_b
+    pts = [o, (o[0] + ax, o[1] + ay), (o[0] + ax + bx, o[1] + ay + by), (o[0] + bx, o[1] + by)]
+    pts_px = ' '.join(f'{px(*p)[0]},{px(*p)[1]}' for p in pts)
+    return f'<polygon points="{pts_px}" fill="{fill}" fill-opacity="{opacity}" stroke="{stroke}" stroke-width="2"/>'
+
+
+def generate_cramers_rule_shear():
+    """3B1B ch12: Cramer's rule y-coordinate via shear (Cavalieri), not rotation.
+    A = [[2,1],[1,3]], b = [5,7] — same system as Ch7 inverse-matrix example."""
+    a, b_, c, d = 2, 1, 1, 3
+    col1, col2 = (a, c), (b_, d)
+    bx, by = 5, 7
+    det = a * d - b_ * c
+    x = (bx * d - b_ * by) / det
+    y = (a * by - bx * c) / det
+    y_col2 = (y * col2[0], y * col2[1])
+
+    marker_colors = {'accent': 'var(--accent)', 'ok': 'var(--ok-ink)'}
+    defs = ('<defs>' + ''.join(
+        f'<marker id="arrow-{key}" viewBox="0 0 10 10" refX="8" refY="5" '
+        f'markerWidth="6" markerHeight="6" orient="auto-start-reverse">'
+        f'<path d="M0,0L10,5L0,10z" fill="{color}"/></marker>'
+        for key, color in marker_colors.items()
+    ) + '</defs>')
+
+    def panel(shear_side, shear_color_key, shear_label):
+        content, px = _grid_svg('', x_max=8, y_max=8)
+        parts = [defs]
+        parts.append(_parallelogram(px, (0, 0), col1, shear_side, 'var(--accent)', 'var(--accent)'))
+        parts.append(_vector_arrow(px, (0, 0), col1, 'var(--accent)', 'col1'))
+        parts.append(_vector_arrow(px, (0, 0), shear_side, marker_colors[shear_color_key], shear_label))
+        inner = ''.join(parts)
+        return _grid_svg(inner, x_max=8, y_max=8)[0]
+
+    panel_before = panel((bx, by), 'ok', 'b')
+    panel_after = panel(y_col2, 'ok', 'y·col2')
+
+    content = f'''
+<h2><span class="step-num">SETUP</span> A = [[2,1],[1,3]], b = [5,7] — mismo sistema que el ejemplo de Ch7</h2>
+<p class="stage-note">det(A) = {det}. col1 = {col1}, col2 = {col2}. Solución conocida: x = {x:g}, y = {y:g}.</p>
+
+<h2><span class="step-num">ANTES</span> Paralelogramo (col1, b)</h2>
+<p class="stage-note">Área de este paralelogramo = y · det(A) — pero todavía no se ve por qué.</p>
+<div class="panel overflow-guard">{panel_before}</div>
+
+<h2><span class="step-num">SHEAR</span> Deslizar b hasta y·col2 — sin rotar, sin cambiar área</h2>
+<p class="stage-note">b = x·col1 + y·col2. La parte x·col1 apunta en la misma dirección que col1 (el lado que ya comparten), así que deslizar (shear) el paralelogramo en esa dirección hasta que el segundo lado sea solo y·col2 no cambia el área — principio de Cavalieri. Esto es lo que en el video se confunde con "rotar": es un corte/deslizamiento, no un giro.</p>
+<div class="panel overflow-guard">{panel_after}</div>
+
+<h2><span class="step-num">DESPEJE</span> De área a y</h2>
+<p class="stage-note">área(col1, y·col2) = y · área(col1, col2) = y · det(A) &nbsp;→&nbsp; y = área(col1, b) / det(A) = {y:g}</p>
+
+<div class="result">y = {y:g} &nbsp;·&nbsp; x análogo con área(b, col2)/det(A) = {x:g} &nbsp;·&nbsp; mismo resultado que A⁻¹b en Ch7</div>
+'''
+
+    return render_page(
+        'cramers-rule-shear-2026-07-28.html',
+        title="Cramer's rule: por qué es un shear, no una rotación",
+        eyebrow='3Blue1Brown · Essence of Linear Algebra Ch 12',
+        subhead='Mismo sistema A=[[2,1],[1,3]], b=[5,7] del ejemplo de inversa (Ch7) — ahora resuelto vía áreas, sin calcular A⁻¹.',
+        content=content,
+        footer='Generado para karpathy-path con coding_the_matrix.viz_html (05-Projects/coding-the-matrix).',
+    )
+
+
+
 if __name__ == '__main__':
     path = generate_triangular_reorder_solve()
     print(f'wrote {path}')
     path2 = generate_msf_span_example()
     print(f'wrote {path2}')
+    path3 = generate_cramers_rule_shear()
+    print(f'wrote {path3}')

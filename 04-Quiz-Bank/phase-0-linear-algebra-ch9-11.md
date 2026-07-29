@@ -1,7 +1,7 @@
 ---
 tags: [phase-0, linear-algebra, dot-product, duality, cross-product]
 date_added: 2026-06-29
-last_tested: 2026-07-22
+last_tested: 2026-07-28
 ---
 
 Q: ¿Qué tipo de resultado produce el producto punto? ¿Y el producto cruz?
@@ -42,7 +42,7 @@ A: Cualquier transformación lineal nD→1D puede escribirse como producto punto
 Q: Si û = [0.8, 0.6] y lo uso como transformación 2D→1D, ¿dónde aterrizan î y ĵ?
 A: î aterriza en 0.8 (coordenada x de û), ĵ aterriza en 0.6 (coordenada y de û). Las coordenadas de û son exactamente los landing points.
 
-<!-- srs: ease=2.5 interval=1 due=2026-07-06 lapses=0 last_seen=none -->
+<!-- srs: ease=2.5 interval=1 due=2026-07-29 lapses=0 last_seen=2026-07-28 -->
 
 ---
 

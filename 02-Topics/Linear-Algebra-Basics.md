@@ -383,11 +383,64 @@ Quiz cerrado en la misma sesión: 3/3 sin nudges — mejor resultado que ch9 (qu
 
 > **Nota:** el contenido formal de Axler (subespacios, independencia lineal, bases, dimensión, mapas lineales) se movió a [[Linear-Algebra-Axler-Fundamentals]] — explicado con menos símbolos, más prosa, cita al libro. Esta nota se queda con la intuición geométrica de 3b1b.
 
+## Ch 12 — Cramer's Rule (2026-07-28)
 
-## Still to cover (3B1B chapters 12–15)
+**El insight:** resolver A·x = b usando áreas de paralelogramos en vez de álgebra directa.
 
-- Ch 12: Cramer's rule
-- Ch 13: Change of basis
+Sistema A = [[a,b],[c,d]], x=[x,y] desconocido, b conocido. Como b = x·col1 + y·col2:
+
+- **Shear, no rotación:** el paralelogramo (col1, b) se desliza (shear) hasta (col1, y·col2) sin cambiar área — principio de Cavalieri. La parte x·col1 no aporta área extra porque está en la misma dirección que col1.
+- área(col1, b) = y · det(A) → **y = área(col1, b) / det(A)**
+- Análogo para x con área(b, col2) / det(A)
+
+**No es la herramienta práctica:** el propio video lo dice — Gaussian elimination es más rápido, sobre todo en matrices grandes. `torch.linalg.solve` usa LU decomposition (Gauss), no Cramer. El valor de ch12 es reforzar la intuición área↔determinante (ch9-11) antes de eigenvalues (ch14).
+
+Detalle completo, incluyendo la confusión shear-vs-rotación resuelta: [[cramers-rule-shear-not-rotation]].
+
+---
+
+## Ch 13 — Change of Basis (2026-07-28)
+
+**El insight:** un vector no cambia — pero las coordenadas que le asignás dependen de qué vectores base uses. [3,2] siempre asume implícitamente la base estándar (î,ĵ); con otra base, el mismo punto en el espacio tiene otros números.
+
+**Base de Jennifer:** b1=[2,1], b2=[-1,1] — descritos en NUESTRO lenguaje (nuestras coordenadas). Para Jennifer, sus propios vectores son simplemente [1,0] y [0,1] — su î,ĵ.
+
+**Origen coincide:** ambos sistemas comparten el mismo origen, solo cambia la orientación/escala de la grilla.
+
+### Traducir un vector
+
+Matriz de cambio de base A = columnas [b1, b2] (en nuestro lenguaje):
+
+$$A = \begin{bmatrix}2&-1\\1&1\end{bmatrix}$$
+
+- A · (coordenadas de Jennifer) = coordenadas nuestras. Ejemplo: A·[-1,2] = -1·b1 + 2·b2 = [-4,1].
+- A⁻¹ · (coordenadas nuestras) = coordenadas de Jennifer.
+
+**Grid vs. Language — la parte contraintuitiva (verificado, 3B1B):**
+> "Geometrically this matrix transforms our grid into Jennifer's grid, yet numerically it's translating a vector described in her language to our language."
+
+A mueve la GRILLA de nosotros→Jennifer, pero traduce el LENGUAJE de Jennifer→nosotros. Direcciones opuestas — no es un error, es cómo funciona la dualidad grid/coordenadas.
+
+### Traducir una transformación — el sandwich A⁻¹MA
+
+M = una transformación que solo "habla" nuestro lenguaje (ej. rotar 90°). Para aplicarla a un vector v_J dado en coordenadas de Jennifer:
+
+1. A·v_J → traduce a nuestro lenguaje
+2. M·(A·v_J) → aplica la transformación (que entiende nuestro lenguaje)
+3. A⁻¹·(M·A·v_J) → traduce el resultado de vuelta al lenguaje de Jennifer
+
+**A⁻¹MA = la misma transformación M, descrita en el idioma de Jennifer.**
+
+Cita textual (verificada, 3B1B):
+> "In general, whenever you see an expression like A⁻¹MA, it suggests a mathematical sort of empathy. The middle matrix represents a transformation as you see it, the outer two matrices represent the empathy, this shift in perspective, and the full matrix product represents that same transformation as someone else sees it."
+
+**Por qué importa para ML:** cambio de base es la base matemática de PCA (encontrar la base donde los datos se ven más simples) y de por qué normalizar/estandarizar features es, literalmente, un cambio de coordenadas.
+
+**Gap propio (sesión 2026-07-28):** el sandwich A⁻¹MA confundió inicialmente — la corrección clave fue distinguir "grid" (A traduce ours→Jennifer) de "language" (A traduce Jennifer→ours), direcciones opuestas del mismo A. Ver [[change-of-basis-a-inverse-m-a]].
+
+---
+
+## Still to cover (3B1B chapters 14–15)
 - Ch 14: Eigenvectors and eigenvalues (crítico para PCA, transformers)
 - Ch 15: Abstract vector spaces
 
@@ -410,3 +463,5 @@ Cada capa de una red neuronal es `y = Wx + b` — una multiplicación de matrice
 - [[dot-product-duality-explained]] — producto punto: geometria vs componentes, por qué coinciden (2026-06-30); repaso 4to intento 2026-07-22, finalmente afianzado
 - [[vector-unitario-normalizacion]] — qué es vector unitario y por qué û unitario es clave en la equivalencia matriz-fila⇔dot-product (2026-07-22)
 - [[cross-product-derivacion-vs-interpretacion]] — v×w se deriva por dualidad, área×perpendicular es lectura geométrica del resultado, no ingrediente del cálculo (2026-07-22)
+- [[cramers-rule-shear-not-rotation]] — la "matriz que gira" en Cramer's rule es en realidad un shear (Cavalieri), no rotación; quién la creó; por qué Gauss gana en la práctica (2026-07-28)
+- [[change-of-basis-a-inverse-m-a]] — el sandwich A⁻¹MA: por qué "grid" y "language" de la matriz de cambio de base van en direcciones opuestas, y qué significa "traducir una transformación" (2026-07-28)

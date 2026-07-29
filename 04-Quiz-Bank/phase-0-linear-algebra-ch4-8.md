@@ -1,7 +1,7 @@
 ---
 tags: [phase-0, linear-algebra, matrix-multiplication, determinant, inverse, null-space, rank]
 date_added: 2026-06-27
-last_tested: 2026-07-12
+last_tested: 2026-07-28
 ---
 
 Q: What does multiplying two matrices $A \cdot B$ represent geometrically?
@@ -21,14 +21,14 @@ A: Because the order of transformations matters geometrically. "Rotate then shea
 Q: What is the determinant of a matrix, geometrically?
 A: The scale factor by which the transformation stretches or shrinks area (2D) or volume (3D). Every region in space gets multiplied by this factor.
 
-<!-- srs: ease=2.5 interval=1 due=2026-07-06 lapses=0 last_seen=none -->
+<!-- srs: ease=2.6 interval=3 due=2026-07-31 lapses=0 last_seen=2026-07-28 -->
 
 ---
 
 Q: What does det(A) = 0 mean geometrically? And for solving equations?
 A: Space was compressed to a lower dimension (line, plane, or point). The transformation is not invertible — information is permanently lost. For $A\vec{x} = \vec{v}$, no unique solution exists.
 
-<!-- srs: ease=2.5 interval=1 due=2026-07-08 lapses=0 last_seen=2026-07-07 -->
+<!-- srs: ease=2.5 interval=1 due=2026-07-29 lapses=0 last_seen=2026-07-28 -->
 
 ---
 
