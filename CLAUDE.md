@@ -85,7 +85,24 @@ last_tested: null
 ---
 Q: ...
 A: ...
+<!-- srs: ease=2.5 interval=1 due=YYYY-MM-DD lapses=0 last_seen=none -->
 ```
+These root-level `04-Quiz-Bank/*.md` files are a **frozen archive** — `/quiz-me` reads/writes them for desktop review exactly as before. Don't add new cards here going forward.
+
+## Live Anki-synced quiz bank
+
+`04-Quiz-Bank/karpathy/` holds the **live** set — one file per card, synced to Anki (deck `karpathy`) via the `yanki` Obsidian plugin, reviewable on phone via AnkiDroid. Format:
+```yaml
+---
+tags: [repo-karpathy, topic-tag]
+---
+{question}
+
+---
+
+{answer}
+```
+No `srs:` comment — once synced, **Anki owns scheduling** entirely in its own local database, not visible in git. `/quiz-me` does not read this folder (no due-date data available to it yet; would need a future AnkiConnect pull-back script). When a new concept is solid enough to quiz, add the new card as an individual file here, not to the archive. Run **"Yanki: Sync flashcard notes to Anki"** (command palette) after adding/editing cards.
 
 ---
 

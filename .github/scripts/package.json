@@ -1,0 +1,9 @@
+{
+  "name": "quiz-bank-validator",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "js-yaml": "^5.2.3",
+    "yanki": "2.0.13"
+  }
+}

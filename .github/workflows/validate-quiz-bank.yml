@@ -1,0 +1,38 @@
+name: Validate quiz bank
+
+on:
+  push:
+    paths:
+      - "04-Quiz-Bank/**/*.md"
+  workflow_call:
+    inputs:
+      quiz_bank_dir:
+        description: Path (relative to repo root) of the live Anki quiz-bank folder to validate
+        required: true
+        type: string
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout calling repo
+        uses: actions/checkout@v4
+        with:
+          path: repo
+
+      - name: Checkout karpathy-path (source of the validator script)
+        uses: actions/checkout@v4
+        with:
+          repository: Santihs/karpathy-path
+          path: tools
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install validator dependencies
+        working-directory: tools/.github/scripts
+        run: npm install
+
+      - name: Run validator
+        run: node tools/.github/scripts/validate-quiz-bank.mjs "repo/${{ inputs.quiz_bank_dir || '04-Quiz-Bank/karpathy' }}"
