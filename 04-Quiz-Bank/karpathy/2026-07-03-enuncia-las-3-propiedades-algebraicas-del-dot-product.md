@@ -8,7 +8,7 @@ tags:
   - klein
 noteId: 1785651973614
 ---
-(2026-07-03) Enunciá las 3 propiedades algebraicas del dot-product (Prop. 2.9.21/2.9.22/2.9.25) y de dónde sale cada una.
+Enunciá las 3 propiedades algebraicas del dot-product (Prop. 2.9.21/2.9.22/2.9.25) y de dónde sale cada una.
 
 ---
 

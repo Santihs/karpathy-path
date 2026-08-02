@@ -8,7 +8,7 @@ tags:
   - klein
 noteId: 1785651974742
 ---
-(repaso 2026-07-03) cost·quantity = costo total. ¿Qué patrón general de ML reaparece acá, y en qué contexto?
+cost·quantity = costo total. ¿Qué patrón general de ML reaparece acá, y en qué contexto?
 
 ---
 

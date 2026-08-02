@@ -8,7 +8,7 @@ tags:
   - klein
 noteId: 1785651973743
 ---
-(2026-07-03) Si `rowlist[i][i] == 0` en un sistema triangular, ¿qué implica matemáticamente (Prop. 2.11.6), y qué se hace en la práctica cuando la matriz general (no triangular) tiene ese problema?
+Si `rowlist[i][i] == 0` en un sistema triangular, ¿qué implica matemáticamente (Prop. 2.11.6), y qué se hace en la práctica cuando la matriz general (no triangular) tiene ese problema?
 
 ---
 

@@ -8,7 +8,7 @@ tags:
   - klein
 noteId: 1785651973545
 ---
-(2026-07-03) En la implementación `Vec.dot(u,v)`, ¿por qué hace falta `assert u.D == v.D` antes de sumar, en vez de solo iterar `zip(u.f, v.f)`?
+En la implementación `Vec.dot(u,v)`, ¿por qué hace falta `assert u.D == v.D` antes de sumar, en vez de solo iterar `zip(u.f, v.f)`?
 
 ---
 

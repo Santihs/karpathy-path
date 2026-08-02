@@ -8,7 +8,7 @@ tags:
   - klein
 noteId: 1785651973594
 ---
-(2026-07-03) En `triangular_solve_n`, la línea `x[i] = (b[i] - rowlist[i] * x) / rowlist[i][i]` usa dot-product. ¿Cómo hace el dot-product para "ignorar" las variables todavía no resueltas?
+En `triangular_solve_n`, la línea `x[i] = (b[i] - rowlist[i] * x) / rowlist[i][i]` usa dot-product. ¿Cómo hace el dot-product para "ignorar" las variables todavía no resueltas?
 
 ---
 

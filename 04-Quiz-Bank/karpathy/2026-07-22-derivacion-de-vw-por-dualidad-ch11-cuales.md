@@ -8,8 +8,8 @@ tags:
   - cross-product
 noteId: 1785651973793
 ---
-(2026-07-22) Derivación de v×w por dualidad (ch11): ¿cuáles son los 4 pasos, en orden?
+En la derivación de v×w por dualidad (ch11), ¿por qué necesitás que f([x,y,z])=det([x,v,w]) sea LINEAL para poder aplicar el paso de dualidad?
 
 ---
 
-1) Definir f([x,y,z])=det([x,v,w]) — función de volumen 3D→1D, v,w fijos. 2) Es lineal → por dualidad existe vector dual p único tal que f([x,y,z])=p·[x,y,z] para todo [x,y,z]. 3) Resolver p igualando coeficientes (x,y,z) entre p1x+p2y+p3z y la expansión del determinante → da la fórmula del cross product. 4) Interpretar geométricamente: p tiene longitud=área del paralelogramo(v,w) y dirección perpendicular a ese plano — consecuencia del resultado, no ingrediente del cálculo.
+Porque el teorema de dualidad (Riesz-tipo, dim finita) solo garantiza la existencia de un vector dual único p tal que f(x)=p·x cuando f es una función lineal escalar. Si f no fuera lineal, no habría garantía de que exista tal p — la linealidad de f (det es lineal en cada fila fija las otras) es la condición que habilita el paso 2 de la derivación.

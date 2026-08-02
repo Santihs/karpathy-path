@@ -10,8 +10,8 @@ tags:
   - rank
 noteId: 1785651975024
 ---
-What does det(A) = 0 mean geometrically? And for solving equations?
+What does det(A) = 0 mean geometrically?
 
 ---
 
-Space was compressed to a lower dimension (line, plane, or point). The transformation is not invertible — information is permanently lost. For $A\vec{x} = \vec{v}$, no unique solution exists.
+Space was compressed to a lower dimension (line, plane, or point). The transformation is not invertible — information is permanently lost.

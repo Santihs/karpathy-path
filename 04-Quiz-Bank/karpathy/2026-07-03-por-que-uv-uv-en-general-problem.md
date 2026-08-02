@@ -8,7 +8,7 @@ tags:
   - klein
 noteId: 1785651973694
 ---
-(2026-07-03) ¿Por qué `(αu)·(αv) ≠ α(u·v)` en general (Problem 2.9.24)?
+¿Por qué `(αu)·(αv) ≠ α(u·v)` en general (Problem 2.9.24)?
 
 ---
 

@@ -8,7 +8,7 @@ tags:
   - cross-product
 noteId: 1785651973843
 ---
-(2026-07-22) v×w = p. Geométricamente, ¿p es perpendicular a qué exactamente — al paralelepípedo o al plano formado por v,w?
+v×w = p. Geométricamente, ¿p es perpendicular a qué exactamente — al paralelepípedo o al plano formado por v,w?
 
 ---
 

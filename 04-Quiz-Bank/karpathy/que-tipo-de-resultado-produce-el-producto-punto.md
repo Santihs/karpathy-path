@@ -8,8 +8,8 @@ tags:
   - cross-product
 noteId: 1785651974724
 ---
-¿Qué tipo de resultado produce el producto punto? ¿Y el producto cruz?
+¿Qué tipo de resultado produce el producto punto (v·w)?
 
 ---
 
-Producto punto → escalar (un número). Producto cruz → vector (perpendicular a los dos de entrada). Esta diferencia es fundamental.
+Un escalar (un número).

@@ -102,7 +102,7 @@ tags: [repo-karpathy, topic-tag]
 
 {answer}
 ```
-No `srs:` comment — once synced, **Anki owns scheduling** entirely in its own local database, not visible in git. `/quiz-me` does not read this folder (no due-date data available to it yet; would need a future AnkiConnect pull-back script). When a new concept is solid enough to quiz, add the new card as an individual file here, not to the archive. Run **"Yanki: Sync flashcard notes to Anki"** (command palette) after adding/editing cards.
+No `srs:` comment — once synced, **Anki owns scheduling** entirely in its own local database, not visible in git. `/quiz-me` does not read this folder (no due-date data available to it yet; would need a future AnkiConnect pull-back script). When a new concept is solid enough to quiz, add the new card as an individual file here, not to the archive. Sync after adding/editing cards: run `/sync-anki`, or manually **"Yanki: Sync flashcard notes to Anki"** (command palette).
 
 ---
 

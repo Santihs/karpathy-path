@@ -8,7 +8,7 @@ tags:
   - klein
 noteId: 1785651973644
 ---
-(2026-07-03) `equal()` en `Vec` compara con `==` exacto, entrada por entrada. ¿Qué debilidad tiene esto con floats, y por qué NO se arregla poniendo tolerancia dentro de `equal()`?
+`equal()` en `Vec` compara con `==` exacto, entrada por entrada. ¿Qué debilidad tiene esto con floats, y por qué NO se arregla poniendo tolerancia dentro de `equal()`?
 
 ---
 

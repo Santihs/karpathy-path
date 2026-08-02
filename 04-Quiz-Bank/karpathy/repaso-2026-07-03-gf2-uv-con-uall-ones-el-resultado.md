@@ -8,7 +8,7 @@ tags:
   - klein
 noteId: 1785651974775
 ---
-(repaso 2026-07-03) GF(2), u·v con u=all-ones. El resultado es 0 o 1 — ¿pero qué SIGNIFICA ese valor?
+GF(2), u·v con u=all-ones. El resultado es 0 o 1 — ¿pero qué SIGNIFICA ese valor?
 
 ---
 

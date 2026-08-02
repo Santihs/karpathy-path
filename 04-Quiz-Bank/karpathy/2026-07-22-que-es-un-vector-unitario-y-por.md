@@ -8,7 +8,7 @@ tags:
   - cross-product
 noteId: 1785651973816
 ---
-(2026-07-22) ¿Qué es un vector unitario, y por qué tiene que ser unitario específicamente el û usado en el ejemplo de dualidad (î/ĵ aterrizando sobre la recta de û)?
+¿Qué es un vector unitario, y por qué tiene que ser unitario específicamente el û usado en el ejemplo de dualidad (î/ĵ aterrizando sobre la recta de û)?
 
 ---
 

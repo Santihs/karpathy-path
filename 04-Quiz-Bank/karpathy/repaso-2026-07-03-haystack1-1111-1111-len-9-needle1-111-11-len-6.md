@@ -8,8 +8,8 @@ tags:
   - klein
 noteId: 1785651974793
 ---
-(repaso 2026-07-03) haystack=[1,-1,1,1,1,-1,1,1,1] (len 9), needle=[1,-1,1,1,-1,1] (len 6). Sin mirar la nota: ¿cuántas posiciones de inicio hay, y cuánto da el dot-product en pos 0?
+haystack=[1,1,-1,-1,1,-1,1,-1] (len 8), needle=[1,-1,-1,1] (len 4). Sin mirar la nota: ¿cuántas posiciones de inicio hay, y cuánto da el dot-product en pos 0?
 
 ---
 
-Posiciones = 9-6+1 = 4 (0,1,2,3). Pos 0: [1,-1,1,1,1,-1]·needle = 1+1+1+1-1-1 = 2. Resultado completo: [2,2,0,0].
+Posiciones = 8-4+1 = 5 (0,1,2,3,4). Pos 0: [1,1,-1,-1]·[1,-1,-1,1] = 1-1+1-1 = 0. Resultado completo: [0,4,-2,0,0] — match perfecto en pos 1 (valor=4=len(needle)).
