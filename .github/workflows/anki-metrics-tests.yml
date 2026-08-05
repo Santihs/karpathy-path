@@ -1,0 +1,20 @@
+name: Anki metrics tests
+
+on:
+  push:
+    paths:
+      - "anki-metrics/**"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v4
+
+      - name: Install dependencies
+        run: uv sync --frozen --directory anki-metrics
+
+      - name: Run tests
+        run: uv run --directory anki-metrics pytest

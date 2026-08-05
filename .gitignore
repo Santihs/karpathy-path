@@ -17,3 +17,4 @@ notifier/credentials.json
 notifier/token.json
 notifier/.env
 notifier/.venv
+anki-metrics/.venv
