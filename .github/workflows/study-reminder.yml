@@ -17,6 +17,9 @@ jobs:
       - name: Install dependencies
         run: uv sync --frozen --directory notifier
 
+      - name: Run tests
+        run: uv run --directory notifier pytest
+
       - name: Send email + create calendar event
         run: uv run --directory notifier remind.py
         env:

@@ -75,12 +75,12 @@ uv run notifier/remind.py
 
 ## How it works
 
-- Runs every day at **22:00 UTC (6pm Bolivia)**
+- Runs every day at **12:00 UTC (8am Bolivia)**
 - Reads `progress.json` directly from the public GitHub repo
 - Determines tomorrow's session type (weekday-micro / saturday-deep / sunday-deep-review)
 - Flags biweekly cumulative review if overdue (≥14 days)
 - Sends email with session brief + streak warning if you missed today
-- Creates a Google Calendar event at **9am tomorrow** (block length depends on session type)
+- Creates a Google Calendar event at **6pm tomorrow** (block length depends on session type)
 
 ---
 
