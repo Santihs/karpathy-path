@@ -15,3 +15,5 @@ What is the formula for the inverse of a 2×2 matrix $\begin{bmatrix}a&b\\c&d\en
 ---
 
 $A^{-1} = \frac{1}{ad-bc}\begin{bmatrix}d&-b\\-c&a\end{bmatrix}$. Steps: swap diagonal, negate off-diagonal, divide by det.
+
+Ref: `02-Topics/Linear-Algebra-Basics.md — Ch 7 — Inverse Matrices, Column Space, Null Space`

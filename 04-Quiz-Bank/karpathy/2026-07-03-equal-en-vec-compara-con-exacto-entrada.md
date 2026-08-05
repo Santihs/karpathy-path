@@ -13,3 +13,5 @@ noteId: 1785651973644
 ---
 
 `0.1+0.2 != 0.3` exacto en floats (error de redondeo acumulado) — vectores matemáticamente iguales comparan distintos. No se arregla con tolerancia dentro de `equal()` porque esa misma función debe seguir siendo EXACTA para fields como GF(2)/int, donde tolerancia rompería la corrección. La solución (Klein) es un helper separado (`is_almost_zero`) aplicado en el call site, no dentro de `__eq__`.
+
+Ref: `05-Projects/coding-the-matrix/src/coding_the_matrix/vec.py`

@@ -19,3 +19,5 @@ noteId: 1785651973964
 ---
 
 (1) 0 ∈ U, (2) cerrado bajo suma (u,w∈U ⟹ u+w∈U), (3) cerrado bajo escalar (a∈F, u∈U ⟹ au∈U).
+
+Ref: `02-Topics/Linear-Algebra-Axler-Fundamentals.md — 1. Subespacios`

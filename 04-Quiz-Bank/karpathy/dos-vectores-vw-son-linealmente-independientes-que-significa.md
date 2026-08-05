@@ -19,3 +19,5 @@ Dos vectores v,w son linealmente independientes. ¿Qué significa exactamente? (
 ---
 
 Ninguno de los dos es múltiplo escalar del otro — no apuntan en la misma dirección/línea.
+
+Ref: `02-Topics/Linear-Algebra-Axler-Fundamentals.md — 2. Independencia lineal`

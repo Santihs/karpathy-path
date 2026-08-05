@@ -13,3 +13,5 @@ noteId: 1785651973694
 ---
 
 El escalar se aplica a AMBOS lados del dot-product, así que se duplica: `(αu)·(αv) = α²(u·v)`, no `α(u·v)`. Homogeneity solo garantiza escalar UN lado a la vez.
+
+Ref: `02-Topics/Coding-the-Matrix-Vectors.md — 10.5 Propiedades algebraicas del dot-product`

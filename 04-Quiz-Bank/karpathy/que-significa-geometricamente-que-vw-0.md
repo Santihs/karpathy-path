@@ -13,3 +13,5 @@ noteId: 1785651974641
 ---
 
 Los vectores son perpendiculares (ortogonales) — no comparten ninguna dirección. Ángulo entre ellos = 90°.
+
+Ref: `02-Topics/Linear-Algebra-Basics.md — Ch 9 — Dot Products and Duality`

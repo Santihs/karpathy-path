@@ -15,3 +15,5 @@ What does $\det(AB) = \det(A) \times \det(B)$ mean intuitively?
 ---
 
 If you compose two transformations, the total area/volume scaling equals the product of each individual scaling. Scale by 3 then by 2 = scale by 6 total.
+
+Ref: `02-Topics/Linear-Algebra-Basics.md — Ch 6 — The Determinant`

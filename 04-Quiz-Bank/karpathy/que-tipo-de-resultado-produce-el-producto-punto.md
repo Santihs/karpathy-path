@@ -13,3 +13,5 @@ noteId: 1785651974724
 ---
 
 Un escalar (un número).
+
+Ref: `02-Topics/Linear-Algebra-Basics.md — Ch 9 — Dot Products and Duality`

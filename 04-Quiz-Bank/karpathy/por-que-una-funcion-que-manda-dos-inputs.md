@@ -19,3 +19,5 @@ noteId: 1785651974442
 ---
 
 Porque el inverso no podría "deshacer" sin ambigüedad — al ver ese output compartido, no sabría cuál de los dos inputs originales devolver.
+
+Ref: `02-Topics/Coding-the-Matrix-Fundamentals.md — 4. Inverso funcional`

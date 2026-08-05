@@ -19,3 +19,5 @@ Da 3 ejemplos de cosas que se pueden representar como vectores, además de "flec
 ---
 
 Cualquiera de: binary string (key criptográfica), attributes (fila de dataset/features), imagen (píxel→intensidad), distribución de probabilidad, estado de un sistema evolucionando.
+
+Ref: `02-Topics/Coding-the-Matrix-Vectors.md — 4. Qué podemos representar con vectores`

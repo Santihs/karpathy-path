@@ -15,3 +15,5 @@ What does multiplying two matrices $A \cdot B$ represent geometrically?
 ---
 
 Composing two transformations — apply B first, then A. The result is a single matrix encoding both in sequence.
+
+Ref: `02-Topics/Linear-Algebra-Basics.md — Ch 4 — Matrix Multiplication as Composition`

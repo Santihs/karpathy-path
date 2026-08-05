@@ -13,3 +13,5 @@ Si û = [0.8, 0.6] y lo uso como transformación 2D→1D, ¿dónde aterrizan î 
 ---
 
 î aterriza en 0.8 (coordenada x de û), ĵ aterriza en 0.6 (coordenada y de û). Las coordenadas de û son exactamente los landing points.
+
+Ref: `02-Topics/Linear-Algebra-Basics.md — Ch 9 — Dot Products and Duality`

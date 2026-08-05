@@ -19,3 +19,5 @@ noteId: 1785651973498
 ---
 
 Con solo 2 vectores, el span máximo es un plano (2D) — no alcanza a cubrir las 3 dimensiones de R³, sin importar cuán independientes sean.
+
+Ref: `02-Topics/Linear-Algebra-Axler-Fundamentals.md — 4. Dimensión`

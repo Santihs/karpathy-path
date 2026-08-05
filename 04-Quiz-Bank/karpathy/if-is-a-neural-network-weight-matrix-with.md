@@ -15,3 +15,5 @@ If $A$ is a neural network weight matrix with shape (256 × 784), what is it doi
 ---
 
 Transforming a 784-dimensional input vector into a 256-dimensional output — a nonsquare linear transformation that projects from a higher to a lower dimensional space.
+
+Ref: `02-Topics/Linear-Algebra-Basics.md — Ch 8 — Nonsquare Matrices`

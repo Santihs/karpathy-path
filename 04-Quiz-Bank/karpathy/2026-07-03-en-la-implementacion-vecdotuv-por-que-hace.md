@@ -13,3 +13,5 @@ En la implementación `Vec.dot(u,v)`, ¿por qué hace falta `assert u.D == v.D` 
 ---
 
 `u.f`/`v.f` son dicts sparse — pueden tener distintas claves presentes (ausente = 0 implícito). `zip` sobre los dicts sparse desalinearía o saltearía entradas. Hay que iterar sobre el domain declarado `D`, no sobre el storage sparse.
+
+Ref: `05-Projects/coding-the-matrix/src/coding_the_matrix/vec.py`

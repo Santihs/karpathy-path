@@ -19,3 +19,5 @@ noteId: 1785651974426
 ---
 
 Porque se define entrada-por-entrada, y la suma en el campo subyacente (R, C, GF(2)) ya es asociativa y conmutativa — la propiedad se hereda directo.
+
+Ref: `02-Topics/Coding-the-Matrix-Vectors.md — 6. Suma generalizada, vector cero, asociatividad/conmutatividad`

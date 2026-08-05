@@ -19,3 +19,5 @@ En el ejemplo de las caras promediadas (Example 2.6.10), ¿qué representa (1/2)
 ---
 
 El promedio pixel-a-pixel de las dos imágenes — una tercera "cara" a mitad de camino entre las dos, mezclando rasgos de ambas.
+
+Ref: `02-Topics/Coding-the-Matrix-Vectors.md — 9. Combinaciones convexas`

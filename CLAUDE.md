@@ -102,7 +102,7 @@ tags: [repo-karpathy, topic-tag]
 
 {answer}
 ```
-No `srs:` comment — once synced, **Anki owns scheduling** entirely in its own local database, not visible in git. `/quiz-me` does not read this folder (no due-date data available to it yet; would need a future AnkiConnect pull-back script). When a new concept is solid enough to quiz, add the new card as an individual file here, not to the archive. Sync after adding/editing cards: run `/sync-anki`, or manually **"Yanki: Sync flashcard notes to Anki"** (command palette).
+No `srs:` comment — once synced, **Anki owns scheduling** entirely in its own local database, not visible in git. `/quiz-me` does not read this folder (no due-date data available to it yet; would need a future AnkiConnect pull-back script). When a new concept is solid enough to quiz, add the new card as an individual file here, not to the archive. Every card must end with a `Ref:` line pointing back to its source — the relevant `02-Topics/` note section (e.g. `` Ref: `02-Topics/Linear-Algebra-Basics.md — Ch 9 — Dot Products and Duality` ``) or the actual code file if it came from `05-Projects/coding-the-matrix` (e.g. `` Ref: `05-Projects/coding-the-matrix/src/coding_the_matrix/vec.py` ``) — plain backtick path, no `[[wikilinks]]` (Anki/AnkiDroid can't resolve those). For the densest derivation/threshold-concept cards (duality, dimension, subspace proofs — not routine recall), add `self-explain: true` to the frontmatter so `/quiz-me` asks for a full explanation before grading instead of just hiding the answer. Sync after adding/editing cards: run `/sync-anki`, or manually **"Yanki: Sync flashcard notes to Anki"** (command palette).
 
 ---
 

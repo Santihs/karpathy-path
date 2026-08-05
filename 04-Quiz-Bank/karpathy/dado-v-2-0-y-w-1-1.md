@@ -13,3 +13,5 @@ Dado v = [2, 0] y w = [1, 1], ¿cuánto de w va en la dirección de v?
 ---
 
 comp = (v·w) / |v| = (2×1 + 0×1) / 2 = 1. La "sombra" de w sobre v tiene longitud 1.
+
+Ref: `02-Topics/Linear-Algebra-Basics.md — Ch 9 — Dot Products and Duality`

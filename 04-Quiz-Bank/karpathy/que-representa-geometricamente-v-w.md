@@ -13,3 +13,5 @@ noteId: 1785651974614
 ---
 
 El área del paralelogramo formado por v y w. Igual que |v||w|sin(θ).
+
+Ref: `02-Topics/Linear-Algebra-Basics.md — Ch 10 — Cross Products`

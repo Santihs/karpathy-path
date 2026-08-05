@@ -13,3 +13,5 @@ Dot-product sobre GF(2): ¿qué representa u·v cuando u es el vector all-ones [
 ---
 
 La PARIDAD de v — 1 si v tiene cantidad impar de 1s, 0 si tiene cantidad par. Dot-product con all-ones = sumar todas las entradas de v sin pesar nada, y en GF(2) esa suma total ES la paridad.
+
+Ref: `02-Topics/Coding-the-Matrix-Vectors.md — 11. Dot-product sobre GF(2)`

@@ -13,3 +13,5 @@ Explica dualidad en una oración.
 ---
 
 Cualquier transformación lineal nD→1D puede escribirse como producto punto con un vector en nD — proyectar y transformar son la misma operación.
+
+Ref: `02-Topics/Linear-Algebra-Basics.md — Ch 9 — Dot Products and Duality`

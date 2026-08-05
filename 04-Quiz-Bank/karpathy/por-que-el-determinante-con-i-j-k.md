@@ -13,3 +13,5 @@ noteId: 1785651974339
 ---
 
 Un determinante real solo tiene escalares como entradas — ahí hay vectores, rompe la definición. Es mnemotécnico: incluye 3 cofactores que resultan en un vector, no en un escalar.
+
+Ref: `02-Topics/Linear-Algebra-Basics.md — Ch 11 — Cross Product como Dualidad`

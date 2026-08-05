@@ -12,3 +12,5 @@ noteId: 1785685525879
 ---
 
 Un vector, perpendicular a los dos vectores de entrada.
+
+Ref: `02-Topics/Linear-Algebra-Basics.md — Ch 10 — Cross Products`

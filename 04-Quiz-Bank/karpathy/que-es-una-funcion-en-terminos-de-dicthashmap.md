@@ -19,3 +19,5 @@ noteId: 1785651974576
 ---
 
 Un conjunto de pares (a,b) donde ningún par comparte la misma primera entrada — igual que un dict sin keys duplicadas. Dominio = conjunto de keys válidas.
+
+Ref: `02-Topics/Coding-the-Matrix-Fundamentals.md — 2. La función`

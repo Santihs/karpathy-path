@@ -13,3 +13,5 @@ noteId: 1785651973893
 ---
 
 `def list_dot(u, v): return sum([u[i]*v[i] for i in range(len(u))])` — o equivalente con zip: `sum([a*b for (a,b) in zip(u,v)])`.
+
+Ref: `05-Projects/coding-the-matrix/src/coding_the_matrix/vec.py`

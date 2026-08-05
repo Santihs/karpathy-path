@@ -13,3 +13,5 @@ noteId: 1785651974511
 ---
 
 $\mathbf{u}\cdot\mathbf{v} = \sum_{k\in D} u[k]\,v[k]$ — suma de productos de entradas correspondientes. Devuelve un ESCALAR, no un vector (por eso también se llama "scalar product").
+
+Ref: `02-Topics/Coding-the-Matrix-Vectors.md — 10. Dot-product`

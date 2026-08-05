@@ -12,3 +12,5 @@ noteId: 1785685525847
 ---
 
 |v×w| (la norma del vector resultado) = área del paralelogramo(v,w). Es un hecho geométrico sobre el resultado del cross product, no algo que el mnemotécnico "determinante" calcule directamente.
+
+Ref: `02-Topics/Linear-Algebra-Basics.md — Ch 10 — Cross Products`

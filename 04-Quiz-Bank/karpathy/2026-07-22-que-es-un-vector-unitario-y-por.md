@@ -13,3 +13,5 @@ noteId: 1785651973816
 ---
 
 Vector unitario = longitud (norma) exactamente 1, notado û. Si no fuera unitario, la proyección de î/ĵ se escalaría por la longitud de u, y habría que dividir por ‖u‖ para recuperar la equivalencia limpia matriz-fila⇔dot-product. Con unitario (longitud 1) no hay factor extra que arrastrar.
+
+Ref: `02-Topics/Linear-Algebra-Basics.md — Ch 9 — Dot Products and Duality`

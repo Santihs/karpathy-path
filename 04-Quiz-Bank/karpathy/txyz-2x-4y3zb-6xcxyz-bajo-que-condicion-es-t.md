@@ -19,3 +19,5 @@ T(x,y,z) = (2x-4y+3z+b, 6x+cxyz). ¿Bajo qué condición es T lineal?
 ---
 
 b=0 y c=0. b≠0 rompe T(0)=0 (traslación); c≠0 rompe homogeneidad (término cúbico no escala linealmente).
+
+Ref: `02-Topics/Linear-Algebra-Axler-Fundamentals.md — 5. Mapas lineales`

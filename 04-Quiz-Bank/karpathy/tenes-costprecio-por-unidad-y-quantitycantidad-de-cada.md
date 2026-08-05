@@ -13,3 +13,5 @@ Tenés cost=[precio por unidad] y quantity=[cantidad de cada item]. ¿Qué opera
 ---
 
 cost·quantity (dot-product) — suma cada precio×cantidad. Patrón general "suma ponderada", mismo patrón que weights·features en regresión lineal / capa densa.
+
+Ref: `02-Topics/Coding-the-Matrix-Vectors.md — 10. Dot-product`

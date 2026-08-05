@@ -19,3 +19,5 @@ Un vector de n entradas — ¿cómo se interpreta como función? (Klein 2.2)
 ---
 
 Es una función con dominio {0,1,...,n-1} (los índices) y codominio F (los valores) — cada índice mapea a su entrada correspondiente.
+
+Ref: `02-Topics/Coding-the-Matrix-Vectors.md — 3. Los vectores son funciones`

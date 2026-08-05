@@ -19,3 +19,5 @@ noteId: 1785651974475
 ---
 
 (1) Ser linealmente independiente Y (2) hacer span del espacio completo. Las dos son obligatorias.
+
+Ref: `02-Topics/Linear-Algebra-Axler-Fundamentals.md — 3. Bases`

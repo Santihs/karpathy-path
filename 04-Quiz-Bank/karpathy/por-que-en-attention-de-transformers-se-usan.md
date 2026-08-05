@@ -13,3 +13,5 @@ noteId: 1785651974388
 ---
 
 Cada producto punto Q·Kᵀ mide cuánto "apunta" una query en la dirección de una key — es similitud direccional. Alto producto punto = alta relevancia.
+
+Ref: `02-Topics/Coding-the-Matrix-Vectors.md — 10. Dot-product`
