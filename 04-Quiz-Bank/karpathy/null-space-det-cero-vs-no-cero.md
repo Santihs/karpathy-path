@@ -8,12 +8,12 @@ tags:
   - inverse
   - null-space
   - rank
-noteId: 1785651975242
+noteId: 1785903293169
 ---
-What is the rank of a matrix?
+How does the null space differ when det(A) != 0 vs. det(A) = 0?
 
 ---
 
-The number of dimensions in the output (column space) — e.g. rank 2 means the output collapses onto a plane.
+det != 0 -> only the zero vector itself is in the null space. det = 0 -> a whole line/plane of vectors gets destroyed.
 
 Ref: `02-Topics/Linear-Algebra-Basics.md — Ch 7 — Inverse Matrices, Column Space, Null Space`

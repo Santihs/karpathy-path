@@ -7,6 +7,7 @@ tags:
   - duality
   - cross-product
 noteId: 1785651974164
+self-explain: true
 ---
 Explica paso a paso cómo dualidad deriva la fórmula del cross product (no solo "nD→1D").
 

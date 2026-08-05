@@ -12,12 +12,12 @@ tags:
   - vectors
   - axler
   - coding-the-matrix
-noteId: 1785651974475
+noteId: 1785903292716
 ---
-¿Qué 2 condiciones tiene que cumplir una lista pa ser "base" de un espacio vectorial? (Axler 2.26)
+Condición 1 para que una lista sea "base" de un espacio vectorial (Axler 2.26)?
 
 ---
 
-(1) Ser linealmente independiente Y (2) hacer span del espacio completo. Las dos son obligatorias.
+Ser linealmente independiente.
 
 Ref: `02-Topics/Linear-Algebra-Axler-Fundamentals.md — 3. Bases`

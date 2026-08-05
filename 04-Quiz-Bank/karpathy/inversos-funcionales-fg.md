@@ -12,12 +12,12 @@ tags:
   - vectors
   - axler
   - coding-the-matrix
-noteId: 1785651974675
+noteId: 1785903293090
 ---
-¿Qué significa que f y g sean inversos funcionales? (Definición 0.3.13)
+Si f y g son inversos funcionales, ¿qué debe cumplir f∘g? (Def. 0.3.13)
 
 ---
 
-f∘g es la identidad en el dominio de g, Y g∘f es la identidad en el dominio de f — las DOS direcciones tienen que cumplirse.
+f∘g debe ser la identidad en el dominio de g.
 
 Ref: `02-Topics/Coding-the-Matrix-Fundamentals.md — 4. Inverso funcional`

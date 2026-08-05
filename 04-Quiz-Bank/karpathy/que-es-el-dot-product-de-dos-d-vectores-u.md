@@ -8,10 +8,10 @@ tags:
   - klein
 noteId: 1785651974511
 ---
-¿Qué es el dot-product de dos D-vectores u, v, y qué tipo de valor devuelve?
+¿Qué es el dot-product de dos D-vectores u, v (fórmula)?
 
 ---
 
-$\mathbf{u}\cdot\mathbf{v} = \sum_{k\in D} u[k]\,v[k]$ — suma de productos de entradas correspondientes. Devuelve un ESCALAR, no un vector (por eso también se llama "scalar product").
+`u·v = sum(u[k]*v[k] for k in D)` — suma de productos de entradas correspondientes.
 
 Ref: `02-Topics/Coding-the-Matrix-Vectors.md — 10. Dot-product`
