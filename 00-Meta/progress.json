@@ -8,7 +8,7 @@
     "total_hours_logged": 29.5,
     "session_count": 19,
     "last_cumulative_review": "2026-08-05",
-    "next_up": "Coding-the-Matrix (Klein) Cap 7 — Gaussian elimination (Cap 6 Dimension cerrado completo hoy 2026-08-06: Morphing Lemma, Basis Theorem, Rank Theorem, Direct Sum, Kernel-Image Theorem, Annihilator — ver 02-Topics/Coding-the-Matrix-Basis.md secciones 8-15, código rank/is_independent/is_invertible en basis.py con 106 tests). Pendiente de antes: 3Blue1Brown ch15 (abstract vector spaces) — ch14 (eigenvectors/eigenvalues) cerrado hoy con proyecto de código eigenvectors-3b1b (Fibonacci vía eigenbasis + visualizador matplotlib interactivo). Axler sigue pausado."
+    "next_up": "Coding-the-Matrix (Klein) Cap 7 — Gaussian elimination (Cap 6 Dimension cerrado completo hoy 2026-08-06: Morphing Lemma, Basis Theorem, Rank Theorem, Direct Sum, Kernel-Image Theorem, Annihilator — ver 02-Topics/Coding-the-Matrix-Basis.md secciones 8-15, código rank/is_independent/is_invertible en basis.py con 106 tests). Pendiente de antes: 3Blue1Brown Ch16 — Abstract vector spaces (Ch14 eigenvectors/eigenvalues y Ch15 truco rápido para autovalores, ambos cerrados hoy — ver Linear-Algebra-Basics.md; proyecto de código eigenvectors-3b1b con Fibonacci vía eigenbasis + visualizador matplotlib). Axler sigue pausado."
   },
   "phases": {
     "phase_0": {

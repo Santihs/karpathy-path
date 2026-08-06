@@ -471,7 +471,7 @@ $$\det\begin{bmatrix}-\lambda & -1\\1 & -\lambda\end{bmatrix} = \lambda^2+1=0 \;
 
 Autovalores complejos → ninguna dirección real se queda fija. Consistente con la intuición geométrica: una rotación (sin escala) mueve *todo* vector fuera de su span, salvo el caso trivial 180°.
 
-### Truco mental para 2×2 — mean ± √(mean²-product)
+## Ch 15 — Truco rápido para calcular autovalores (2×2) — mean ± √(mean²-product)
 
 Para una matriz 2×2, dos atajos evitan expandir el polinomio característico completo:
 
@@ -519,8 +519,8 @@ Visualizador interactivo (sliders para a,b,c,d de la matriz, dibuja grid transfo
 
 ---
 
-## Still to cover (3B1B chapters 15)
-- Ch 15: Abstract vector spaces
+## Still to cover (3B1B chapters 16+)
+- Ch 16: Abstract vector spaces
 
 ---
 
