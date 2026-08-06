@@ -1,13 +1,13 @@
 ---
 tags: [phase-0, linear-algebra, matrix-multiplication, determinant, inverse, null-space, rank]
 date_added: 2026-06-27
-last_tested: 2026-07-28
+last_tested: 2026-08-05
 ---
 
 Q: What does multiplying two matrices $A \cdot B$ represent geometrically?
 A: Composing two transformations — apply B first, then A. The result is a single matrix encoding both in sequence.
 
-<!-- srs: ease=2.5 interval=1 due=2026-07-06 lapses=0 last_seen=none -->
+<!-- srs: ease=2.5 interval=1 due=2026-08-06 lapses=0 last_seen=2026-08-05 -->
 
 ---
 
@@ -42,7 +42,7 @@ A: The set of all input vectors that get mapped to the zero vector (origin) afte
 Q: What is the rank of a matrix?
 A: The number of dimensions in the output (column space). Rank 3 = full 3D output. Rank 2 = output is a plane. Rank 1 = output is a line.
 
-<!-- srs: ease=2.5 interval=1 due=2026-07-06 lapses=0 last_seen=none -->
+<!-- srs: ease=2.6 interval=3 due=2026-08-08 lapses=0 last_seen=2026-08-05 -->
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 tags: [phase-0, linear-algebra, subspaces, bases, dimension, linear-maps, functions, probability, vectors, axler, coding-the-matrix]
 date_added: 2026-07-01
-last_tested: 2026-07-28
+last_tested: 2026-08-05
 ---
 
 Q: ¿Cuáles son las 3 condiciones pa que un subconjunto U de V sea subespacio? (Axler 1.34)
@@ -21,7 +21,7 @@ A: No. El vector cero no cumple la ecuación (0+0+0=0≠5) — falla la condici�
 Q: Dos vectores v,w son linealmente independientes. ¿Qué significa exactamente? (Axler 2.16d)
 A: Ninguno de los dos es múltiplo escalar del otro — no apuntan en la misma dirección/línea.
 
-<!-- srs: ease=2.5 interval=1 due=2026-07-06 lapses=0 last_seen=none -->
+<!-- srs: ease=2.6 interval=3 due=2026-08-08 lapses=0 last_seen=2026-08-05 -->
 
 ---
 

@@ -1,0 +1,22 @@
+[project]
+name = "eigenvectors-3b1b"
+version = "0.1.0"
+description = "3Blue1Brown Essence of LA Ch14 exercise — Fibonacci matrix powers via eigenbasis"
+authors = [
+    { name = "Santiago Huanacu Sanchez", email = "santihs.sanchez@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "numpy>=2.0.0",
+    "matplotlib>=3.9.0",
+]
+
+[dependency-groups]
+dev = ["pytest>=8.0.0"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[build-system]
+requires = ["uv_build>=0.9.15,<0.10.0"]
+build-backend = "uv_build"

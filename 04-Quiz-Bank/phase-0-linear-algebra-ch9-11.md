@@ -1,13 +1,13 @@
 ---
 tags: [phase-0, linear-algebra, dot-product, duality, cross-product]
 date_added: 2026-06-29
-last_tested: 2026-07-28
+last_tested: 2026-08-05
 ---
 
 Q: ¿Qué tipo de resultado produce el producto punto? ¿Y el producto cruz?
 A: Producto punto → escalar (un número). Producto cruz → vector (perpendicular a los dos de entrada). Esta diferencia es fundamental.
 
-<!-- srs: ease=2.5 interval=1 due=2026-07-06 lapses=0 last_seen=none -->
+<!-- srs: ease=2.6 interval=3 due=2026-08-08 lapses=0 last_seen=2026-08-05 -->
 
 ---
 
@@ -28,7 +28,7 @@ A: comp = (v·w) / |v| = (2×1 + 0×1) / 2 = 1. La "sombra" de w sobre v tiene l
 Q: ¿Por qué en attention de transformers se usan productos punto?
 A: Cada producto punto Q·Kᵀ mide cuánto "apunta" una query en la dirección de una key — es similitud direccional. Alto producto punto = alta relevancia.
 
-<!-- srs: ease=2.5 interval=1 due=2026-07-06 lapses=0 last_seen=none -->
+<!-- srs: ease=2.3 interval=1 due=2026-08-06 lapses=1 last_seen=2026-08-05 -->
 
 ---
 

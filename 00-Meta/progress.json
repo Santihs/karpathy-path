@@ -7,7 +7,7 @@
     "study_streak": 5,
     "total_hours_logged": 26.0,
     "session_count": 18,
-    "last_cumulative_review": "2026-07-22",
+    "last_cumulative_review": "2026-08-05",
     "next_up": "3Blue1Brown Essence of Linear Algebra Ch 14 — eigenvectors/eigenvalues (prioridad, cero cobertura hasta ahora, crítico para PCA/attention más adelante). Después ch15 (abstract vector spaces). Ch12 (Cramer's rule, shear vs rotación) y ch13 (change of basis, sandwich A⁻¹MA) cerrados hoy 2026-07-28 con verificación web — ver 02-Topics/Linear-Algebra-Basics.md. Pendiente de antes (sin tocar hoy): Coding-the-Matrix (Klein) Cap 6 — dimensión y consecuencias del Exchange Lemma, docstrings senior-style en vec.py/triangular.py/vecutil.py, Axler pausado."
   },
   "phases": {
