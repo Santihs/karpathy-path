@@ -6,6 +6,7 @@
 # over any field (works unchanged for GF(2) vectors from msf.py, since Vec's
 # +/-/* dispatch to whatever field element is stored, e.g. gf2.one).
 from coding_the_matrix.vec import Vec
+from coding_the_matrix.mat import mat2coldict
 
 
 class _EliminationBasis:
@@ -72,6 +73,54 @@ def grow(vectors):
     """
     tracker = _EliminationBasis()
     return [v for v in vectors if tracker.add(v)]
+
+
+def rank(vectors):
+    """
+    Klein 6.2.5: rank of a set = dim(Span(set)) = size of any basis for its
+    span. grow() already returns such a basis, so rank is just its length.
+
+    >>> from coding_the_matrix.vecutil import list2vec
+    >>> e1, e2, e3 = list2vec([1,0,0]), list2vec([0,1,0]), list2vec([0,0,1])
+    >>> rank([e1, e2, e3])
+    3
+    >>> rank([e1, e2, e1 + e2])
+    2
+    """
+    return len(grow(vectors))
+
+
+def is_independent(vectors):
+    """
+    Klein 6.7.6: a list is independent iff none of its vectors was redundant,
+    i.e. iff rank equals the count — no vector got dropped by grow().
+
+    >>> from coding_the_matrix.vecutil import list2vec
+    >>> is_independent([list2vec(v) for v in [[2,4,0],[8,16,4],[0,0,7]]])
+    False
+    >>> is_independent([list2vec(v) for v in [[2,4,0],[8,16,4]]])
+    True
+    """
+    return rank(vectors) == len(vectors)
+
+
+def is_invertible(M):
+    """
+    Klein 6.7.12 / Corollary 6.4.10: M is invertible iff it's square and its
+    columns are linearly independent.
+
+    >>> from coding_the_matrix.matutil import listlist2mat
+    >>> is_invertible(listlist2mat([[1,2,3],[3,1,1]]))
+    False
+    >>> is_invertible(listlist2mat([[1,0],[0,1]]))
+    True
+    >>> is_invertible(listlist2mat([[1,0,1],[0,1,1],[1,1,0]]))
+    True
+    """
+    rows, cols = M.D
+    if len(rows) != len(cols):
+        return False
+    return is_independent(list(mat2coldict(M).values()))
 
 
 def shrink(vectors):

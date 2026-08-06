@@ -2,13 +2,13 @@
   "meta": {
     "current_phase": 0,
     "current_week": 1,
-    "last_session_date": "2026-07-28",
-    "last_session_type": "weekday-micro",
-    "study_streak": 5,
-    "total_hours_logged": 26.0,
-    "session_count": 18,
+    "last_session_date": "2026-08-06",
+    "last_session_type": "biweekly-cumulative",
+    "study_streak": 1,
+    "total_hours_logged": 29.5,
+    "session_count": 19,
     "last_cumulative_review": "2026-08-05",
-    "next_up": "3Blue1Brown Essence of Linear Algebra Ch 14 — eigenvectors/eigenvalues (prioridad, cero cobertura hasta ahora, crítico para PCA/attention más adelante). Después ch15 (abstract vector spaces). Ch12 (Cramer's rule, shear vs rotación) y ch13 (change of basis, sandwich A⁻¹MA) cerrados hoy 2026-07-28 con verificación web — ver 02-Topics/Linear-Algebra-Basics.md. Pendiente de antes (sin tocar hoy): Coding-the-Matrix (Klein) Cap 6 — dimensión y consecuencias del Exchange Lemma, docstrings senior-style en vec.py/triangular.py/vecutil.py, Axler pausado."
+    "next_up": "Coding-the-Matrix (Klein) Cap 7 — Gaussian elimination (Cap 6 Dimension cerrado completo hoy 2026-08-06: Morphing Lemma, Basis Theorem, Rank Theorem, Direct Sum, Kernel-Image Theorem, Annihilator — ver 02-Topics/Coding-the-Matrix-Basis.md secciones 8-15, código rank/is_independent/is_invertible en basis.py con 106 tests). Pendiente de antes: 3Blue1Brown ch15 (abstract vector spaces) — ch14 (eigenvectors/eigenvalues) cerrado hoy con proyecto de código eigenvectors-3b1b (Fibonacci vía eigenbasis + visualizador matplotlib interactivo). Axler sigue pausado."
   },
   "phases": {
     "phase_0": {

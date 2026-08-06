@@ -2,8 +2,8 @@
 tags: [phase-0, math, linear-algebra]
 status: learning
 first_learned: 2026-06-26
-last_reviewed: 2026-07-07
-confidence: 2/5
+last_reviewed: 2026-08-05
+confidence: 3/5
 ---
 
 # Linear Algebra Basics
@@ -440,8 +440,86 @@ Cita textual (verificada, 3B1B):
 
 ---
 
-## Still to cover (3B1B chapters 14–15)
-- Ch 14: Eigenvectors and eigenvalues (crítico para PCA, transformers)
+## Ch 14 — Eigenvectors and Eigenvalues (2026-08-05)
+
+**El insight central:** al aplicar una transformación A, la mayoría de los vectores se salen de su span original (rotan/se desvían). Un **autovector** es de los pocos que se quedan sobre su propia línea (span) — solo se estira o encoge, nunca rota. El factor de estiramiento es su **autovalor** asociado.
+
+$$A\vec{v} = \lambda\vec{v}$$
+
+Ejemplo trabajado con A=[[3,1],[0,2]]:
+- î=[1,0] queda sobre el eje x (su propio span) tras la transformación → autovector con λ=3 (columna 1 de A es [3,0], 3 veces î). [-1,1] se estira a 2·[-1,1] → autovector con λ=2.
+- Un vector cualquiera (ej. amarillo intermedio) se sale de su span — no es autovector.
+
+**Por qué es útil:** en 3D, un autovector de una rotación es literalmente el **eje de rotación** — el único vector que no se mueve. Patrón general en álgebra lineal: cuando algo parece depender de la orientación de tus ejes (coordenadas), buscá si en realidad depende solo de los autovectores/autovalores — esos son intrínsecos a la transformación, no a cómo elegiste describirla.
+
+### Derivando el cálculo — det(A − λI) = 0
+
+Problema: `Av = λv` tiene tipos distintos a cada lado (matriz·vector vs escalar·vector). Truco: `λv = λ(Iv) = (λI)v` — ahora ambos lados son matriz·vector, se puede restar:
+
+$$A\vec{v} = \lambda\vec{v} \;\Rightarrow\; (A-\lambda I)\vec{v} = \vec{0}$$
+
+Esto pide un vector v≠0 en el null space de `(A-λI)` — por ch7, eso solo pasa cuando la transformación colapsa una dimensión, es decir `det(A-λI) = 0` (ver [[eigen-lambda-i-trick]] para el paso a paso completo de por qué se multiplica por I).
+
+**Ejemplo — A=[[3,1],[0,2]]:**
+$$\det\begin{bmatrix}3-\lambda & 1\\0 & 2-\lambda\end{bmatrix} = (3-\lambda)(2-\lambda) = 0 \;\Rightarrow\; \lambda=2 \text{ o } \lambda=3$$
+
+Con λ=2: resolver `[[1,1],[0,0]]v=0` → autovector en la dirección [-1,1] (o cualquier múltiplo).
+Con λ=3: autovector [1,0] (î).
+
+**Caso sin autovectores reales — rotación pura:**
+$$\det\begin{bmatrix}-\lambda & -1\\1 & -\lambda\end{bmatrix} = \lambda^2+1=0 \;\Rightarrow\; \lambda=\pm i$$
+
+Autovalores complejos → ninguna dirección real se queda fija. Consistente con la intuición geométrica: una rotación (sin escala) mueve *todo* vector fuera de su span, salvo el caso trivial 180°.
+
+### Truco mental para 2×2 — mean ± √(mean²-product)
+
+Para una matriz 2×2, dos atajos evitan expandir el polinomio característico completo:
+
+- **Traza = suma de autovalores**: $\text{tr}(A) = a+d = \lambda_1+\lambda_2$
+- **Determinante = producto de autovalores**: $\det(A) = ad-bc = \lambda_1\lambda_2$
+
+Conocer suma y producto de 2 números es el mismo problema que factorizar `x²-Sx+P=0`. Con `m = tr(A)/2` (promedio) y `p = det(A)` (producto):
+
+$$\lambda_1,\lambda_2 = m \pm \sqrt{m^2-p}$$
+
+Es la fórmula cuadrática de siempre, reescrita: viene de `λ²-2mλ+p=0` → `λ=(2m±√(4m²-4p))/2 = m±√(m²-p)`. Ventaja: `m` y `p` se leen directo de la matriz (traza/2 y determinante) sin expandir el polinomio característico símbolo por símbolo — menos pasos que identificar a,b,c en `(-b±√(b²-4ac))/2a`.
+
+**Ejemplo — A=[[8,4],[2,6]]:** m=(8+6)/2=7, p=8·6-4·2=40 → d²=7²-40=9 → d=3 → λ=4 o λ=10.
+
+**Ejemplo — A=[[3,11],[1,11]]:** m=(3+11)/2=7, p=3·11-11·1=22 → λ=7±√(49-22)=7±√27.
+
+Confirmado contra la fuente oficial — [3Blue1Brown, "A quick trick for computing eigenvalues"](https://www.3blue1brown.com/lessons/quick-eigen/).
+
+### Diagonalización — base de autovectores
+
+Si los propios vectores base de un sistema de coordenadas son autovectores, la matriz en esa base es **diagonal** (0 en todas partes salvo la diagonal). Diagonal = trivial de exponenciar: $D^n$ eleva cada entrada a la n independientemente — no hay que multiplicar matrices repetidamente.
+
+**Cambio a base de autovectores** (mismo sandwich A⁻¹MA de Ch13 arriba, con M=matriz de autovectores como columnas):
+
+$$M^{-1}AM = D \quad\Rightarrow\quad A^n = M D^n M^{-1}$$
+
+Con A=[[3,1],[0,2]], autovector [-1,1] como nueva base:
+$$\begin{bmatrix}1&-1\\0&1\end{bmatrix}^{-1}\begin{bmatrix}3&1\\0&2\end{bmatrix}\begin{bmatrix}1&-1\\0&1\end{bmatrix} = \begin{bmatrix}3&0\\0&2\end{bmatrix}$$
+
+**Por qué es raro tener suerte:** no toda matriz tiene una base completa de autovectores reales (ver caso rotación arriba) — cuando SÍ los tiene, calcular potencias grandes ($A^n$ para n gigante) se vuelve trivial en vez de multiplicar A por sí misma n veces.
+
+### Aplicación práctica — Fibonacci vía eigenbasis
+
+Ejercicio resuelto en código: A=[[0,1],[1,1]] tiene la propiedad `Aⁿ = [[F(n-1),F(n)],[F(n),F(n+1)]]`. Sus autovalores son las raíces de `λ²-λ-1=0`: φ=(1+√5)/2 (razón áurea) y ψ=(1-√5)/2 — literalmente los ingredientes de la fórmula de Binet, `F(n) = (φⁿ-ψⁿ)/√5`. Diagonalizar y exponenciar en la base de autovectores da Fⁿ en O(1) multiplicaciones de escalares en vez de O(n) multiplicaciones de matrices.
+
+Código + tests: [`05-Projects/eigenvectors-3b1b/src/eigenvectors_3b1b/fib_eigen.py`](../05-Projects/eigenvectors-3b1b/src/eigenvectors_3b1b/fib_eigen.py) — `matrix_power_via_eigenbasis` implementa la fórmula genérica, `fib(n)` la aplica a Fibonacci, tests verifican contra cálculo directo y contra `np.linalg.matrix_power`.
+
+Visualizador interactivo (sliders para a,b,c,d de la matriz, dibuja grid transformado + spans de autovectores en vivo): [`05-Projects/eigenvectors-3b1b/src/eigenvectors_3b1b/visualize.py`](../05-Projects/eigenvectors-3b1b/src/eigenvectors_3b1b/visualize.py) — correr con `uv run python -m eigenvectors_3b1b.visualize` desde esa carpeta.
+
+**Por qué importa para ML/AI:**
+- **PCA:** los componentes principales son los autovectores de la matriz de covarianza de los datos; el autovalor asociado = varianza capturada en esa dirección. El primer componente principal es el autovector con mayor autovalor. (Livins, *Eigenvalues and Principal Component Analysis*, Medium; apxml.com, *Eigenvectors Role in PCA*)
+- Aparece de nuevo más adelante en self-attention y en análisis de estabilidad de redes recurrentes (autovalores >1 → explosión, <1 → desvanecimiento — mismo patrón que vanishing/exploding gradients).
+
+**Gap propio (quiz cumulative 2026-08-05):** conexión dot-product→attention (Q·Kᵀ) fallada — normal, es preview de Phase 2 todavía no cubierto formal.
+
+---
+
+## Still to cover (3B1B chapters 15)
 - Ch 15: Abstract vector spaces
 
 ---
@@ -454,6 +532,8 @@ Cada capa de una red neuronal es `y = Wx + b` — una multiplicación de matrice
 
 - [3Blue1Brown — Essence of Linear Algebra](https://www.3blue1brown.com/topics/linear-algebra)
 - [Mathematics for Machine Learning, Ch. 2](https://mml-book.github.io/)
+- [Eigenvalues and Principal Component Analysis — Medium](https://medium.com/@sirtonylivins/eigenvalues-and-principal-component-analysis-7f2f44c68ed6)
+- [The Fibonacci sequence and linear algebra — Fabian Dablander](https://fabiandablander.com/r/Fibonacci.html)
 
 ## Doubts Resolved
 
@@ -465,3 +545,4 @@ Cada capa de una red neuronal es `y = Wx + b` — una multiplicación de matrice
 - [[cross-product-derivacion-vs-interpretacion]] — v×w se deriva por dualidad, área×perpendicular es lectura geométrica del resultado, no ingrediente del cálculo (2026-07-22)
 - [[cramers-rule-shear-not-rotation]] — la "matriz que gira" en Cramer's rule es en realidad un shear (Cavalieri), no rotación; quién la creó; por qué Gauss gana en la práctica (2026-07-28)
 - [[change-of-basis-a-inverse-m-a]] — el sandwich A⁻¹MA: por qué "grid" y "language" de la matriz de cambio de base van en direcciones opuestas, y qué significa "traducir una transformación" (2026-07-28)
+- [[eigen-lambda-i-trick]] — por qué λv se reescribe como (λI)v antes de poder factorizar (A-λI)v=0 (2026-08-05)

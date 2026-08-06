@@ -1,8 +1,8 @@
 ---
-tags: [phase-0, math, linear-algebra, coding-the-matrix, basis, span, compression, grow-shrink, minimum-spanning-forest, gf2]
+tags: [phase-0, math, linear-algebra, coding-the-matrix, basis, span, compression, grow-shrink, minimum-spanning-forest, gf2, dimension, rank, kernel-image, annihilator]
 status: learning
 first_learned: 2026-07-17
-last_reviewed: 2026-07-21
+last_reviewed: 2026-08-06
 confidence: 4/5
 source_pdf: "00-Meta/resources/Philip N. Klein-Coding the Matrix_ Linear Algebra through Computer Science Applications-Newtonian Press (2013).pdf"
 ---
@@ -314,5 +314,152 @@ Aplicación directa en `msf_grow`: el chequeo "¿hay camino x-a-y con aristas ya
 
 Las dos desigualdades juntas → `|B1| = |B2|`. Cualquier corrida de Grow o Shrink, sin importar orden ni elección de vectores, termina con el mismo tamaño — no es coincidencia empírica, es esta prueba. Cierra la pregunta de 5.3.3: funciona para vectores (y MSF, por la formulación GF(2) de 5.4.3) porque independencia lineal tiene esta propiedad de intercambio rígida; dominating-set no tiene análogo algebraico, por eso greedy puede fallar ahí.
 
+---
+
+# Capítulo 6: Dimension (Klein) — sesión 2026-08-05/06
+
+## 8. Morphing Lemma y Basis Theorem (6.1)
+
+**Setup**: `S` = generadores de `V`, `B` = set independiente en `V`. **Morphing Lemma (6.1.1)**: `|S| ≥ |B|`.
+
+**Basis Theorem (6.1.2) — todas las bases del mismo espacio tienen el mismo tamaño.** Prueba: aplicás Morphing Lemma cruzado — `S=B1,B=B2` da `|B1|≥|B2|`; `S=B2,B=B1` da `|B2|≥|B1|` → juntas fuerzan `|B1|=|B2|`. Esto es lo que hace que "dimensión" tenga sentido como concepto único, no dependiente de qué base elegiste.
+
+**Theorem 6.1.3**: un set de generadores de `V` es el generador MÁS CHICO posible ⟺ es una base. Prueba en 2 partes: (1) si `T` es base, cualquier otro generador `S` tiene `|T|≤|S|` por Morphing Lemma → `T` ya es mínimo. (2) si `T` NO es base, es generador dependiente → algún vector de `T` está en el span de los otros (Linear-Dependence Lemma 5.5.9) → se puede sacar sin perder span (Superfluous-Vector Lemma 5.5.1) → `T` no era mínimo.
+
+**La prueba del Morphing Lemma es algorítmica**, no solo existencial — se llama "Morphing" porque transforma `S` en un set que contiene todo `B`, manteniendo el mismo tamaño en cada paso: en cada iteración "inyecta" un vector de `B` y "eyecta" un vector de `S` (decidido por el Exchange Lemma de la sección 7 arriba). Inducción sobre `k=0..|B|`: `S_k` mantiene el span de `V`, mismo cardinality que `S`, y ya contiene `b1..bk`.
+
+**Ejemplo visual (grafos, campus Brown)** — el mismo proceso de morphing aplicado a spanning forests: `S`=forest inicial, `B`=forest objetivo. Se van intercambiando aristas una por una (inyectar la nueva, eyectar la que cierra ciclo), preservando siempre la propiedad de spanning forest y el mismo número de aristas. Instancia concreta y visual del Basis Theorem — dos spanning forests distintos del mismo grafo siempre tienen el mismo número de aristas.
+
+## 9. Dimensión y Rank (6.2)
+
+**Definition 6.2.1**: dimensión de `V` = tamaño de cualquier base de `V`, notado `dim V`. Bien definida gracias al Basis Theorem. Ejemplos: `dim(R³)=3` (base estándar), `dim(F^D)=|D|` para cualquier campo `F` y set finito `D`.
+
+**Rank (Definition 6.2.5)**: dado un set `S` cualquiera (no necesariamente independiente), `rank(S) = dim(Span S)` — cuántas direcciones realmente independientes hay en `S`, sin importar cuántos vectores redundantes tenga.
+
+**Proposition 6.2.8**: `rank(S) ≤ |S|` siempre — no podés generar más dimensiones de las que metiste (consecuencia del Subset-Basis Lemma: todo set finito contiene una base para su span).
+
+**Row rank / column rank (Definition 6.2.9)**: para una matriz `M`, row rank = rank de sus filas, column rank = rank de sus columnas. Ejemplo trabajado — `M=[[1,0,0],[0,2,0],[2,4,0]]`: fila 3 = 2·fila1+2·fila2 (dependiente) → row rank=2; columnas `[1,0,2],[0,2,4],[0,0,0]` — la 3ra es cero, las otras 2 independientes → column rank=2. Coinciden.
+
+**Rank en grafos (6.2.2)**: rank de un "connected subgraph" `T` (set de edges donde cada par pertenece a algún path dentro de `T`) = número de nodos tocados por esas edges, menos uno. Un solo edge → rank 1. Un ciclo de 3 edges → rank 2 (no 3 — el ciclo resta uno por la dependencia lineal, ver sección 6 arriba). Con 2 connected subgraphs disjuntos, los ranks se suman.
+
+**Cardinalidad de un espacio vectorial sobre GF(2) (6.2.4)**: si `dim V = d`, entonces `V` tiene exactamente `2^d` vectores — por la Unique Representation Lemma (cada vector tiene representación única en la base, `d` coeficientes binarios → `2^d` combinaciones).
+
+**Superset-Basis Lemma (6.2.13)**: todo set independiente `A` en `V` se puede extender a una base completa de `V`. Prueba: correr Grow empezando desde `T=A` en vez de vacío. Como Grow nunca rompe independencia, y `V⊆F^D` con `D` finito garantiza (por Morphing Lemma) que `|B|≤|D|` siempre, el algoritmo no puede crecer para siempre → termina con una base que contiene `A` entero.
+
+**Dimension Principle (Lemma 6.2.14)** — la pieza más útil del capítulo: si `V` es subespacio de `W`, entonces **(D1)** `dim V ≤ dim W`, y **(D2)** si además `dim V = dim W`, entonces `V = W` — no puede quedar espacio "de sobra". Ejemplo: `V=Span{[1,2],[2,1]}` — como esos 2 vectores son independientes, `dim V=2=dim(R²)` → por D2, automáticamente `V=R²` sin verificar vector por vector.
+
+**Grow termina (6.2.7)**: consecuencia directa de D2 — cada iteración de Grow sube `rank(S)` en 1; en el momento que `dim(Span S)=dim(V)`, D2 fuerza `Span S=V` → el algoritmo para ahí.
+
+**Rank Theorem (Theorem 6.2.20)**: **row rank = column rank, siempre, para cualquier matriz.** Prueba elegante — escribís `A=BU` donde `B`=base del column space (`r` vectores) y `U`=coordenadas de cada columna en esa base. Reinterpretando la misma ecuación por FILAS en vez de columnas, cada fila de `A` resulta combinación lineal de las filas de `U` → `row rank(A) ≤ r = column rank(A)`. Aplicás el mismo argumento a la transpuesta `Aᵀ` (intercambia el rol de filas/columnas) → da la desigualdad al revés → juntas fuerzan la igualdad.
+
+**Simple authentication revisited (6.2.9)** — aplicación de seguridad: password = vector secreto `x̂` sobre GF(2). Protocolo desafío-respuesta: computadora manda `a` random, humano responde `a·x̂`. Si Eve espía `m` pares `(ai,bi)`, puede responder cualquier desafío en `Span{a1,...,am}` (combinación lineal aplicada a las respuestas conocidas). Con vectores aleatorios y `m>n`, probablemente `rank[a1,...,am]=n` (máximo) → `Span=GF(2)^n` completo → Eve responde CUALQUIER desafío. Peor: la password es solución de `A·x=b`; una vez `rank(A)=n`, `Null A` es trivial → solución única → Eve calcula la password exacta con un solver de sistema lineal. Verificado con código Python del libro usando `independence.rank(L)`.
+
+## 10. Direct Sum (6.3)
+
+**Definition 6.3.1**: si `U` y `V` (subespacios de `F^D`) comparten SOLO el vector cero, `U⊕V = {u+v : u∈U, v∈V}`. Si comparten algo más, es ilegal formar el direct sum. En Python: `{u+v for u in U for v in V}` — análogo al Cartesian product pero sumando en vez de tuplear.
+
+**No es lo mismo que unión de conjuntos**: `U∪V` solo junta los elementos tal cual; `U⊕V` genera TODAS las combinaciones `u+v` posibles. Ejemplo trabajado en chat: `U=Span{[1,0]}` (eje x), `V=Span{[0,1]}` (eje y) en R² — comparten solo el origen → `U⊕V` = cualquier `[a,b]=a·[1,0]+b·[0,1]` = **todo R²**. Si en cambio `V=Span{[2,0]}` (misma línea que `U`, solo escalada), comparten TODA la línea, no solo el cero → direct sum ilegal.
+
+**Lemma 6.3.6**: la unión de generadores de `V` y generadores de `W` genera `V⊕W`.
+
+**Direct Sum Basis Lemma (6.3.8)**: la unión de una BASE de `U` y una BASE de `V` es base de `U⊕V` (no solo generador — también independiente, porque cualquier combinación-cero se separa en parte-U y parte-V, cada una forzada a cero por separado ya que solo comparten el 0, y de ahí por independencia de cada base individual).
+
+**Direct-Sum Dimension Corollary (6.3.9) — la fórmula clave**: `dim(U) + dim(V) = dim(U⊕V)`. Usada después en la prueba del Kernel-Image Theorem.
+
+**Unique decomposition (6.3.10)**: cualquier vector en `U⊕V` tiene representación única como `u+v` — no hay 2 formas distintas de descomponerlo.
+
+**Subespacios complementarios (6.3.11)**: si `U⊕V=W`, se dicen complementarios. No son únicos — un plano en R³ tiene infinitas líneas complementarias posibles (cualquiera que no esté contenida en el plano). Proposition 6.3.15 garantiza que siempre existe al menos un complemento, vía Superset-Basis Lemma.
+
+## 11. Dimension y funciones lineales — Kernel-Image Theorem (6.4)
+
+**Objetivo del capítulo**: criterio limpio para saber cuándo una función lineal (o matriz) es invertible.
+
+**6.4.1**: `f:V→W` invertible ⟺ one-to-one (kernel trivial) Y onto (`Im f=W`, equivalente a `dim(Im f)=dim(W)` por Dimension Principle).
+
+**La subfunción invertible más grande (6.4.2)**: dado `f:V→W` no necesariamente invertible, se construye `f*:V*→W*` que SÍ es invertible, recortando dominio y codominio. `W*=Im(f)` (asegura onto). Se eligen preimágenes `v1..vr` de una base `w1..wr` de `W*`, `V*=Span{v1..vr}`. Se prueba que `f*` es onto, one-to-one, y que `v1..vr` es base de `V*` — todo por la misma técnica (aplicar `f`, usar independencia de la base `wi`).
+
+**Kernel-Image Theorem (6.4.7) — EL teorema del capítulo:**
+
+$$\dim(\text{Ker } f) + \dim(\text{Im } f) = \dim(V)$$
+
+Prueba: se muestra primero `V = Ker(f) ⊕ V*` (Lemma 6.4.5 — comparten solo el 0 porque el kernel de `f*` ya es trivial; y todo `v∈V` se descompone como `(v-v*)+v*` con `v*∈V*` elegido tal que `f(v*)=f(v)`). Aplicando la fórmula de dimensión del direct sum (sección 10): `dim V = dim(Ker f) + dim(V*)`, y como `dim(V*)=r=dim(Im f)` (biyección vía `f*`), sale el teorema.
+
+**Consecuencias — todo lo demás de 6.4 es aplicar este teorema:**
+
+- **Invertibilidad revisitada (Theorem 6.4.8)**: `f` invertible ⟺ `dim(Ker f)=0` Y `dim(V)=dim(W)`.
+- **Rank-Nullity Theorem (6.4.9)**: para `f(x)=Ax` con `A` de `n` columnas: `rank(A) + nullity(A) = n`.
+- **Checksum revisited (6.4.6)**: aplicación práctica — probabilidad de que un error de transmisión pase desapercibido en un checksum de 64 bits es `1/2^64`, derivado de Rank-Nullity + la fórmula de cardinalidad `2^dim` (sección 9).
+- **Matrix invertibility (Corollary 6.4.10)**: `A` invertible ⟺ cuadrada (`|R|=|C|`) Y columnas independientes.
+- **Corollary 6.4.11**: la transpuesta de una matriz invertible es invertible (usa el Rank Theorem).
+- **Corollary 6.4.12**: si `A,B` cuadradas y `BA=I`, entonces `A` y `B` son inversas mutuas — no hace falta verificar `AB=I` por separado.
+- **Change of basis (6.4.8)**: la matriz `C` que convierte coordenadas entre 2 bases del mismo espacio es necesariamente cuadrada, porque toda base del mismo espacio tiene el mismo tamaño (Basis Theorem).
+
+## 12. El Annihilator (6.5)
+
+**Motivación**: 4 "Conversion Problems" entre representaciones de un espacio (span de generadores ↔ solution set de un sistema homogéneo). El Problem 1 (dado `A`, encontrar generadores del null space) resuelve los otros 3 como subrutina — el resto de 6.5 desarrolla la matemática que lo justifica.
+
+**Definition 6.5.7**: annihilator de un subespacio `V` de `F^n`, escrito `V°`, = `{u∈F^n : u·v=0 para todo v∈V}` — todos los vectores perpendiculares a TODO `V`.
+
+**Lemma 6.5.8**: si `a1..am` generan `V` y `A`=matriz con esos vectores como filas, `V°=Null(A)` — conecta directo annihilator con null space.
+
+**Annihilator Dimension Theorem (6.5.13)**: `dim V + dim V° = n`. Prueba trivial una vez tenés Rank-Nullity: `A`=matriz cuyo row space es `V`, `V°=Null A` (por 6.5.8), `rank A + nullity A = n` es exactamente `dim V + dim V° = n`.
+
+**Annihilator Theorem (6.5.15) — cierra el capítulo**: `(V°)° = V` — el annihilator del annihilator es el espacio original. Prueba: cada vector base de `V` está en `(V°)°` (por definición cruzada de perpendicularidad) → `V` es subespacio de `(V°)°`; aplicando el Annihilator Dimension Theorem dos veces (a `V` y a `V°`) y restando, `dim V = dim(V°)°` → por Dimension Principle (D2), son el mismo espacio.
+
+**Por qué importa**: si tenés un algoritmo para "generadores→annihilator" (que es el Problem 1 disfrazado), aplicarlo 2 veces resuelve también el Problem 2 (generadores→sistema homogéneo) — 2 problemas que parecían distintos son, literalmente, el mismo problema aplicado dos veces, gracias a este teorema.
+
+## 13. Implementación — `rank`, `is_independent`, `is_invertible`
+
+Agregado a `05-Projects/coding-the-matrix/src/coding_the_matrix/basis.py`, reusando `grow()` ya existente:
+
+```python
+def rank(vectors):
+    """rank(S) = dim(Span S) = tamaño de cualquier base para su span."""
+    return len(grow(vectors))
+
+def is_independent(vectors):
+    """Independiente ⟺ nadie fue descartado por grow() ⟺ rank == cantidad."""
+    return rank(vectors) == len(vectors)
+
+def is_invertible(M):
+    """Corollary 6.4.10: invertible ⟺ cuadrada Y columnas independientes."""
+    rows, cols = M.D
+    if len(rows) != len(cols):
+        return False
+    return is_independent(list(mat2coldict(M).values()))
+```
+
+Tests: `tests/test_basis.py` — 13 tests nuevos (106 total pasan), incluyendo el ejemplo del libro donde el MISMO patrón 0/1 es invertible sobre R pero NO sobre GF(2) (porque `1+1=0` cambia qué combinaciones dan cero).
+
+## 14. Ejercicios resueltos (6.7)
+
+**Problem 6.7.5 — row rank/column rank en 4 matrices:**
+
+1. `[[1,2,0],[0,2,1]]`: filas independientes (ninguna múltiplo de la otra) → row rank=2. Columnas `[1,0],[2,2],[0,1]` — `col1,col3` bastan como base (col2 es combinación de ambas) → column rank=2. ✓
+2. `[[1,4,0,0],[0,2,2,0],[0,0,1,1]]`: filas en forma escalonada (pivote nuevo en cada una) → row rank=3. Columnas triangulares con det≠0 → column rank=3. ✓
+3. `[[1],[2],[3]]`: filas todas múltiplo de `[1]` → row rank=1. Columna única no-cero → column rank=1. ✓
+4. `[[1,0],[2,1],[3,4]]`: `[1,0],[2,1]` ya generan F² completo → row rank=2. Columnas `[1,2,3],[0,1,4]` no son múltiplo entre sí → column rank=2. ✓
+
+**Método general**: mirar filas primero (¿alguna es combinación obvia de las otras?), elegir columnas independientes buscando pivotes/ceros exclusivos — sin necesidad de eliminación gaussiana formal en matrices chicas.
+
+**Problem 6.7.6 — `my_is_independent(L)`**: se pide sin loop, reusando `rank`. Es la definición operacional de independencia: nadie es redundante ⟺ `rank(L)=len(L)`. Implementado como `is_independent` arriba.
+
+**Problem 6.7.12 — `is_invertible(M)`**: traduce directo el Corollary 6.4.10 a código — cuadrada + columnas independientes. El ejemplo pedagógico central del libro: la matriz `[[1,0,1],[0,1,1],[1,1,0]]` es invertible sobre R (det=-2≠0) pero NO sobre GF(2) (fila1+fila2=`[1,1,0]`=fila3, dependientes porque `1+1=0` en GF(2)) — mismo patrón de números, resultado opuesto, porque invertibilidad depende del campo, no solo de "qué números hay".
+
+**Problem 6.7.8 — prueba en una línea**: si `dim V = n`, cualquier `n+1` vectores son dependientes. Consecuencia directa del Morphing Lemma: si `S`=base de `V` (`|S|=n`) y `B`=set independiente en `V`, `|S|≥|B|` → `n≥|B|`. `n+1` vectores independientes violarían eso directo.
+
+## 15. Ejercicios de práctica — ronda 2026-08-06
+
+6 problemas cortos, sin prueba formal, para fijar Cap 6. Resultado: 4/6 sin ayuda.
+
+- **dim de un span (3 vectores)**: gap propio — asumí independencia sin chequear si algún vector era resta obvia de los otros (`v1-v2=v3`). Antes de contar vectores, probar combinaciones simples (suma/resta) primero.
+- **rank de un set con vector escalar redundante**: correcto sin ayuda.
+- **row rank = column rank en matriz 2×2 con filas proporcionales**: correcto sin ayuda.
+- **Dimension Principle — cuándo un span NO es todo el espacio**: correcto sin ayuda.
+- **Direct sum en R³, dimensión resultante (plano, no todo R³)**: correcto sin ayuda.
+- **Kernel-Image Theorem — despejar dim(Ker f) dado dim(Im f)**: gap propio — contesté "2" en vez de aplicar la resta `dim(Ker f)=dim(dominio)-dim(Im f)=3-2=1`. Confundí con copiar `dim(Im f)` en vez de restar del dominio.
+
+**Patrón de los 2 gaps**: ambos son de "no aplicar el paso mecánico" (chequear combinación lineal directa; restar en la fórmula del teorema) más que de no entender el concepto — la intuición estaba bien en los 4 correctos.
+
 ## Próximo
-Continuar Klein Cap 6 (próxima sesión) — dimensión y consecuencias del Exchange Lemma (Corollary: toda base tiene mismo tamaño = dim V bien definida).
+Klein Cap 7 — Gaussian elimination (próxima sesión).
