@@ -40,3 +40,21 @@ Tercera falla registrada en quiz (06-30, 07-03, 07-07) — esta vez rewatch comp
 Confirmación propia en la sesión: "es una transformation entonces igual el producto punto?" — correcto. Cualquier transformación lineal nD→1D = dot-product con el vector dual (la matriz fila leída como vector columna).
 
 Necesita para no ser el 5to fallo: usar û unitario específicamente (no vector cualquiera) es lo que hace que la proyección de î/ĵ dé la matriz sin factor de escala extra — ver [[vector-unitario-normalizacion]].
+
+## Repaso 2026-08-07 — proyección escalar con v NO unitario, ¿de dónde sale la división?
+
+Pregunta puntual sobre carta Anki: `comp = (v·w)/|v|` — ¿por qué dividir por |v|?
+
+**Derivación:** parto de la fórmula geométrica `v·w = |v||w|cos(θ)`. La sombra (proyección escalar) de w sobre la dirección de v es, por definición, `|w|cos(θ)` — la parte de w que "apunta como" v, medida en unidades de longitud, sin el factor |v| metido.
+
+Despejando `|w|cos(θ)` de la fórmula geométrica:
+```
+v·w = |v| · (|w|cos(θ))
+|w|cos(θ) = (v·w) / |v|
+```
+
+La división cancela el |v| que el dot product mete de más. Sin dividir, `v·w` mezcla dos cosas: la sombra real y el tamaño de v (si v fuera el doble de largo, v·w se duplica aunque la sombra de w no cambió). Dividir por |v| es lo mismo que primero normalizar v a v̂=v/|v| y hacer `v̂·w` — conecta directo con la nota de arriba sobre "usar û unitario" para que el dot dé la proyección limpia.
+
+**Chequeo numérico** (v=[2,0], w=[1,1]): `v·w = 2·1+0·1 = 2`, `|v|=2`, `comp = 2/2 = 1`. Verificación geométrica directa: v apunta en eje x puro, entonces la sombra de w sobre esa dirección es simplemente la componente x de w, que es 1. Coincide.
+
+Fuente verificada: [Scalar projection — Wikipedia](https://en.wikipedia.org/wiki/Scalar_projection) confirma `comp_v(w) = (v·w)/|v|` como fórmula estándar de proyección escalar (a veces con valor absoluto de |v| si se quiere magnitud sin signo, pero la versión con signo es la estándar en este contexto de duality).

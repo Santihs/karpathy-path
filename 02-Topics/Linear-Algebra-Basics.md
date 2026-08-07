@@ -546,3 +546,4 @@ Cada capa de una red neuronal es `y = Wx + b` — una multiplicación de matrice
 - [[cramers-rule-shear-not-rotation]] — la "matriz que gira" en Cramer's rule es en realidad un shear (Cavalieri), no rotación; quién la creó; por qué Gauss gana en la práctica (2026-07-28)
 - [[change-of-basis-a-inverse-m-a]] — el sandwich A⁻¹MA: por qué "grid" y "language" de la matriz de cambio de base van en direcciones opuestas, y qué significa "traducir una transformación" (2026-07-28)
 - [[eigen-lambda-i-trick]] — por qué λv se reescribe como (λI)v antes de poder factorizar (A-λI)v=0 (2026-08-05)
+- [[reflexion-vectorial-via-proyeccion]] — reflejar w sobre línea de v = 2·proj_v(w) - w, derivado de descomponer w en partes paralela/perpendicular (2026-08-07)
