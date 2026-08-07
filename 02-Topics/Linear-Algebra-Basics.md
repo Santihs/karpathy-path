@@ -2,7 +2,7 @@
 tags: [phase-0, math, linear-algebra]
 status: learning
 first_learned: 2026-06-26
-last_reviewed: 2026-08-05
+last_reviewed: 2026-08-07
 confidence: 3/5
 ---
 
@@ -519,8 +519,74 @@ Visualizador interactivo (sliders para a,b,c,d de la matriz, dibuja grid transfo
 
 ---
 
-## Still to cover (3B1B chapters 16+)
-- Ch 16: Abstract vector spaces
+## Ch 16 — Abstract Vector Spaces (2026-08-07)
+
+### La pregunta central: qué ES un vector
+
+Tres candidatas a definición: (a) una flecha en el plano, (b) un par de números reales, (c) ambas manifiestan algo más profundo. La respuesta de 3B1B es la (c), pero con un giro: los matemáticos **evitan** definir qué es un vector concretamente. La forma que tome (flecha, lista de números, función, polinomio) no importa — un vector es *cualquier cosa* que tenga una noción de suma y de multiplicación por escalar que cumpla 8 axiomas. Eso es un **espacio vectorial**.
+
+Esto conecta con la intuición de independencia de coordenadas ya vista en Ch13 (change of basis) y Ch14 (eigenvectores): el determinante y los autovectores de una transformación no dependen del sistema de coordenadas que elijas para describirla — son propiedades del espacio en sí, no de la representación numérica.
+
+### Funciones como vectores
+
+Igual que sumamos flechas o listas de números, se pueden sumar **funciones**: `(f+g)(x) = f(x) + g(x)` para todo x — evaluás ambas en cada posición y sumás los resultados punto a punto. Multiplicar por escalar es igual de directo: `(2f)(x) = 2·f(x)`, escala verticalmente la curva.
+
+Con eso ya tenés las 2 operaciones que definen un espacio vectorial — las funciones califican como vectores.
+
+### Transformaciones lineales de funciones
+
+La derivada `d/dx` transforma una función en otra función — es una transformación función→función, el análogo de una matriz transformando flechas.
+
+**Definición formal de linealidad** (misma definición para flechas y funciones):
+- Additivity: `L(v+w) = L(v) + L(w)`
+- Scaling: `L(cv) = c·L(v)`
+
+La derivada cumple ambas:
+- `d/dx(x³+x²) = d/dx(x³) + d/dx(x²)` (additivity)
+- `d/dx(4x³) = 4·d/dx(x³)` (scaling)
+
+Por eso "derivar es lineal" — y cualquier transformación lineal de un vector `v=[x,y]` se puede reconstruir sabiendo solo dónde caen los vectores base: `L(v) = x·L(î) + y·L(ĵ)`. Mismo principio en funciones.
+
+### Dar coordenadas al espacio de polinomios
+
+1. Elegir una base. Para "todos los polinomios", la base natural es `b0(x)=1, b1(x)=x, b2(x)=x², b3(x)=x³, ...` — el análogo de î, ĵ, k̂.
+2. Cualquier polinomio ya está escrito como combinación lineal de esas funciones base: `1x² + 3x + 5·1` → coordenadas `[5, 3, 1, 0, 0, ...]` (coeficiente de cada bi en su posición).
+3. Como los polinomios pueden tener grado arbitrariamente grande, el espacio de coordenadas es infinito-dimensional — pero cada polinomio individual tiene un número finito de términos, así que su vector de coordenadas es finitos números seguidos de infinitos ceros (soporte finito).
+
+### La derivada como matriz infinita
+
+Como la derivada es lineal, se puede escribir como matriz — tomando la derivada de cada función base y poniéndola como columna. Sale una matriz infinita con estructura simple: en la fila i, columna i+1, aparece el número natural i+1 (proviene de `d/dx(xⁿ) = n·x^(n-1)`), resto ceros.
+
+Ejemplo numérico: derivar `1x³+5x²+4x+5` (vector `[5,4,5,1,0,...]`) multiplicando por esa matriz da `[4,10,3,0,...]` = `3x²+10x+4` — coincide exactamente con la derivada calculada a mano.
+
+### Mismo concepto, nombre distinto según el contexto
+
+| Concepto en álgebra lineal | Nombre alternativo aplicado a funciones |
+|---|---|
+| Linear transformations | Linear operators |
+| Dot products | Inner products |
+| Eigenvectors | Eigenfunctions |
+
+Flechas, vectores columna y polinomios son 3 disfraces del mismo objeto matemático cuando cumplen los axiomas — todas las herramientas de álgebra lineal (determinante, autovectores, producto punto, etc.) se aplican igual.
+
+### Los 8 axiomas de un espacio vectorial
+
+1. `u+(v+w) = (u+v)+w`
+2. `v+w = w+v`
+3. Existe `0` tal que `0+v = v` para todo v
+4. Para todo v existe `-v` tal que `v+(-v) = 0`
+5. `a(bv) = (ab)v`
+6. `1v = v`
+7. `a(v+w) = av + aw`
+8. `(a+b)v = av + bv`
+
+Cualquier conjunto de objetos con nociones de suma y escalado que cumpla estos 8 axiomas es un espacio vectorial — sus elementos son "vectores" sin importar la forma concreta que tomen.
+
+### Por qué importa para ML/AI
+
+Los "function spaces" son la base formal de kernel methods y de cómo se piensan los embeddings como vectores en espacios de alta dimensión — no solo listas de números, sino cualquier objeto que cumpla los axiomas. La idea de "eigenfunction" reaparece en análisis espectral de operadores (relevante para entender ciertos análisis de estabilidad en redes).
+
+Fuente verificada: [Abstract vector spaces — 3Blue1Brown](https://www.3blue1brown.com/lessons/abstract-vector-spaces/), [Essence of Linear Algebra — chapter list, GitLab notes](https://gitlab.com/derek-knox/notes/-/blob/master/3Blue1Brown%20-%20Essence%20of%20Linear%20Algebra%20Course%20by%20Grant%20Sanderson.md). Nota: la numeración oficial de 3B1B llama a este capítulo "Ch 15"; este vault usa Ch16 por la renumeración ya corregida en el commit `37e6008` (Ch14=eigenvectors, Ch15=truco rápido autovalores, Ch16=abstract vector spaces).
 
 ---
 
