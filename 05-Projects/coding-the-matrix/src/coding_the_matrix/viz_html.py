@@ -18,7 +18,7 @@ def render_page(out_name, title, eyebrow, subhead, content, footer=""):
     html = env.get_template("_template.html").render(
         title=title, eyebrow=eyebrow, subhead=subhead, content=content, footer=footer)
     out_path = _VISUALS_DIR / out_name
-    out_path.write_text(html)
+    out_path.write_text(html, encoding="utf-8")
     return out_path
 
 

@@ -2,13 +2,13 @@
   "meta": {
     "current_phase": 0,
     "current_week": 1,
-    "last_session_date": "2026-08-06",
-    "last_session_type": "biweekly-cumulative",
+    "last_session_date": "2026-08-08",
+    "last_session_type": "saturday-deep",
     "study_streak": 1,
-    "total_hours_logged": 29.5,
-    "session_count": 19,
+    "total_hours_logged": 32.5,
+    "session_count": 20,
     "last_cumulative_review": "2026-08-05",
-    "next_up": "Coding-the-Matrix (Klein) Cap 7 — Gaussian elimination (Cap 6 Dimension cerrado completo hoy 2026-08-06: Morphing Lemma, Basis Theorem, Rank Theorem, Direct Sum, Kernel-Image Theorem, Annihilator — ver 02-Topics/Coding-the-Matrix-Basis.md secciones 8-15, código rank/is_independent/is_invertible en basis.py con 106 tests). Pendiente de antes: 3Blue1Brown Ch16 — Abstract vector spaces (Ch14 eigenvectors/eigenvalues y Ch15 truco rápido para autovalores, ambos cerrados hoy — ver Linear-Algebra-Basics.md; proyecto de código eigenvectors-3b1b con Fibonacci vía eigenbasis + visualizador matplotlib). Axler sigue pausado."
+    "next_up": "Coding-the-Matrix (Klein) Cap 9 — Orthogonalization / Gram-Schmidt (Cap 8 The Inner Product cerrado completo hoy 2026-08-08: fire engine problem, norm/orthogonality/projection con project_along/project_orthogonal_1/projection_matrix implementados y testeados — ver 02-Topics/Coding-the-Matrix-Inner-Product.md; Lab 8.4 completo — hypothesis class, loss, hill-climbing, gradient con regla de la cadena, gradient descent, entrenado sobre dataset WDBC real (300 train/260 validate pacientes, fw_val=5.4%), read_training_data propio, 2 visualizadores matplotlib interactivos incluyendo superficie 3D de loss con camino de gradient descent). Cap 9 generaliza project_along de 1 vector a varios — resuelve exacto el problema de mínimos cuadrados que gradient descent resuelve por iteración."
   },
   "phases": {
     "phase_0": {
@@ -18,8 +18,8 @@
       "topics": {
         "linear_algebra_vectors_matrices": { "status": "mastered", "confidence": 5 },
         "linear_algebra_dot_products_embeddings": { "status": "done", "confidence": 5 },
-        "calculus_derivatives_gradients": { "status": "not_started", "confidence": 0 },
-        "calculus_chain_rule_backprop_preview": { "status": "not_started", "confidence": 0 },
+        "calculus_derivatives_gradients": { "status": "done_needs_review", "confidence": 3 },
+        "calculus_chain_rule_backprop_preview": { "status": "done_needs_review", "confidence": 3 },
         "probability_distributions_expectation": { "status": "in_progress", "confidence": 1 },
         "probability_cross_entropy_softmax": { "status": "not_started", "confidence": 0 },
         "numpy_fundamentals": { "status": "not_started", "confidence": 0 },

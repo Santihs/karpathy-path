@@ -2,3 +2,7 @@
 __pycache__/
 *.pyc
 .pytest_cache/
+
+# Klein's WDBC lab data (resources.codingthematrix.com) -- course material,
+# not ours to redistribute. Repo is public, keep these local-only.
+data/
