@@ -2,13 +2,13 @@
   "meta": {
     "current_phase": 0,
     "current_week": 1,
-    "last_session_date": "2026-08-08",
-    "last_session_type": "saturday-deep",
-    "study_streak": 1,
-    "total_hours_logged": 32.5,
-    "session_count": 20,
+    "last_session_date": "2026-08-09",
+    "last_session_type": "sunday-deep-review",
+    "study_streak": 2,
+    "total_hours_logged": 34.5,
+    "session_count": 21,
     "last_cumulative_review": "2026-08-05",
-    "next_up": "Coding-the-Matrix (Klein) Cap 9 — Orthogonalization / Gram-Schmidt (Cap 8 The Inner Product cerrado completo hoy 2026-08-08: fire engine problem, norm/orthogonality/projection con project_along/project_orthogonal_1/projection_matrix implementados y testeados — ver 02-Topics/Coding-the-Matrix-Inner-Product.md; Lab 8.4 completo — hypothesis class, loss, hill-climbing, gradient con regla de la cadena, gradient descent, entrenado sobre dataset WDBC real (300 train/260 validate pacientes, fw_val=5.4%), read_training_data propio, 2 visualizadores matplotlib interactivos incluyendo superficie 3D de loss con camino de gradient descent). Cap 9 generaliza project_along de 1 vector a varios — resuelve exacto el problema de mínimos cuadrados que gradient descent resuelve por iteración."
+    "next_up": "Coding-the-Matrix (Klein) Cap 9 — REPASAR 9.1-9.3 primero (sesión 2026-08-09 marcada densa, confidence 2/5 — ver 02-Topics/Coding-the-Matrix-Orthogonalization.md, sección 'Pendiente'). Cubierto hoy: 9.0 (closest point in span, conexión con least-squares Ax=b), 9.1 (proyección ortogonal a un set, Generalized Fire Engine Lemma, dos intentos naive de project_orthogonal que fallan por vlist no mutuamente ortogonal), 9.2 (project_orthogonal correcto bajo mutua ortogonalidad + prueba por loop invariant + aug_project_orthogonal con sigmadict), 9.3.1-9.3.2 (Gram-Schmidt = orthogonalize, prueba de que preserva mutua ortogonalidad Y el span, forma matricial Ec 9.7 — germen de QR factorization, R triangular superior). Tras repaso, seguir con 9.4 (closest point in span combinando orthogonalize+project_orthogonal), 9.5 (basis/subset basis), 9.6 (orthogonal complement), 9.7-9.9 (QR factorization completa, least-squares, linear regression como aplicación)."
   },
   "phases": {
     "phase_0": {
