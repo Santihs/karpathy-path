@@ -226,6 +226,7 @@ final:   train loss=174.1     fraction_wrong=0.16
 
 - [[linear-classifier-perceptron-pytorch]] — el classifier `signo(w·y)` de este lab es exactamente el perceptrón clásico; cómo lo implementa PyTorch (`torch.sign`, `nn.Linear`, autograd vs derivación manual)
 - [[gradient-descent-history-origin]] — de dónde viene gradient descent (Cauchy 1847), por qué terminó siendo el algoritmo de entrenamiento de IA
+- [[ortogonalidad-por-que-se-define-asi]] — derivación de por qué `<u,v>=0` es la condición exacta pa Pitágoras, con ejemplos numéricos, y 5 usos prácticos (proyección, Gram-Schmidt, least-squares, PCA/compresión, redundancia de features)
 
 ## Ver también
 

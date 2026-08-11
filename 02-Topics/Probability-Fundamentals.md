@@ -64,6 +64,10 @@ Ejemplo: tirás un dado (uniforme, 1/6 cada cara), aplicás $f(x) = 0$ si par, $
 - **Expectation (valor esperado)** — no cubierto en este capítulo de Klein.
 - **Cross-entropy y softmax** — necesita sesión aparte, conecta directo con loss functions de ML (fuera de scope de Klein Cap 0).
 
+**Recurso:** [Mathematics for Machine Learning (libro gratis, Deisenroth/Faisal/Ong)](https://mml-book.github.io/) — capítulo de probabilidad, referencia estándar del roadmap (`00-Meta/AI_Roadmap_From_Developer_to_Karpathy_Level.md`) para expectation/cross-entropy/softmax con el rigor que la intro de Klein no cubre.
+
+**Prioridad:** este es el gap más grande de Phase 0 (1/5, vs. álgebra lineal en 5/5) — recomendado próximo Saturday-deep, antes de arrancar Phase 1 (la loss de un clasificador usa cross-entropy directo).
+
 ## Ver también
 
 - [[Coding-the-Matrix-Fundamentals]] — funciones, invertibilidad (prerequisito de esta nota)

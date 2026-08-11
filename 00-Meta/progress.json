@@ -2,13 +2,13 @@
   "meta": {
     "current_phase": 0,
     "current_week": 1,
-    "last_session_date": "2026-08-09",
-    "last_session_type": "sunday-deep-review",
-    "study_streak": 2,
-    "total_hours_logged": 34.5,
-    "session_count": 21,
+    "last_session_date": "2026-08-10",
+    "last_session_type": "weekday-micro",
+    "study_streak": 3,
+    "total_hours_logged": 36.5,
+    "session_count": 22,
     "last_cumulative_review": "2026-08-05",
-    "next_up": "Coding-the-Matrix (Klein) Cap 9 — REPASAR 9.1-9.3 primero (sesión 2026-08-09 marcada densa, confidence 2/5 — ver 02-Topics/Coding-the-Matrix-Orthogonalization.md, sección 'Pendiente'). Cubierto hoy: 9.0 (closest point in span, conexión con least-squares Ax=b), 9.1 (proyección ortogonal a un set, Generalized Fire Engine Lemma, dos intentos naive de project_orthogonal que fallan por vlist no mutuamente ortogonal), 9.2 (project_orthogonal correcto bajo mutua ortogonalidad + prueba por loop invariant + aug_project_orthogonal con sigmadict), 9.3.1-9.3.2 (Gram-Schmidt = orthogonalize, prueba de que preserva mutua ortogonalidad Y el span, forma matricial Ec 9.7 — germen de QR factorization, R triangular superior). Tras repaso, seguir con 9.4 (closest point in span combinando orthogonalize+project_orthogonal), 9.5 (basis/subset basis), 9.6 (orthogonal complement), 9.7-9.9 (QR factorization completa, least-squares, linear regression como aplicación)."
+    "next_up": "PROBABILIDAD (el gap más grande de Phase 0, ver 00-Meta/progress.json phases.phase_0 — probability_distributions_expectation 1/5, probability_cross_entropy_softmax 0/5). Sesión 2026-08-10 cerró Coding-the-Matrix (Klein) Cap 9 COMPLETO (9.0-9.10: orthogonal projection, Generalized Fire Engine Lemma, Gram-Schmidt/orthogonalize, aug_orthogonalize, closest_point, find_basis/find_subset_basis, orthogonal complement, QR factorization, QR_solve caso cuadrado + least-squares, aplicaciones — regresión lineal, fitting cuadrático, más-mediciones-mejor-precisión, cierre con Lab 8.4 ML comparando QR_solve vs gradient_descent en dataset sintético: mismos coeficientes/loss, QR ~350x más rápido). Código completo + 46 tests en 05-Projects/coding-the-matrix/src/coding_the_matrix/orthogonalization.py, visualización 3D en visualize_orthogonalize.py. Nota 02-Topics/Coding-the-Matrix-Orthogonalization.md status=solid confidence=4/5. Coding the Matrix Cap 10+ (wavelets, eigenvalues, SVD) queda EN PAUSA, no bloqueante — retomar cuando toque SVD/PCA/embeddings más adelante. Próxima sesión: usar Mathematics for Machine Learning (mml-book.github.io, cap. probabilidad) para completar expectation, cross-entropy, softmax en 02-Topics/Probability-Fundamentals.md (ya tiene la base de Klein 0.4 — distribuciones discretas, eventos, funciones invertibles — falta expectation/cross-entropy/softmax). Después: repaso rápido de cálculo (3Blue1Brown Essence of Calculus, ya en 3/5 solo necesita refresh) y PyTorch 60-min blitz — recién ahí arrancar Phase 1 (micrograd)."
   },
   "phases": {
     "phase_0": {
