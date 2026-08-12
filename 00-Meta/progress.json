@@ -2,13 +2,13 @@
   "meta": {
     "current_phase": 0,
     "current_week": 1,
-    "last_session_date": "2026-08-10",
+    "last_session_date": "2026-08-11",
     "last_session_type": "weekday-micro",
-    "study_streak": 3,
-    "total_hours_logged": 36.5,
-    "session_count": 22,
+    "study_streak": 4,
+    "total_hours_logged": 37.25,
+    "session_count": 23,
     "last_cumulative_review": "2026-08-05",
-    "next_up": "PROBABILIDAD (el gap más grande de Phase 0, ver 00-Meta/progress.json phases.phase_0 — probability_distributions_expectation 1/5, probability_cross_entropy_softmax 0/5). Sesión 2026-08-10 cerró Coding-the-Matrix (Klein) Cap 9 COMPLETO (9.0-9.10: orthogonal projection, Generalized Fire Engine Lemma, Gram-Schmidt/orthogonalize, aug_orthogonalize, closest_point, find_basis/find_subset_basis, orthogonal complement, QR factorization, QR_solve caso cuadrado + least-squares, aplicaciones — regresión lineal, fitting cuadrático, más-mediciones-mejor-precisión, cierre con Lab 8.4 ML comparando QR_solve vs gradient_descent en dataset sintético: mismos coeficientes/loss, QR ~350x más rápido). Código completo + 46 tests en 05-Projects/coding-the-matrix/src/coding_the_matrix/orthogonalization.py, visualización 3D en visualize_orthogonalize.py. Nota 02-Topics/Coding-the-Matrix-Orthogonalization.md status=solid confidence=4/5. Coding the Matrix Cap 10+ (wavelets, eigenvalues, SVD) queda EN PAUSA, no bloqueante — retomar cuando toque SVD/PCA/embeddings más adelante. Próxima sesión: usar Mathematics for Machine Learning (mml-book.github.io, cap. probabilidad) para completar expectation, cross-entropy, softmax en 02-Topics/Probability-Fundamentals.md (ya tiene la base de Klein 0.4 — distribuciones discretas, eventos, funciones invertibles — falta expectation/cross-entropy/softmax). Después: repaso rápido de cálculo (3Blue1Brown Essence of Calculus, ya en 3/5 solo necesita refresh) y PyTorch 60-min blitz — recién ahí arrancar Phase 1 (micrograd)."
+    "next_up": "PROBABILIDAD — seguir mml-book (Deisenroth/Faisal/Ong) Cap 6 'Probability and Distributions' desde 6.2.2 'Continuous Probabilities' (p.180+), luego 6.3 Sum Rule/Product Rule/Bayes' Theorem, luego 6.4 'Summary Statistics and Independence' (ahí vive expectation/mean/variance/covariance — resuelve el gap probability_distributions_expectation). Sesión 2026-08-11/12 cubrió mml-book 6.1 (construcción de espacio de probabilidad, random variable como función, Example 6.1 monedas $/£) + 6.1.3 (probabilidad vs estadística) + 6.2-6.2.1 (pmf/cdf, univariate/multivariate, joint/marginal/conditional probability, Example 6.2). CONFIRMADO vía TOC oficial (Cambridge frontmatter): cross-entropy y softmax NO están en mml-book — para esos dos usar Raschka 'Build a LLM from Scratch' (Phase 2), CS231n notes, o 3Blue1Brown ep.3. Nota 02-Topics/Probability-Fundamentals.md ahora tiene Parte 1 (Klein 0.4) + Parte 2 (mml-book 6.1-6.2.1), status=learning confidence=2/5. Coding the Matrix Cap 9 completo desde sesión 2026-08-10 (orthogonalization, QR, ver 02-Topics/Coding-the-Matrix-Orthogonalization.md solid 4/5) — Cap 10+ (SVD) en pausa, no bloqueante. Después de probabilidad: repaso rápido de cálculo (3Blue1Brown Essence of Calculus, 3/5 solo refresh) y PyTorch 60-min blitz — recién ahí arrancar Phase 1 (micrograd)."
   },
   "phases": {
     "phase_0": {
@@ -20,7 +20,7 @@
         "linear_algebra_dot_products_embeddings": { "status": "done", "confidence": 5 },
         "calculus_derivatives_gradients": { "status": "done_needs_review", "confidence": 3 },
         "calculus_chain_rule_backprop_preview": { "status": "done_needs_review", "confidence": 3 },
-        "probability_distributions_expectation": { "status": "in_progress", "confidence": 1 },
+        "probability_distributions_expectation": { "status": "in_progress", "confidence": 2 },
         "probability_cross_entropy_softmax": { "status": "not_started", "confidence": 0 },
         "numpy_fundamentals": { "status": "not_started", "confidence": 0 },
         "pytorch_tensors_autograd_blitz": { "status": "not_started", "confidence": 0 },
