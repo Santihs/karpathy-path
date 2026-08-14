@@ -10,10 +10,10 @@ tags:
   - rank
 noteId: 1785685525797
 ---
-If det(A) = 0, does Ax = v have a unique solution?
+Si det(A) = 0, ¿tiene Ax = v solución única?
 
 ---
 
-No. A is not invertible, so no unique solution exists for Ax = v (either no solution, or infinitely many, depending on v).
+No. A no es invertible, así que no hay solución única para Ax = v (o no hay solución, o hay infinitas, según v).
 
 Ref: `02-Topics/Linear-Algebra-Basics.md — Ch 7 — Inverse Matrices, Column Space, Null Space`

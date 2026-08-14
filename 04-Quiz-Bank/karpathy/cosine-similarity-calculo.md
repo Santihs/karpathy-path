@@ -14,4 +14,4 @@ noteId: 1785903292771
 
 Normalizá ambos vectores (hacelos unitarios), después dot product = cos(θ). Fórmula: (v·w) / (|v| × |w|).
 
-Ref: `02-Topics/Coding-the-Matrix-Vectors.md — 10. Dot-product`
+Ref: `02-Topics/Linear-Algebra-Basics.md — Ch 9 — Dot Products and Duality`

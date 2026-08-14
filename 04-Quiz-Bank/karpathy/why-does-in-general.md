@@ -11,7 +11,7 @@ tags:
 noteId: 1785651975275
 self-explain: true
 ---
-Why does $AB \neq BA$ in general?
+Why does AB != BA in general?
 
 ---
 

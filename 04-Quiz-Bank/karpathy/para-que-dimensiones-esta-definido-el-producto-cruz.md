@@ -12,6 +12,6 @@ noteId: 1785651974290
 
 ---
 
-Solo en 3D (y matemáticamente en 7D, pero ignorar). El producto punto funciona en cualquier dimensión.
+Solo en 3D (y matemáticamente en 7D, pero ignorar).
 
 Ref: `02-Topics/Linear-Algebra-Basics.md — Ch 10 — Cross Products`

@@ -14,4 +14,4 @@ En la práctica, si una matriz general (no triangular pero invertible) tiene un 
 
 *Partial pivoting* — reordenar filas para mover un valor no-cero a la diagonal.
 
-Ref: `05-Projects/coding-the-matrix/src/coding_the_matrix/triangular.py`
+Ref: `06-Doubts-Resolved/triangular-solve-zero-pivot.md`

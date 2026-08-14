@@ -2,8 +2,8 @@
 tags: [phase-0, math, probability, coding-the-matrix, mml-book]
 status: learning
 first_learned: 2026-07-01
-last_reviewed: 2026-08-12
-confidence: 2/5
+last_reviewed: 2026-08-14
+confidence: 3/5
 source_pdf: "00-Meta/resources/Philip N. Klein-Coding the Matrix_ Linear Algebra through Computer Science Applications-Newtonian Press (2013).pdf"
 source_pdf_2: "mml-book.pdf (Deisenroth/Faisal/Ong) — https://mml-book.github.io/book/mml-book.pdf"
 ---
@@ -132,6 +132,19 @@ $$P(Y=y_j \mid X=x_i) = \frac{n_{ij}}{c_i} \qquad P(X=x_i \mid Y=y_j) = \frac{n_
 - Función invertible + input uniforme → output uniforme. Esta es la base matemática de por qué XOR con una key random (one-time pad) es indetectable.
 - Random variable = función (no es "aleatoria" ni "variable"), $X: \Omega \to \mathcal{T}$.
 - pmf (discreto) vs cdf (continuo); joint (intersección) vs marginal (sumás la otra variable, dividís por N total) vs conditional (dividís por el subtotal de la condición, no por N total).
+
+## Repaso 2026-08-14 — framing 100% dev
+
+Sesión anterior no quedó clara (mucha notación densa de golpe). Reconstruido con analogías 100% dev, sin tocar contenido nuevo:
+
+- **Distribución** = un dict que suma 1: `Pr = {'heads': 0.5, 'tails': 0.5}`.
+- **Random variable** = una función pura `def X(outcome): ...`, no es "aleatoria" — lo aleatorio es el input, no la función.
+- **Aplicar función a input random** = `GROUP BY output + SUM(prob)`. Código: `out[f(outcome)] += p` por cada `(outcome, p)`.
+- **Función invertible + input uniforme → output uniforme**: sin collisions en el groupby, cada output tiene un único input. Base del one-time pad.
+- **pmf vs cdf**: pmf = lookup exacto `dict[x]` (discreto). cdf = query acumulado `WHERE x <= 5` (continuo, porque un punto exacto tiene masa cero).
+- **Marginal vs conditional** = dos queries sobre la misma tabla de counts: marginal divide por N total (`count(X==x1)/total_rows`), conditional divide por el subtotal ya filtrado (`count(X==x1 and Y==y1)/count(X==x1)`) — el denominador cambia porque ya restringiste el universo.
+
+Confidence subió 2/5 → 3/5: el modelo mental ahora es sólido, pero **expectation/mean/variance/covariance (6.4) sigue siendo el gap real** — ahí es donde sigue el roadmap.
 
 ## Todavía falta (roadmap Phase 0)
 

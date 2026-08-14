@@ -11,6 +11,6 @@ noteId: 1786145495335
 
 ---
 
-Porque hasta procesar todas las columnas no se puede saber si esa fila es redundante o si "le queda info escondida" en una columna aún no procesada — una fila puede tener valores no-cero que recién se cancelan al llegar a una columna posterior, revelando que era combinación lineal de las demás. Cortar antes de tiempo da un falso positivo de independencia (rank sobreestimado).
+Porque una fila puede tener valores no-cero que recién se cancelan en una columna posterior — cortar antes revela ese "falso positivo" y sobreestima el rank/independencia.
 
 Ref: `02-Topics/Coding-the-Matrix-Gaussian-Elimination.md — 7.1 — Echelon form`

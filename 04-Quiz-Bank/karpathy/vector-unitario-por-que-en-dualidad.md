@@ -14,4 +14,4 @@ En el ejemplo de dualidad (î/ĵ aterrizando sobre la recta de û), ¿por qué t
 
 Si no fuera unitario, la proyección de î/ĵ se escalaría por la longitud de u, y habría que dividir por ‖u‖ para recuperar la equivalencia limpia matriz-fila⇔dot-product. Con longitud 1 no hay factor extra que arrastrar.
 
-Ref: `02-Topics/Linear-Algebra-Basics.md — Ch 9 — Dot Products and Duality`
+Ref: `06-Doubts-Resolved/vector-unitario-normalizacion.md`

@@ -6,12 +6,12 @@ tags:
   - coding-the-matrix
   - klein
   - kernel-image
-noteId: 1785990658538
+noteId: 1786683042291
 ---
-f:R³→R², dim(Im f)=2. ¿Cuánto vale dim(Ker f)? (Gap propio 2026-08-06: contesté "2" en vez de aplicar la resta.)
+¿Cuál es el error típico al aplicar el Kernel-Image Theorem?
 
 ---
 
-1 (Kernel-Image Theorem: dim(Ker f) = dim(dominio) − dim(Im f) = 3 − 2 = 1).
+Copiar dim(Im f) directo en vez de restarla del dominio — el kernel vive en el DOMINIO, no en el codominio.
 
 Ref: `02-Topics/Coding-the-Matrix-Basis.md — 11. Dimension y funciones lineales — Kernel-Image Theorem`

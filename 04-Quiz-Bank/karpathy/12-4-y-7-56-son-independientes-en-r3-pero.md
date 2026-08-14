@@ -3,15 +3,9 @@ tags:
   - repo-karpathy
   - phase-0
   - linear-algebra
-  - subspaces
-  - bases
   - dimension
-  - linear-maps
-  - functions
-  - probability
-  - vectors
+  - bases
   - axler
-  - coding-the-matrix
 noteId: 1785651973498
 ---
 (1,2,-4) y (7,-5,6) son independientes en R³ pero NO son base de R³. ¿Por qué no?

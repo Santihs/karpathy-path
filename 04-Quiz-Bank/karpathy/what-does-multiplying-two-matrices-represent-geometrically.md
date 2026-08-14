@@ -10,7 +10,7 @@ tags:
   - rank
 noteId: 1785651975092
 ---
-What does multiplying two matrices $A \cdot B$ represent geometrically?
+What does multiplying two matrices A*B represent geometrically?
 
 ---
 

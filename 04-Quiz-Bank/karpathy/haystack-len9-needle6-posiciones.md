@@ -14,4 +14,4 @@ haystack len=9, needle len=6. ¿Cuántas posiciones de inicio son posibles, y co
 
 9-6+1 = 4 posiciones (0,1,2,3). Fórmula: len(haystack)-len(needle)+1.
 
-Ref: `02-Topics/Coding-the-Matrix-Fundamentals.md — 10. Cap 4.6 — Needle-in-haystack como matrix-vector (4.6.6)`
+Ref: `02-Topics/Coding-the-Matrix-Vectors.md — 10. Dot-product (2.9, Aplicación 2 — pattern matching, Quiz 2.9.13)`

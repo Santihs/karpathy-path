@@ -14,6 +14,6 @@ What is the dimension rule for multiplying matrices?
 
 ---
 
-$(m \times n) \cdot (n \times p) = (m \times p)$. The inner dimensions must match; the outer dimensions give the result shape.
+(m x n) * (n x p) = (m x p). The inner dimensions must match; the outer dimensions give the result shape.
 
 Ref: `02-Topics/Linear-Algebra-Basics.md — Ch 4 — Matrix Multiplication as Composition`

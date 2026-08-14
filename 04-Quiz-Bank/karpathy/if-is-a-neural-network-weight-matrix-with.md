@@ -10,10 +10,10 @@ tags:
   - rank
 noteId: 1785651974214
 ---
-If $A$ is a neural network weight matrix with shape (256 × 784), what is it doing geometrically?
+Si A es la weight matrix de una red neuronal con shape (256 × 784), ¿qué hace geométricamente?
 
 ---
 
-Transforming a 784-dimensional input vector into a 256-dimensional output — a nonsquare linear transformation that projects from a higher to a lower dimensional space.
+Transforma un input vector de 784 dimensiones en un output de 256 dimensiones — una transformación lineal no-cuadrada que proyecta de una dimensión más alta a una más baja.
 
 Ref: `02-Topics/Linear-Algebra-Basics.md — Ch 8 — Nonsquare Matrices`

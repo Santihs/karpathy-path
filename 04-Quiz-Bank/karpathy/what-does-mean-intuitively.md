@@ -10,7 +10,7 @@ tags:
   - rank
 noteId: 1785651975064
 ---
-What does $\det(AB) = \det(A) \times \det(B)$ mean intuitively?
+What does det(AB) = det(A) * det(B) mean intuitively?
 
 ---
 

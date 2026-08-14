@@ -14,4 +14,4 @@ Si ningún reordenamiento de filas (pivoting) logra poner un valor no-cero en la
 
 La matriz es singular de verdad — triangular solve ya no aplica.
 
-Ref: `05-Projects/coding-the-matrix/src/coding_the_matrix/triangular.py`
+Ref: `06-Doubts-Resolved/triangular-solve-zero-pivot.md`

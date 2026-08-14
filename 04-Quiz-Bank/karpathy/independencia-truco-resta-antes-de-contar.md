@@ -11,6 +11,6 @@ V=Span{[1,1,0],[0,1,1],[1,0,-1]}. ¿Son independientes los 3 vectores? (Gap prop
 
 ---
 
-No — v1−v2 = [1,1,0]−[0,1,1] = [1,0,−1] = v3 exactamente. v3 es combinación de los otros dos → dependientes → dim V=2, no 3. Antes de asumir independencia con pocos vectores, probar sumas/restas simples entre ellos primero — a veces la dependencia salta a la vista sin necesitar eliminación gaussiana completa.
+No — v1−v2 = [1,1,0]−[0,1,1] = [1,0,−1] = v3 exactamente. v3 es combinación de los otros dos → dependientes → dim V=2, no 3.
 
 Ref: `02-Topics/Coding-the-Matrix-Basis.md — 15. Ejercicios de práctica`

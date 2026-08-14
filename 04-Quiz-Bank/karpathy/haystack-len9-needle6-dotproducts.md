@@ -14,4 +14,4 @@ haystack=[1,-1,1,1,1,-1,1,1,1], needle=[1,-1,1,1,-1,1]. ¿Cuál es el resultado 
 
 [2,2,0,0] — mejor match empatado en posición 0 y 1.
 
-Ref: `02-Topics/Coding-the-Matrix-Fundamentals.md — 10. Cap 4.6 — Needle-in-haystack como matrix-vector (4.6.6)`
+Ref: `02-Topics/Coding-the-Matrix-Vectors.md — 10. Dot-product (2.9, Aplicación 2 — pattern matching, Quiz 2.9.13)`

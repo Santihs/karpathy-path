@@ -14,4 +14,4 @@ noteId: 1785903292955
 
 Un helper separado (`is_almost_zero`) aplicado en el call site, no dentro de `__eq__`.
 
-Ref: `05-Projects/coding-the-matrix/src/coding_the_matrix/vec.py`
+Ref: `05-Projects/coding-the-matrix/tests/test_vec.py — test_equal_is_exact_and_breaks_on_float_accumulation`

@@ -14,4 +14,4 @@ Needle-in-haystack matching con vectores ±1: ¿qué significa que el dot-produc
 
 Match perfecto — cada entrada del needle coincide en signo con la porción correspondiente del haystack en esa posición. Base conceptual de cross-correlation/convolution en CNNs.
 
-Ref: `02-Topics/Coding-the-Matrix-Fundamentals.md — 10. Cap 4.6 — Needle-in-haystack como matrix-vector (4.6.6)`
+Ref: `02-Topics/Coding-the-Matrix-Vectors.md — 10. Dot-product (2.9.13 — pattern matching / needle-in-haystack)`

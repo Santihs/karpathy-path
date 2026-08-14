@@ -12,6 +12,6 @@ Si `rowlist[i][i] == 0` en un sistema triangular, ¿qué implica matemáticament
 
 ---
 
-Existe al menos un `b` para el cual el sistema NO tiene solución — no es solo un límite del código.
+Ya no hay garantía de solución única — para un b dado, el sistema puede no tener solución, o tener infinitas (x[i] queda libre).
 
 Ref: `05-Projects/coding-the-matrix/src/coding_the_matrix/triangular.py`

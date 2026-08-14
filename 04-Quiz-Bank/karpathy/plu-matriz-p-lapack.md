@@ -14,4 +14,4 @@ En la factorización A=PLU, ¿qué representa la matriz P, y dónde aparece en l
 
 P es la matriz de permutación del partial pivoting; es la que usa LAPACK `getrf`, la rutina detrás de `torch.linalg.solve`.
 
-Ref: `05-Projects/coding-the-matrix/src/coding_the_matrix/triangular.py`
+Ref: `06-Doubts-Resolved/triangular-solve-zero-pivot.md`
