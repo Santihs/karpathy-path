@@ -1,3 +1,5 @@
+If $ARGUMENTS is non-empty, it's an extra note/question from me for this session (not part of the protocol below) — read it, weave the answer or adjustment into the briefing/session, don't ignore it.
+
 Read /00-Meta/progress.json to get my current state. Check today's day of week and determine the session type (weekday-micro / saturday-deep / sunday-deep-review / biweekly-cumulative — check last_cumulative_review for the biweekly trigger).
 
 Scan flashcard-style files in /04-Quiz-Bank/ for `<!-- srs: ... due=YYYY-MM-DD ... -->` lines (missing = due today). Count how many have `due <= today`.
