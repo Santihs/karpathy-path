@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bayes' theorem — posterior/likelihood/prior/evidence</title>
+<style>
+  :root {
+    --paper: #edf1f5; --paper-raised: #ffffff; --ink: #20293d; --ink-soft: #4b5568;
+    --rule: #c7d0dc; --accent: #b8752e; --accent-soft: #f2e0c9; --accent-ink: #6b4110;
+    --zero: #9aa5b3; --ok-soft: #d9ecdd; --ok-ink: #1f5c33;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #161b22; --paper-raised: #1d232c; --ink: #e7e9ec; --ink-soft: #a8b0bd;
+      --rule: #333c48; --accent: #dda25c; --accent-soft: #3a2c17; --accent-ink: #f4d9ad;
+      --zero: #5b6472; --ok-soft: #17301f; --ok-ink: #8fd3a1;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #161b22; --paper-raised: #1d232c; --ink: #e7e9ec; --ink-soft: #a8b0bd;
+    --rule: #333c48; --accent: #dda25c; --accent-soft: #3a2c17; --accent-ink: #f4d9ad;
+    --zero: #5b6472; --ok-soft: #17301f; --ok-ink: #8fd3a1;
+  }
+  :root[data-theme="light"] {
+    --paper: #edf1f5; --paper-raised: #ffffff; --ink: #20293d; --ink-soft: #4b5568;
+    --rule: #c7d0dc; --accent: #b8752e; --accent-soft: #f2e0c9; --accent-ink: #6b4110;
+    --zero: #9aa5b3; --ok-soft: #d9ecdd; --ok-ink: #1f5c33;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--paper); color: var(--ink);
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    max-width: 760px; margin: 0 auto; padding: 3rem 1.5rem 5rem; line-height: 1.55;
+  }
+  .sans { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .mono { font-family: "SF Mono", ui-monospace, "Cascadia Code", Menlo, monospace; }
+
+  .eyebrow {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-soft); margin: 0 0 0.6rem;
+  }
+  h1 { font-size: 1.85rem; font-weight: 600; margin: 0 0 0.3rem; text-wrap: balance; }
+  .subhead {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--ink-soft); font-size: 1rem; margin: 0 0 2.4rem;
+  }
+  h2 {
+    font-size: 1.05rem; font-weight: 600; margin: 2.6rem 0 0.4rem;
+    display: flex; align-items: baseline; gap: 0.6rem;
+  }
+  h2 .step-num {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em;
+    color: var(--accent-ink); background: var(--accent-soft);
+    padding: 0.15rem 0.5rem; border-radius: 999px;
+  }
+  .stage-note {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.92rem; color: var(--ink-soft); margin: 0 0 1rem;
+  }
+  .panel {
+    background: var(--paper-raised); border: 1px solid var(--rule); border-radius: 8px;
+    padding: 1.3rem 1.4rem; margin: 0 0 1.6rem;
+  }
+  .overflow-guard { overflow-x: auto; }
+
+  table.mat {
+    border-collapse: collapse; font-family: "SF Mono", ui-monospace, "Cascadia Code", Menlo, monospace;
+    font-size: 0.95rem;
+  }
+  table.mat th, table.mat td {
+    text-align: right; padding: 0.4rem 0.8rem; font-variant-numeric: tabular-nums;
+    border-bottom: 1px solid var(--rule); min-width: 2.4rem;
+  }
+  table.mat th {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.75rem; color: var(--ink-soft); font-weight: 500;
+  }
+  table.mat th:first-child, table.mat td:first-child { text-align: left; }
+  table.mat tr:last-child td { border-bottom: none; }
+  table.mat td.zero { color: var(--zero); }
+  table.mat td.pivot { color: var(--accent-ink); background: var(--accent-soft); font-weight: 700; border-radius: 4px; }
+  table.mat tr.active-row td { background: var(--accent-soft); }
+  table.mat tr.active td.highlight-cell { background: var(--accent-soft); color: var(--accent-ink); font-weight: 700; border-radius: 4px; }
+
+  table.trace {
+    width: 100%; border-collapse: collapse;
+    font-family: "SF Mono", ui-monospace, "Cascadia Code", Menlo, monospace; font-size: 0.95rem;
+  }
+  table.trace th, table.trace td {
+    text-align: left; padding: 0.5rem 0.7rem; font-variant-numeric: tabular-nums;
+    border-bottom: 1px solid var(--rule);
+  }
+  table.trace th {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--ink-soft); font-weight: 500;
+  }
+  table.trace tr:last-child td { border-bottom: none; }
+  table.trace tr.active td { background: var(--accent-soft); color: var(--accent-ink); font-weight: 600; }
+  table.trace tr.active td:first-child { border-radius: 4px 0 0 4px; }
+  table.trace tr.active td:last-child { border-radius: 0 4px 4px 0; }
+
+  .vectors {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    display: flex; gap: 2rem; margin: 0 0 2.6rem; padding: 1rem 1.25rem;
+    background: var(--paper-raised); border: 1px solid var(--rule); border-radius: 6px;
+  }
+  .vectors .item { font-variant-numeric: tabular-nums; }
+  .vectors .label { color: var(--ink-soft); font-size: 0.8rem; margin-right: 0.4rem; }
+  .vectors .val { font-family: "SF Mono", ui-monospace, "Cascadia Code", Menlo, monospace; font-weight: 600; }
+
+  .order-flow {
+    display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+    font-family: "SF Mono", ui-monospace, "Cascadia Code", Menlo, monospace; font-size: 1.05rem;
+  }
+  .order-flow .tag { background: var(--accent-soft); color: var(--accent-ink); padding: 0.3rem 0.7rem; border-radius: 6px; font-weight: 600; }
+  .order-flow .arrow { color: var(--ink-soft); font-size: 1.2rem; }
+  .order-flow .label { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; color: var(--ink-soft); font-size: 0.85rem; }
+
+  .solve-step { display: grid; grid-template-columns: 1fr; gap: 0.9rem; }
+  .row-being-solved { font-family: "SF Mono", ui-monospace, "Cascadia Code", Menlo, monospace; font-size: 0.98rem; }
+  .row-being-solved .rlabel { color: var(--ink-soft); }
+
+  .partial-x {
+    display: flex; gap: 0.6rem; flex-wrap: wrap;
+    font-family: "SF Mono", ui-monospace, "Cascadia Code", Menlo, monospace; font-size: 0.92rem;
+  }
+  .partial-x .slot { padding: 0.25rem 0.6rem; border-radius: 6px; border: 1px solid var(--rule); }
+  .partial-x .slot.solved { background: var(--ok-soft); color: var(--ok-ink); border-color: transparent; font-weight: 600; }
+  .partial-x .slot.pending { color: var(--zero); }
+  .partial-x .label { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; color: var(--ink-soft); font-size: 0.85rem; }
+
+  .arith { font-family: "SF Mono", ui-monospace, "Cascadia Code", Menlo, monospace; font-size: 0.98rem; }
+  .arith .highlight { color: var(--accent-ink); font-weight: 700; }
+
+  .result {
+    margin-top: 2.6rem; padding: 1.4rem 1.5rem; background: var(--ok-soft); color: var(--ok-ink);
+    border-radius: 8px; font-family: "SF Mono", ui-monospace, "Cascadia Code", Menlo, monospace;
+    font-size: 1.1rem; font-weight: 600; text-align: center;
+  }
+  .footer-note {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.85rem; color: var(--ink-soft); margin-top: 2rem; text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<p class="eyebrow">mml-book Cap 6.3, Eq 6.23</p>
+<h1>Bayes' theorem — posterior/likelihood/prior/evidence</h1>
+<p class="subhead">Consecuencia directa del product rule (6.22): igualar p(x,y)=p(x|y)p(y) y p(x,y)=p(y|x)p(x), despejar p(x|y).</p>
+
+
+<div class="panel" style="text-align:center;font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:1.15rem;padding:2rem 1rem;">
+  <div style="margin-bottom:0.4rem;">
+    <span style="display:inline-flex;flex-direction:column;align-items:center;"><span class="sans" style="font-size:0.7rem;color:var(--accent-ink);margin-bottom:0.15rem;">posterior</span><span>p(x|y)</span></span>
+    <span style="margin:0 0.5rem;">=</span>
+    <span style="display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;margin:0 0.3rem;"><span><span style="display:inline-flex;flex-direction:column;align-items:center;"><span class="sans" style="font-size:0.7rem;color:var(--accent-ink);margin-bottom:0.15rem;">likelihood</span><span>p(y|x)</span></span><span style="margin:0 0.35rem;">&middot;</span><span style="display:inline-flex;flex-direction:column;align-items:center;"><span class="sans" style="font-size:0.7rem;color:var(--accent-ink);margin-bottom:0.15rem;">prior</span><span>p(x)</span></span></span><span style="border-top:1.5px solid var(--ink);width:100%;margin:0.15rem 0;"></span><span><span style="display:inline-flex;flex-direction:column;align-items:center;"><span class="sans" style="font-size:0.7rem;color:var(--accent-ink);margin-bottom:0.15rem;">evidence</span><span>p(y)</span></span></span></span>
+  </div>
+</div>
+
+<h2><span class="step-num">EJEMPLO</span> Filtro de spam — x = es spam, y = contiene &ldquo;gratis&rdquo;</h2>
+<p class="stage-note">x es la variable latente (no observada) que queremos inferir; y es lo que sí observamos.</p>
+<div class="panel">
+  <table class="trace">
+    <tr><th>Término</th><th>Símbolo</th><th>Valor</th><th>Lectura</th></tr>
+    <tr><td>Prior</td><td>p(x)</td><td>0.2</td><td>P(spam) antes de ver el mail</td></tr>
+    <tr><td>Likelihood</td><td>p(y|x)</td><td>0.5</td><td>P(&ldquo;gratis&rdquo; | spam)</td></tr>
+    <tr><td>Likelihood (complemento)</td><td>p(y|&not;x)</td><td>0.05</td><td>P(&ldquo;gratis&rdquo; | no_spam)</td></tr>
+    <tr class="active"><td>Evidence (sum rule)</td><td>p(y)</td><td>0.14</td><td>0.5&middot;0.2 + 0.05&middot;0.8</td></tr>
+    <tr class="active"><td>Posterior</td><td>p(x|y)</td><td>0.714</td><td>(0.5&middot;0.2) / 0.14</td></tr>
+  </table>
+</div>
+<div class="result">prior 20% &nbsp;&rarr;&nbsp; posterior 71.4% después de ver &ldquo;gratis&rdquo;</div>
+
+
+<p class="footer-note">Generado para karpathy-path con coding_the_matrix.viz_html (05-Projects/coding-the-matrix).</p>
+
+</body>
+</html>

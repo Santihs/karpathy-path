@@ -270,6 +270,72 @@ def generate_cramers_rule_shear():
 
 
 
+def generate_bayes_theorem():
+    """mml-book 6.3 Eq 6.23 — Bayes' theorem, labeled posterior/likelihood/prior/evidence,
+    worked with the spam-filter numbers used in chat (2026-08-16 session)."""
+
+    def frac(num, den):
+        return (
+            '<span style="display:inline-flex;flex-direction:column;align-items:center;'
+            'vertical-align:middle;margin:0 0.3rem;">'
+            f'<span>{num}</span>'
+            '<span style="border-top:1.5px solid var(--ink);width:100%;margin:0.15rem 0;"></span>'
+            f'<span>{den}</span></span>'
+        )
+
+    def braced(term, label, color_var):
+        return (
+            '<span style="display:inline-flex;flex-direction:column;align-items:center;">'
+            f'<span class="sans" style="font-size:0.7rem;color:{color_var};margin-bottom:0.15rem;">{label}</span>'
+            f'<span>{term}</span></span>'
+        )
+
+    p_spam, p_no_spam = 0.20, 0.80
+    p_gratis_spam, p_gratis_no_spam = 0.50, 0.05
+    p_gratis = p_gratis_spam * p_spam + p_gratis_no_spam * p_no_spam
+    posterior = (p_gratis_spam * p_spam) / p_gratis
+
+    formula = f'''
+<div class="panel" style="text-align:center;font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:1.15rem;padding:2rem 1rem;">
+  <div style="margin-bottom:0.4rem;">
+    {braced('p(x|y)', 'posterior', 'var(--accent-ink)')}
+    <span style="margin:0 0.5rem;">=</span>
+    {frac(
+        braced('p(y|x)', 'likelihood', 'var(--accent-ink)') + '<span style="margin:0 0.35rem;">&middot;</span>' + braced('p(x)', 'prior', 'var(--accent-ink)'),
+        braced('p(y)', 'evidence', 'var(--accent-ink)')
+    )}
+  </div>
+</div>
+'''
+
+    worked = f'''
+<h2><span class="step-num">EJEMPLO</span> Filtro de spam — x = es spam, y = contiene &ldquo;gratis&rdquo;</h2>
+<p class="stage-note">x es la variable latente (no observada) que queremos inferir; y es lo que sí observamos.</p>
+<div class="panel">
+  <table class="trace">
+    <tr><th>Término</th><th>Símbolo</th><th>Valor</th><th>Lectura</th></tr>
+    <tr><td>Prior</td><td>p(x)</td><td>{p_spam:g}</td><td>P(spam) antes de ver el mail</td></tr>
+    <tr><td>Likelihood</td><td>p(y|x)</td><td>{p_gratis_spam:g}</td><td>P(&ldquo;gratis&rdquo; | spam)</td></tr>
+    <tr><td>Likelihood (complemento)</td><td>p(y|&not;x)</td><td>{p_gratis_no_spam:g}</td><td>P(&ldquo;gratis&rdquo; | no_spam)</td></tr>
+    <tr class="active"><td>Evidence (sum rule)</td><td>p(y)</td><td>{p_gratis:g}</td><td>{p_gratis_spam:g}&middot;{p_spam:g} + {p_gratis_no_spam:g}&middot;{p_no_spam:g}</td></tr>
+    <tr class="active"><td>Posterior</td><td>p(x|y)</td><td>{posterior:.3f}</td><td>({p_gratis_spam:g}&middot;{p_spam:g}) / {p_gratis:g}</td></tr>
+  </table>
+</div>
+<div class="result">prior 20% &nbsp;&rarr;&nbsp; posterior {posterior*100:.1f}% después de ver &ldquo;gratis&rdquo;</div>
+'''
+
+    content = formula + worked
+
+    return render_page(
+        'bayes-theorem-2026-08-16.html',
+        title="Bayes' theorem — posterior/likelihood/prior/evidence",
+        eyebrow='mml-book Cap 6.3, Eq 6.23',
+        subhead='Consecuencia directa del product rule (6.22): igualar p(x,y)=p(x|y)p(y) y p(x,y)=p(y|x)p(x), despejar p(x|y).',
+        content=content,
+        footer='Generado para karpathy-path con coding_the_matrix.viz_html (05-Projects/coding-the-matrix).',
+    )
+
+
 if __name__ == '__main__':
     path = generate_triangular_reorder_solve()
     print(f'wrote {path}')
@@ -277,3 +343,5 @@ if __name__ == '__main__':
     print(f'wrote {path2}')
     path3 = generate_cramers_rule_shear()
     print(f'wrote {path3}')
+    path4 = generate_bayes_theorem()
+    print(f'wrote {path4}')

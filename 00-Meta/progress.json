@@ -2,13 +2,13 @@
   "meta": {
     "current_phase": 0,
     "current_week": 1,
-    "last_session_date": "2026-08-14",
-    "last_session_type": "weekday-micro",
+    "last_session_date": "2026-08-16",
+    "last_session_type": "sunday-deep-review",
     "study_streak": 1,
-    "total_hours_logged": 37.75,
-    "session_count": 24,
+    "total_hours_logged": 40.75,
+    "session_count": 25,
     "last_cumulative_review": "2026-08-05",
-    "next_up": "PROBABILIDAD — seguir mml-book (Deisenroth/Faisal/Ong) Cap 6 'Probability and Distributions' desde 6.2.2 'Continuous Probabilities' (p.180+), luego 6.3 Sum Rule/Product Rule/Bayes' Theorem, luego 6.4 'Summary Statistics and Independence' (ahí vive expectation/mean/variance/covariance — resuelve el gap probability_distributions_expectation). Sesión 2026-08-14 fue repaso: re-explicación de mml-book 6.1-6.2.1 (espacio de probabilidad, random variable, pmf/cdf, joint/marginal/conditional) con framing 100% dev (dict, groupby+sum, pandas queries) porque no había quedado claro en la sesión previa — sin contenido nuevo del libro. Se generaron 8 cards Anki nuevas de probabilidad con ese framing dev, más un review masivo de las 127 cards de 04-Quiz-Bank/karpathy/ vía 4 harvard-reviewer subagents en paralelo (accuracy + Anki sizing): 6 refs rotas corregidas, 5 cards borradas (3 fabricadas, 2 duplicadas), 7 cards densas divididas en 14, 5 cards con LaTeX residual limpiadas, tags basura arregladas. Deck final: 129 notes sincronizadas. Probability-Fundamentals.md confidence subió a 3/5 (modelo mental sólido, pero expectation/mean/variance de 6.4 sigue sin cubrir — ese es el gap real). Coding the Matrix Cap 9 completo desde sesión 2026-08-10 (orthogonalization, QR, ver 02-Topics/Coding-the-Matrix-Orthogonalization.md solid 4/5) — Cap 10+ (SVD) en pausa, no bloqueante. Después de probabilidad: repaso rápido de cálculo (3Blue1Brown Essence of Calculus, 3/5 solo refresh) y PyTorch 60-min blitz — recién ahí arrancar Phase 1 (micrograd)."
+    "next_up": "PROBABILIDAD — retomar mml-book (Deisenroth/Faisal/Ong) Cap 6.5 'Gaussian Distribution' (p.197+, ver Figure 6.7). Sesión 2026-08-16 (3h) cerró TODO el gap `probability_distributions_expectation`: mml-book 6.2.2-6.2.3 (pdf/cdf, Table 6.1, Example 6.3), 6.3 completo (Sum Rule/Product Rule/Bayes' Theorem, ejercicio resuelto spam-filter), 6.4 completo (expected value/mean/median/mode, covariance/variance/covariance matrix/correlation, empirical mean/cov, tres expresiones de varianza, sums/transformaciones afines, independence/i.i.d./conditional independence, inner products de random variables) — todo con ejercicios a mano (dado cargado E[X]=4.5 V[X]=3.25, tabla de logs GET/POST cov/corr/independencia, numpy np.cov/corrcoef) verificados correctos. Complemento con video 3Blue1Brown 'Bayes theorem' (Essence of probability): intuición geométrica del cuadrado 1x1, caso Steve (base-rate neglect, Tversky/Kahneman 1974), caso Linda (conjunction fallacy) + crítica de Gigerenzer sobre frequency framing (verificada vía web). Todo compilado en 02-Topics/Probability-Fundamentals.md (secciones 9-18, confidence 3/5→4/5) + 19 cards Anki nuevas (revisadas por harvard-reviewer: 3 splits por bundling, deck en 148 notes) + visual 07-Visuals/bayes-theorem-2026-08-16.html. Después de 6.5 Gaussian: `probability_cross_entropy_softmax` sigue siendo gap confirmado fuera del libro — necesita Raschka *Build a LLM from Scratch* (Phase 2), CS231n notes, o 3Blue1Brown NN ep.3. Luego: repaso rápido de cálculo (3Blue1Brown Essence of Calculus, refresh) y PyTorch 60-min blitz — recién ahí arrancar Phase 1 (micrograd). Coding the Matrix Cap 9 completo desde sesión 2026-08-10 (orthogonalization, QR) — Cap 10+ (SVD) en pausa, no bloqueante."
   },
   "phases": {
     "phase_0": {
@@ -20,7 +20,7 @@
         "linear_algebra_dot_products_embeddings": { "status": "done", "confidence": 5 },
         "calculus_derivatives_gradients": { "status": "done_needs_review", "confidence": 3 },
         "calculus_chain_rule_backprop_preview": { "status": "done_needs_review", "confidence": 3 },
-        "probability_distributions_expectation": { "status": "in_progress", "confidence": 3 },
+        "probability_distributions_expectation": { "status": "done_needs_review", "confidence": 4 },
         "probability_cross_entropy_softmax": { "status": "not_started", "confidence": 0 },
         "numpy_fundamentals": { "status": "not_started", "confidence": 0 },
         "pytorch_tensors_autograd_blitz": { "status": "not_started", "confidence": 0 },
